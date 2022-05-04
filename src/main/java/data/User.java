@@ -18,8 +18,8 @@ import java.util.Date;
 @Table(name = "abyx_users")
 
 public class User {
-//Instance variables:
-    public enum Role {USER, ADMIN}
+    //Instance variables:
+    public enum Role {VISITOR, USER, PREMIUM, ADMIN}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class User {
     @Column
     private boolean emailVerified;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 32)
     @ToString.Exclude
     private String password;
 
@@ -46,12 +46,17 @@ public class User {
     @Column(nullable = true)
     private String preferredLanguage;
 
+    @Column(nullable = true, length = 50)
+    private String locationRegion;
+
+    @Column(nullable = true, length = 50)
+    private String locationCountry;
+
+    @Column(nullable = true)
+    private String aboutUserText;
+
     @Column(nullable = false)
     @Enumerated
-    private Role role;
+    private Role accessLevel;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("author")
-    @ToString.Exclude
-    private Collection<Post> posts;
 }
