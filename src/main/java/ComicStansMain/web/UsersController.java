@@ -1,16 +1,16 @@
-package web;
+package ComicStansMain.web;
 
 
-import data.User;
-import data.UsersRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import ComicStansMain.data.User;
+import ComicStansMain.data.UsersRepository;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +20,11 @@ import java.util.Optional;
 
 public class UsersController {
     private final UsersRepository ur;
-    private final PasswordEncoder pe;
+//    private final PasswordEncoder pe;
 
-    public UsersController(UsersRepository ur, PasswordEncoder pe) {
+    public UsersController(UsersRepository ur) {
         this.ur = ur;
-        this.pe = pe;
+//        this.pe = pe;
     }
 
     private List<User> getAll() {
@@ -45,30 +45,31 @@ public class UsersController {
         return ur.findByEmail(email);
     }
 
-    @GetMapping("me")
-    private User getMyInfo(OAuth2Authentication auth) {
-        String email = auth.getName(); // yes, the email is found under "getName()"
-        return ur.findByEmail(email);
-    }
+//    @GetMapping("me")
+//    private User getMyInfo(OAuth2Authentication auth) {
+//        String email = auth.getName(); // yes, the email is found under "getName()"
+//        return ur.findByEmail(email);
+//    }
 
     @PostMapping
     private void createUser(@RequestBody User newUser) {
         newUser.setAccessLevel(User.Role.USER);
-        String encryptedPassword = newUser.getPassword();
-        encryptedPassword = pe.encode(encryptedPassword);
-        newUser.setPassword(encryptedPassword);
+//        String encryptedPassword = newUser.getPassword();
+//        encryptedPassword = pe.encode(encryptedPassword);
+//        newUser.setPassword(encryptedPassword);
+        newUser.setDateJoined(LocalDate.now());
         ur.save(newUser);
     }
 
     @PutMapping("{id}")
     private void updateUser(@PathVariable long id, @RequestBody User thisUser) {
-        User tempUser = new User();
+        User tempUser = ur.getById(id);
         tempUser.setUsername(thisUser.getUsername());
         tempUser.setPassword(thisUser.getPassword());
         tempUser.setEmail(thisUser.getEmail());
         tempUser.setLocationRegion(thisUser.getLocationRegion());
         tempUser.setLocationCountry(thisUser.getLocationCountry());
-        ur.save(id, thisUser);
+        ur.save(tempUser);
     }
 
     @PutMapping("{id}/password")

@@ -1,4 +1,4 @@
-package data;
+package ComicStansMain.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

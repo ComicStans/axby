@@ -1,13 +1,11 @@
-package data;
+package ComicStansMain.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -41,22 +39,22 @@ public class User {
     private String password;
 
     @Column(nullable = true)
-    private Date dateJoined;
+    private LocalDate dateJoined;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String preferredLanguage;
 
-    @Column(nullable = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String locationRegion;
 
-    @Column(nullable = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String locationCountry;
 
     @Column(nullable = true)
     private String aboutUserText;
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Role accessLevel;
 
 }
