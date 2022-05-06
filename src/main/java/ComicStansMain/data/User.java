@@ -1,11 +1,13 @@
 package ComicStansMain.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -61,5 +63,21 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role accessLevel;
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
+            targetEntity = Guild.class)
+
+    @JoinTable(
+            name="axby_guild_user",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="guild_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
+
+    @JsonIgnoreProperties("guilds")
+    private Collection<Guild> guilds;
 
 }
