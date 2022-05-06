@@ -19,22 +19,25 @@ public class Post {
     private long id;
 
     @ManyToOne
-    private Board board_id;
+    @Column(name = "board_id")
+    private Board boardId;
 
     @ManyToOne
-    private User author_id;
+    @Column(name = "author_id")
+    private User authorId;
 
-    @Column
+    @Column(name = "post_type")
     @Enumerated(EnumType.STRING)
-    private String post_type;
+    private String postType;
 
-    @Column
-    private String post_text;
+    @Column(name = "post_text")
+    private String postText;
 
-    @Column(nullable = false)
-    private long post_replied_to;
+    @Column(nullable = false, name = "post_replied_to")
+    private long postRepliedTo;
 
-    @Column
-    private LocalDate post_time;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "post_time")
+    private LocalDate postTime;
 
 }

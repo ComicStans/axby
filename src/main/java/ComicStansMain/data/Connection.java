@@ -24,13 +24,16 @@ public class Connection {
     @ManyToOne
     private User recipient;
 
-    @Column(nullable = false)
-    private LocalDate date_requested;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_requested")
+    private LocalDate dateRequested;
 
-    @Column
-    private LocalDate date_rejected;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_rejected")
+    private LocalDate dateRejected;
 
-    @Column
-    private LocalDate date_accepted;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_accepted")
+    private LocalDate dateAccepted;
 
 }

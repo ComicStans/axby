@@ -27,9 +27,11 @@ public class Board {
     private long game_id;
 
     @ManyToOne
-    private User creator_user_id;
+    @Column(name = "create_user_id")
+    private User creator;
 
-    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_created")
     private LocalDate dateCreated;
 
     @OneToMany(mappedBy = "board_id")

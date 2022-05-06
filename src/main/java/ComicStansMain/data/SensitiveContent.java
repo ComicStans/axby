@@ -20,8 +20,8 @@ public class SensitiveContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private String content_type;
+    @Column(nullable = false, name = "content_type")
+    private String contentType;
 
     @ManyToMany(
             fetch = FetchType.LAZY,
@@ -36,5 +36,7 @@ public class SensitiveContent {
     )
     @JsonIgnoreProperties("categories")
     private Collection<User> users;
+
+
 
 }

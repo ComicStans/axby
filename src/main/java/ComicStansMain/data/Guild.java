@@ -29,8 +29,9 @@ public class Guild {
     @Column
     private String motto;
 
-    @Column(nullable = false)
-    private LocalDate date_created;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_created")
+    private LocalDate dateCreated;
 
     @ManyToMany(
             fetch = FetchType.LAZY,

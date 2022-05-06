@@ -45,7 +45,7 @@ public class User {
     @ToString.Exclude
     private String password;
 
-    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate dateJoined;
 
     @Column(nullable = false)
@@ -79,5 +79,21 @@ public class User {
 
     @JsonIgnoreProperties("guilds")
     private Collection<Guild> guilds;
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
+            targetEntity = SensitiveContent.class)
+
+    @JoinTable(
+            name="axby_user_content_filter",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="sensitive_content_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
+
+    @JsonIgnoreProperties("guilds")
+    private Collection<SensitiveContent> sensitive_content;
 
 }

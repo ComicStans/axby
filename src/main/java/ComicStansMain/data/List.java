@@ -24,11 +24,12 @@ public class List {
     @ManyToOne
     private User user_id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "list_type")
     @Enumerated(EnumType.STRING)
-    private String list_type;
+    private String listType;
 
-    @Column(nullable = false)
-    private LocalDate date_created;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
 
 }
