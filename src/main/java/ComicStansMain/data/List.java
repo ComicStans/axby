@@ -11,30 +11,24 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "axby_posts")
-public class post {
+@Table(name = "axby_lists")
+public class List {
+
+    //This class will contain a collection of Games;
+    //each game will have properties of its own, including an optional user-authored rating & review.
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    private Board board_id;
-
-    @ManyToOne
-    private User author_id;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private String post_type;
-
-    @Column
-    private String post_text;
+    private User user_id;
 
     @Column(nullable = false)
-    private long post_replied_to;
+    @Enumerated(EnumType.STRING)
+    private String list_type;
 
-    @Column
-    private LocalDate post_time;
+    @Column(nullable = false)
+    private LocalDate date_created;
 
 }

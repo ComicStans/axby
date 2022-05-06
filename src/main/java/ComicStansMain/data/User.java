@@ -16,6 +16,11 @@ import java.time.LocalDate;
 @Table(name = "axby_users")
 
 public class User {
+
+    //The User is the central object in this social-networking-style application.
+    //The Users table is related, one-to-many, to Boards, Lists, Reports, and User_Preference.
+    //It is related, many-to-many, to Games, Guilds, Sensitive_Content, and Connections
+
     //Instance variables:
     public enum Role {VISITOR, USER, PREMIUM, ADMIN}
 
