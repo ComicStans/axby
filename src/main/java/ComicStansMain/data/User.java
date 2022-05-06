@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "abyx_users")
+@Table(name = "axby_users")
 
 public class User {
     //Instance variables:
