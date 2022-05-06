@@ -1,6 +1,4 @@
 
-import createView from "../createView.js";
-
 const URL = 'http://localhost:8081/api/users';
 
 export default function UserIndex(props) {
