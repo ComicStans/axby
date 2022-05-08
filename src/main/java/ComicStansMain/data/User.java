@@ -45,7 +45,7 @@ public class User {
     @ToString.Exclude
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, name = "date_joined")
     private LocalDate dateJoined;
 
     @Column(nullable = false)
@@ -57,11 +57,11 @@ public class User {
     @Column(nullable = false, length = 50)
     private String locationCountry;
 
-    @Column(nullable = true)
+    @Column
     private String aboutUserText;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private Role accessLevel;
 
     @ManyToMany(
@@ -93,7 +93,30 @@ public class User {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties("guilds")
-    private Collection<SensitiveContent> sensitive_content;
+    @JsonIgnoreProperties("sensitiveContent")
+    private Collection<SensitiveContent> sensitiveContent;
 
+    //User one-to-many Collections: lists, boards, posts, reports, preferences.
+    //The reports table has two columns with Users as foreign keys: the user reporting
+    //and the user reported.
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("preferences")
+    private Collection<Preference> preferences;
+
+    @OneToMany(mappedBy = "userReporting", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("reports")
+    private Collection<Report> reports;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("lists")
+    private Collection<List> lists;
+
+    @OneToMany(mappedBy = "authorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("posts")
+    private Collection<Post> posts;
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("boards")
+    private Collection<Board> boards;
 }

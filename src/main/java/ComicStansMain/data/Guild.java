@@ -29,7 +29,6 @@ public class Guild {
     @Column
     private String motto;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="date_created")
     private LocalDate dateCreated;
 

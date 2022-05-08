@@ -14,21 +14,23 @@ import java.time.LocalDate;
 @Table(name = "axby_posts")
 public class Post {
 
+    //Each Post is associated with one board and one user.
+    //Posts can be Original or Reply; if Reply, the Post has a post_replied_to value.
+    public enum postType {ORIGINAL, REPLY}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    @Column(name = "board_id")
     private Board boardId;
 
     @ManyToOne
-    @Column(name = "author_id")
     private User authorId;
 
     @Column(name = "post_type")
-    @Enumerated(EnumType.STRING)
-    private String postType;
+    @Enumerated
+    private postType postType;
 
     @Column(name = "post_text")
     private String postText;
@@ -36,7 +38,6 @@ public class Post {
     @Column(nullable = false, name = "post_replied_to")
     private long postRepliedTo;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "post_time")
     private LocalDate postTime;
 
