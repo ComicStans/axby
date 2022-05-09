@@ -23,22 +23,24 @@ public class Post {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "board_id", nullable = false)
     private Board boardId;
 
     @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private User authorId;
 
-    @Column(name = "post_type")
+    @Column(name = "post_type", nullable = false)
     @Enumerated
     private postType postType;
 
     @Column(name = "post_text")
     private String postText;
 
-    @Column(nullable = false, name = "post_replied_to")
+    @Column(name = "post_replied_to", nullable = false)
     private long postRepliedTo;
 
-    @Column(name = "post_time")
+    @Column(name = "post_time", nullable = false)
     private LocalDate postTime;
 
 }

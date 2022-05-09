@@ -29,7 +29,7 @@ public class Guild {
     @Column
     private String motto;
 
-    @Column(name="date_created")
+    @Column(name="date_created", nullable = false)
     private LocalDate dateCreated;
 
     @ManyToMany(

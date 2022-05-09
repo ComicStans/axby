@@ -19,15 +19,17 @@ public class Report {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_reporting", nullable = false)
     private User userReporting;
 
     @ManyToOne
+    @JoinColumn(name = "user_reported", nullable = false)
     private User userReported;
 
-    @Column(name = "date_reported")
+    @Column(name = "date_reported", nullable = false)
     private LocalDate dateReported;
 
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String reportText;
 
     @Column(name = "date_resolved")

@@ -21,6 +21,7 @@ public class Preference {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
     @Column(name = "filter_age_rating")
