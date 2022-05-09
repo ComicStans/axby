@@ -1,4 +1,4 @@
-import Home from "./views/Home.js";
+import Home from "./Views/Home.js";
 import PostIndex from "./views/PostIndex.js";
 // import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
