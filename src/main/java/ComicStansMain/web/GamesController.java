@@ -3,11 +3,12 @@ package ComicStansMain.web;
 import ComicStansMain.data.Game;
 import ComicStansMain.data.GamesRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 
 @CrossOrigin
@@ -20,5 +21,11 @@ public class GamesController {
     @GetMapping
     private Collection<Game> getAll() {
         return gamesRepository.findAll();
+    }
+    @PostMapping
+    private void createGame(@RequestBody Game game) {
+//        gotta learn how to convert utc to local date, for now all games will have been created today
+        game.setRelease_date(LocalDate.now());
+        gamesRepository.save(game);
     }
 }
