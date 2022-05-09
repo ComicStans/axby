@@ -1,10 +1,10 @@
+import createView from "../createView";
 
 const URL = 'http://localhost:8081/api/users';
 
 export default function UserIndex(props) {
     return `
-<head>    
-<link rel="stylesheet" href="users.css"><title></title>
+<head><title></title>    
 </head>
         <header>
             <h1>User Inforamtion </h1>

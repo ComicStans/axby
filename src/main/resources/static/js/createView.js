@@ -8,23 +8,17 @@ import {getHeaders} from "./auth.js";
  * @param URI
  */
 export default function createView(URI) {
-
     let route = router(URI);
-
-    // Store the title because the loading screen render overwrites it.
     let currentTitle = document.title;
-
-    // if route is invalid, return a 404 page
     if (!route) {
         render(null, router('/error'));
         return;
     }
 
-    // change view to loading screen
-    render(null, router('/loading'));
+    render(null, router('/Loading'));
 
     let request = {
-        headers: getHeaders() // this is using the the getHeaders in auth.js
+        headers: getHeaders()
     }
     fetchData(route.state, request).then((props) => {
         document.title = currentTitle;
@@ -34,7 +28,6 @@ export default function createView(URI) {
     });
 }
 
-// When the user hits back in the browser, get the last uri from history and render it (w/ props)
 window.addEventListener('popstate', (e) => {
     if (e?.state?.lastUri) {
         console.log(`Back to ${e.state.lastUri}!`)
