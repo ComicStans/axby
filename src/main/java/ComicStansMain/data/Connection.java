@@ -19,12 +19,14 @@ public class Connection {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "requester_id", nullable = false)
     private User requester;
 
     @ManyToOne
+    @JoinColumn(name = "recipient_id", nullable = false)
     private User recipient;
 
-    @Column(name="date_requested")
+    @Column(name="date_requested", nullable = false)
     private LocalDate dateRequested;
 
     @Column(name="date_rejected")

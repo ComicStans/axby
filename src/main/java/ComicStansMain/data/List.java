@@ -24,13 +24,14 @@ public class List {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
-    @Column(nullable = false, name = "list_type")
+    @Column(name = "list_type", nullable = false)
     @Enumerated
     private listType listType;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", nullable = false)
     private LocalDate dateCreated;
 
 }

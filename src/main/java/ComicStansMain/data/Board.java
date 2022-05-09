@@ -27,6 +27,7 @@ public class Board {
     private long game_id;
 
     @ManyToOne
+    @JoinColumn(name = "creator_id", nullable = false)
     private User creator;
 
     @Column(name = "date_created")
