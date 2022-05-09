@@ -5,10 +5,7 @@ import ComicStansMain.data.GamesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.Collection;
 
 @CrossOrigin
@@ -24,7 +21,7 @@ public class GamesController {
     }
     @PostMapping
     private void createGame(@RequestBody Game game) {
-//        gotta learn how to convert utc to local date, for now all games will have been created today
+//        The release date comes in as utc from the api, so we'll have to convert it before saving it to our table
         game.setRelease_date(LocalDate.now());
         gamesRepository.save(game);
     }
