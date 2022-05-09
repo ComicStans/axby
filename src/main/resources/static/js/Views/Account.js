@@ -1,6 +1,6 @@
 import createView from "../createView";
 
-const URL = 'http://localhost:8081/api/users';
+const URL = 'http://localhost:8081/api/account';
 
 export default function UserIndex(props) {
     return `
