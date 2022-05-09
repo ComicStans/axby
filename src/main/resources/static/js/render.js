@@ -1,4 +1,4 @@
-import Navbar from "./views/partials/Navbar.js";
+import Navbar from "/static/js/Views/Navbar.js";
 
 /**
  * Pushes the current URI to the URL bar and sets the HTML of the app div.
@@ -7,7 +7,7 @@ import Navbar from "./views/partials/Navbar.js";
  */
 export default function render(props, route) {
     const app = document.querySelector('#app');
-    const title = `REST Blog - ${route.title}`;
+    const title = `axby - ${route.title}`;
     document.title = title;
     app.innerHTML = `${Navbar(null)} ${route.returnView(props)}`;
     if (route.viewEvent){

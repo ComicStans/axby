@@ -10,7 +10,6 @@ export default function init() {
  */
 function loadViewOnPageRequest() {
     window.addEventListener('DOMContentLoaded', function() {
-        //TODO: Switched to location.pathname so the route would be accurate to current view
         createView(location.pathname);
     });
 }

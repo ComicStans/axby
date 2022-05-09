@@ -6,24 +6,20 @@ import createView from "./createView.js";
  * On a successful response, sets the tokens into storage and redirects to the root
  */
 export default function addLoginEvent() {
-    console.log("entered addLoginEvent")
     document.querySelector("#login-btn").addEventListener("click", function () {
         let obj = {
             username: document.querySelector("#username").value,
             password: document.querySelector("#password").value,
             grant_type: 'password'
         }
-        console.log("got to login event")
-        // TODO: these are the only request params /oauth/token accepts in Spring Security
-        // TODO: need to possibly implement a random bit handshake w/ SHA256 on the password before sending
-        //      -> Alternatively, encrypt the entire request body
+
         let request = {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa('rest-blog-client:secret')
+                'Authorization': 'Basic ' + btoa('axby-client:secret')
             },
-            body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&client_id=rest-blog-client`
+            body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&client_id=axby-client`
         };
 
         fetchData(
@@ -63,14 +59,5 @@ function setTokens(responseData) {
     if (responseData.route['refresh_token']) {
         localStorage.setItem("refresh_token", responseData.route['refresh_token']);
         console.log("Refresh token set")
-    }
-
-}
-
-export function isLoggedIn(){
-    if (localStorage.getItem('access_token')){
-        return true;
-    } else {
-        return false
     }
 }
