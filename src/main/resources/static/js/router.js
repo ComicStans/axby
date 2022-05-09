@@ -73,7 +73,26 @@ export default function router(URI) {
             state: {},
             uri: location.pathname,
             title: 'Loading...',
-        }
+        },
+        // '/marketPlace': {
+        //     returnView: MarketPlace,
+        //     state: {},
+        //     uri: '/marketPlace',
+        //     title: "Market Place",
+        // }
+        // '/profile': {
+        //     returnView: Profile,
+        //     state: {},
+        //     uri: '/profile',
+        //     title: "Profile",
+        // }
+        // '/friends': {
+        //     returnView: Friends,
+        //     state: {},
+        //     uri: '/friends',
+        //     title: "Friends",
+        //
+        // }
     };
 
     return routes[URI];
