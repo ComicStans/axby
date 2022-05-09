@@ -28,4 +28,18 @@ public class GamesController {
         game.setRelease_date(LocalDate.now());
         gamesRepository.save(game);
     }
+    @PutMapping("{id}")
+    private void updateGame(@PathVariable long id, @RequestBody Game game) {
+//        We'll have to talk about which fields we want to be updateable and which aren't. I'm just doing summery
+//        for now to make sure the endpoint works, but we'll edit this class and pick which ones we want to be changed
+//        by the user
+        Game updatedGame = gamesRepository.getById(id);
+        updatedGame.setSummary(game.getSummary());
+        gamesRepository.save(updatedGame);
+    }
+    @DeleteMapping("{id}")
+    private void deleteGame(@PathVariable long id) {
+        gamesRepository.deleteById(id);
+    }
+
 }

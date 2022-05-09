@@ -50,4 +50,7 @@ public class Game {
 //    @ManyToOne
 //    @JsonIgnoreProperties("user")
 //    private User user;
+    @Column
+//    A field where the user can leave their opinions of a game
+    private String review;
 }
