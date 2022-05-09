@@ -7,7 +7,6 @@ import java.util.Collection;
 public interface ConnectionsRepository extends JpaRepository<User, Long> {
 
     Collection<User> findAllByRequesterId(Long requesterId);
-
     Collection<User> findAllByRecipientId(Long recipientId);
 
 }
