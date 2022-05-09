@@ -24,6 +24,9 @@ public class Board {
     private long id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private long game_id;
 
     @ManyToOne
