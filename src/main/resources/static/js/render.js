@@ -1,4 +1,4 @@
-import Navbar from "./views/partials/Navbar.js";
+import Navbar from "/static/Navbar.js";
 
 /**
  * Pushes the current URI to the URL bar and sets the HTML of the app div.

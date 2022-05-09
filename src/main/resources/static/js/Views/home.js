@@ -1,4 +1,4 @@
-export default function Home(props) {
+export default function home(props) {
     return `
 <head>    
 <title></title>
