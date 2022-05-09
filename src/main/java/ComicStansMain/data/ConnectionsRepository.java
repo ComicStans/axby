@@ -2,10 +2,12 @@ package ComicStansMain.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Collection;
+
 public interface ConnectionsRepository extends JpaRepository<User, Long> {
 
-    User findAllByRequesterId(Long requesterId);
+    Collection<User> findAllByRequesterId(Long requesterId);
 
-    User findAllByRecipientId(Long recipientId);
+    Collection<User> findAllByRecipientId(Long recipientId);
 
 }
