@@ -45,5 +45,5 @@ public class Game {
     private String companies;
     @Column
 //    referenced as "first_release_date" in the api
-    private LocalDate date;
+    private LocalDate release_date;
 }
