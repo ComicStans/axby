@@ -3,6 +3,7 @@ package ComicStansMain.data;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Getter
@@ -42,4 +43,7 @@ public class Game {
 //    The names of the companies involved can be obtained by adding "involved_companies.company.name" to the fields,
 //    Be aware that not all games seem to have an "involved_companies" property.
     private String companies;
+    @Column
+//    referenced as "first_release_date" in the api
+    private LocalDate date;
 }
