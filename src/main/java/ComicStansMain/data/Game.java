@@ -1,5 +1,6 @@
 package ComicStansMain.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,4 +47,7 @@ public class Game {
     @Column
 //    referenced as "first_release_date" in the api
     private LocalDate release_date;
+//    @ManyToOne
+//    @JsonIgnoreProperties("user")
+//    private User user;
 }
