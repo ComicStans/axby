@@ -21,6 +21,10 @@ public class GamesController {
     private Collection<Game> getAll(){
         return gamesRepository.findAll();
     }
+    @GetMapping("companies")
+    private Collection<Game> getGamesByCompany(@RequestParam String companies) {
+        return gamesRepository.findAllByCompaniesContains(companies);
+    }
 
     @PostMapping
     private void createGame(@RequestBody Game game) {
