@@ -4,10 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface GuildsRepository extends JpaRepository<User, Long> {
+public interface GuildsRepository extends JpaRepository<Guild, Long> {
 
     Guild findByName(String name);
-    Collection<Guild> findAllByUserId(Long userId);
+//    Collection<Guild> findAllByUsers(Long userId);
     Collection<Guild> findAllByNameLike(String namePattern);
 
 }
