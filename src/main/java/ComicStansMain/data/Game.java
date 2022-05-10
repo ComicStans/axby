@@ -34,4 +34,14 @@ public class Game {
 
     @Column(name = "release_date")
     private Date releaseDate;
+
+    @Column(name = "review")
+    private String review;
+
+    @Column(name = "summary")
+    private String summary;
+
+    @Column(name = "similar_games")
+    private String similarGames;
+
 }

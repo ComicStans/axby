@@ -47,8 +47,8 @@ export default function router(URI) {
             title: 'account',
             viewEvent: UserEvents
         },
-        '/posts': {
-            returnView: PostIndex,
+        '/messageBoards': {
+            returnView: MessageBoards,
             state: {
                 posts: '/api/posts'
             },
@@ -74,25 +74,25 @@ export default function router(URI) {
             uri: location.pathname,
             title: 'Loading',
         },
-        // '/marketPlace': {
-        //     returnView: MarketPlace,
-        //     state: {},
-        //     uri: '/marketPlace',
-        //     title: "Market Place",
-        // }
-        // '/profile': {
-        //     returnView: Profile,
-        //     state: {},
-        //     uri: '/profile',
-        //     title: "Profile",
-        // }
-        '/friends': {
-            returnView: Friends,
+        '/marketPlace': {
+            returnView: MarketPlace,
             state: {},
-            uri: '/friends',
-            title: "Friends",
-
+            uri: '/marketPlace',
+            title: "Market Place",
+        },
+        '/profile': {
+            returnView: Profile,
+            state: {},
+            uri: '/profile',
+            title: "Profile",
         }
+         '/friends': {
+             returnView: Friends,
+             state: {},
+             uri: '/friends',
+             title: "Friends",
+        
+         }
     };
 
     return routes[URI];
