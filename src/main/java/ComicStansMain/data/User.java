@@ -64,6 +64,19 @@ public class User {
     @Enumerated
     private Role accessLevel;
 
+//Each User will have one PlayedList and one WannaPlayList.
+//The played list will feature reviews of the Games listed.
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "played_list_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("played")
+    private PlayedList played;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "wanna_play_list_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("wannaPlay")
+    private WannaPlayList wannaPlay;
+
+//Each User can belong to many Guilds, each of which can have many Users (or it wouldn't be a Guild, would it?).
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
@@ -80,6 +93,8 @@ public class User {
     @JsonIgnoreProperties("guilds")
     private Collection<Guild> guilds;
 
+//Each User can have many types of SensitiveContent that can be filtered out of view.
+//And of course many Users may wish to filter the same types of content.
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
@@ -96,10 +111,9 @@ public class User {
     @JsonIgnoreProperties("sensitiveContent")
     private Collection<SensitiveContent> sensitiveContent;
 
-    //User one-to-many Collections: lists, boards, posts, reports, preferences.
-    //The reports table has two columns with Users as foreign keys: the user reporting
-    //and the user reported.
-
+//User one-to-many Collections: boards, posts, reports, preferences.
+//The reports table has two columns with Users as foreign keys: the user reporting
+//and the user reported.
     @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("preferences")
     private Collection<Preference> preferences;
@@ -108,15 +122,12 @@ public class User {
     @JsonIgnoreProperties("reports")
     private Collection<Report> reports;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("lists")
-    private Collection<List> lists;
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("boards")
+    private Collection<Board> boards;
 
     @OneToMany(mappedBy = "authorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("posts")
     private Collection<Post> posts;
 
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("boards")
-    private Collection<Board> boards;
 }
