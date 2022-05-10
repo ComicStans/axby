@@ -17,7 +17,7 @@ export default function createView(URI) {
         return;
     }
 
-    render(null, router('/Loading'));
+    render(null, router('/loading'));
 
     let request = {
         headers: getHeaders()

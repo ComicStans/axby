@@ -4,7 +4,7 @@ import {getHeaders} from "../auth.js";
 
 const URL = 'http://localhost:8081/api/posts';
 
-export default function PostIndex(props) {
+export default function MessageBoards(props) {
     return `
         <header>
             <h1>My Blogs</h1>
