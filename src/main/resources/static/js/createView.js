@@ -8,6 +8,8 @@ import {getHeaders} from "./auth.js";
  * @param URI
  */
 export default function createView(URI) {
+    const app = document.querySelector('#app');
+
     let route = router(URI);
     let currentTitle = document.title;
     if (!route) {
