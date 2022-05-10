@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface PostsRepository extends JpaRepository<User, Long> {
+public interface PostsRepository extends JpaRepository<Post, Long> {
 
-    Collection<Post> findAllByUsername(Long authorId);
-    Collection<Post> findAllByBoards(Long boardId);
+    Collection<Post> findAllByAuthorId(Long authorId);
+    Collection<Post> findAllByBoardId(Long boardId);
 
 }
