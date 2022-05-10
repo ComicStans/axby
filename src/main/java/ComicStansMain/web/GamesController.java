@@ -34,4 +34,8 @@ public class GamesController {
         editedGame.setArt(game.getArt());
         gamesRepository.save(editedGame);
     }
+    @DeleteMapping("{id}")
+    private void deleteGame(@PathVariable long id) {
+        gamesRepository.deleteById(id);
+    }
 }
