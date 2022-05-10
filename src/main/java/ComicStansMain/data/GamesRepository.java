@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface GamesRepository extends JpaRepository<Game, Long> {
     Game findByName(String Name);
-//    List<Game> findByCompaniesContains(String companies);
 @Query(
         value = "SELECT * FROM axby_games u WHERE u.companies like %:companyName%",
         nativeQuery = true)

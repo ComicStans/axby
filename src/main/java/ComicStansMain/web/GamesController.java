@@ -27,6 +27,10 @@ public class GamesController {
         System.out.println(companies);
         return gamesRepository.findAllByCompanies("Comic");
     }
+    @GetMapping("name")
+    private Game FindByName(@RequestParam String name) {
+        return gamesRepository.findByName(name);
+    }
 
     @PostMapping
     private void createGame(@RequestBody Game game) {
