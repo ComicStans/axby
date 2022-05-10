@@ -1,17 +1,15 @@
 import Home from "./Views/Home.js";
-import MessageBoards from "./Views/MessageBoards.js";
-// import About from "./views/About.js";
+import PostIndex from "./Views/PostIndex.js";
+import About from "./Views/About.js";
 import Error404 from "./Views/Error404.js";
 import Loading from "./Views/Loading.js";
 import Login from "./Views/Login.js";
 import LoginEvent from "./auth.js";
-// import Register from "./views/Register.js"
-// import {RegisterEvent} from "./views/Register.js";
-import {PostEvents} from "./Views/MessageBoards.js";
+import Register, {RegisterEvent} from "./Views/Register.js"
+import {PostEvents} from "./Views/PostIndex.js";
 import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
-import MarketPlace from "./Views/MarketPlace.js";
-import Profile from "./Views/Profile.js";
+import Friends from "./Views/Friends.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -33,13 +31,13 @@ export default function router(URI) {
             title: "Login",
             viewEvent: LoginEvent
         },
-        // '/register': {
-        //     returnView: Register,
-        //     state: {},
-        //     uri: '/register',
-        //     title: 'Register',
-        //     viewEvent: RegisterEvent
-        // },
+        '/register': {
+            returnView: Register,
+            state: {},
+            uri: '/register',
+            title: 'Register',
+            viewEvent: RegisterEvent
+        },
         '/account': {
             returnView: UserIndex,
             state: {
@@ -58,12 +56,12 @@ export default function router(URI) {
             title: 'All Posts',
             viewEvent: PostEvents
         },
-        // '/about': {
-        //     returnView: About,
-        //     state: {},
-        //     uri: '/about',
-        //     title: 'About',
-        // },
+        '/about': {
+            returnView: About,
+            state: {},
+            uri: '/About',
+            title: 'About',
+        },
         '/error': {
             returnView: Error404,
             state: {},
@@ -74,7 +72,7 @@ export default function router(URI) {
             returnView: Loading,
             state: {},
             uri: location.pathname,
-            title: 'Loading...',
+            title: 'Loading',
         },
         '/marketPlace': {
             returnView: MarketPlace,
@@ -88,13 +86,13 @@ export default function router(URI) {
             uri: '/profile',
             title: "Profile",
         }
-        // '/friends': {
-        //     returnView: Friends,
-        //     state: {},
-        //     uri: '/friends',
-        //     title: "Friends",
-        //
-        // }
+         '/friends': {
+             returnView: Friends,
+             state: {},
+             uri: '/friends',
+             title: "Friends",
+        
+         }
     };
 
     return routes[URI];
