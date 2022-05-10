@@ -28,4 +28,10 @@ public class GamesController {
         game.setReleaseDate(date);
         gamesRepository.save(game);
     }
+    @PutMapping("{id}")
+    private void editGame(@PathVariable long id, @RequestBody Game game) {
+        Game editedGame = gamesRepository.getById(id);
+        editedGame.setArt(game.getArt());
+        gamesRepository.save(editedGame);
+    }
 }
