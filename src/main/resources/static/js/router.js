@@ -66,7 +66,7 @@ export default function router(URI) {
             returnView: Error404,
             state: {},
             uri: location.pathname,
-            title: ' ERROR',
+            title: 'ERROR',
         },
         '/loading': {
             returnView: Loading,
