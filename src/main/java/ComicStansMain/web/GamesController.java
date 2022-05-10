@@ -25,7 +25,7 @@ public class GamesController {
     @GetMapping("companies")
     private List<Game> getGamesByCompany(@RequestParam String companies) {
         System.out.println(companies);
-        return gamesRepository.findAllByCompanies("Comic");
+        return gamesRepository.findAllByCompanies(companies);
     }
     @GetMapping("name")
     private Game FindByName(@RequestParam String name) {
