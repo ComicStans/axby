@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -37,10 +38,10 @@ public class Post {
     @Column(name = "post_text")
     private String postText;
 
-    @Column(name = "post_replied_to", nullable = false)
+    @Column(name = "post_replied_to")
     private long postRepliedTo;
 
     @Column(name = "post_time", nullable = false)
-    private LocalDate postTime;
+    private Date postTime;
 
 }
