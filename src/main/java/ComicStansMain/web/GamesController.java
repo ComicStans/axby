@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @CrossOrigin
 @AllArgsConstructor
@@ -22,8 +23,9 @@ public class GamesController {
         return gamesRepository.findAll();
     }
     @GetMapping("companies")
-    private Collection<Game> getGamesByCompany(@RequestParam String companies) {
-        return gamesRepository.findAllByCompaniesContains(companies);
+    private List<Game> getGamesByCompany(@RequestParam String companies) {
+        System.out.println(companies);
+        return gamesRepository.findAllByCompanies("Comic");
     }
 
     @PostMapping
