@@ -3,72 +3,42 @@ import createView from "../createView.js";
 export default function Register(props) {
     return `
     <!DOCTYPE html>
-        <html>
+        <html lang="en">
             <head>
                 <meta charset="UTF-8"/>
-                <link rel="stylesheet" href="../Register.css">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <title>Register</title>
             </head>
-            <body>
-                <h1>Register</h1>
-                <button id="myBtn">Open Modal</button>
-
-                <form id="register-form">
-                    <label for="username">Username</label>
-                    <input id="username" name="username" type="text"/>
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email">
-                    <label for="password">Password</label>
-                    <input id="password" name="password" type="password"/>
-                    <button id="register-btn" type="button">Register</button>
-                </form>
-              <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                    
-                      <!-- Modal content -->
-                      <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p>Some text in the Modal..</p>
-                      </div>
-                    
-                    </div>  
-                
-                    <script>
-                        // Get the modal
-                        let modal = document.getElementById("myModal");
-                        
-                        // Get the button that opens the modal
-                        let btn = document.getElementById("myBtn");
-                        
-                        // Get the <span> element that closes the modal
-                        let span = document.getElementsByClassName("close")[0];
-                        
-                        // When the user clicks the button, open the modal 
-                        btn.onclick = function() {
-                          modal.style.display = "block";
-                        }
-                        
-                        // When the user clicks on <span> (x), close the modal
-                        span.onclick = function() {
-                          modal.style.display = "none";
-                        }
-                        
-                        // When the user clicks anywhere outside of the modal, close it
-                        window.onclick = function(event) {
-                          if (event.target == modal) {
-                            modal.style.display = "none";
-                          }
-                        }
-                    </script>
-                
-            </body>
+               <body>
+                     <!--Creates the popup body-->
+                 <div class="popup-overlay">
+                      <!--Creates the popup content-->
+                 <div class="popup-content">
+                     <h1>Register</h1>
+                     <form id="register-form">
+                        <label for="username">Username</label>
+                        <input id="username" name="username" type="text"/>
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email">
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password"/>
+                        <button id="register-btn" type="button">Register</button>
+                     </form>
+        
+                            <!--popup's close button-->
+                            <button class="close">Close</button> </div>
+                        </div>
+                        <!--Content shown when popup is not displayed-->
+                        <h2>jQuery Pop-Up Example</h2>
+                        <button class="open">Open</button>
+        
+               </body>
         </html>
 `;
 }
 
-export function RegisterEvent(){
-    $("#register-btn").click(function(){
+export function RegisterEvent() {
+    $("#register-btn").click(function () {
 
         let newUser = {
             username: $("#username").val(),
@@ -91,4 +61,14 @@ export function RegisterEvent(){
             })
 
     })
+    //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+    $(".open").on("click", function () {
+        $(".popup-overlay, .popup-content").addClass("active");
+    });
+
+//removes the "active" class to .popup and .popup-content when the "Close" button is clicked
+    $(".close, .popup-overlay").on("click", function () {
+        $(".popup-overlay, .popup-content").removeClass("active");
+    });
+
 }
