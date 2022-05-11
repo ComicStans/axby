@@ -26,8 +26,9 @@ public class Board {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private long game_id;
+    @ManyToOne
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
 
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
@@ -38,8 +39,6 @@ public class Board {
 
     @OneToMany(mappedBy = "boardId")
     private Collection<Post> Posts;
-
-
 
 
 }

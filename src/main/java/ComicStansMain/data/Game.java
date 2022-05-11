@@ -52,4 +52,7 @@ public class Game {
     @ManyToOne
     @JsonIgnoreProperties("games")
     private WannaPlayList wannaPlayList;
+
+    @OneToMany(mappedBy = "game")
+    private Collection<Board> boards;
 }

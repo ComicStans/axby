@@ -38,10 +38,10 @@ public class Post {
     @Column(name = "post_text")
     private String postText;
 
-    @Column(name = "post_replied_to")
-    private long postRepliedTo;
+//    @Column(name = "post_replied_to")
+//    private long postRepliedTo;
 
     @Column(name = "post_time", nullable = false)
-    private Date postTime;
+    private LocalDate postTime;
 
 }
