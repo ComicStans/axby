@@ -1,3 +1,7 @@
+body {
+    background-color: red;
+}
+
 #register-form {
     display: grid;
 }

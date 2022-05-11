@@ -6,13 +6,13 @@ export default function Register(props) {
         <html>
             <head>
                 <meta charset="UTF-8"/>
-                <link rel="stylesheet" href="./Re">
+                <link rel="stylesheet" href="../Register.css">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <title>Register</title>
             </head>
             <body>
                 <h1>Register</h1>
-                        <button id="myBtn">Open Modal</button>
+                <button id="myBtn">Open Modal</button>
 
                 <form id="register-form">
                     <label for="username">Username</label>
