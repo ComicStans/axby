@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -34,8 +35,7 @@ public class GamesController {
 
     @PostMapping
     private void createGame(@RequestBody Game game) {
-        Date date = new Date(1459987200L);
-        game.setReleaseDate(date);
+        game.setReleaseDate(LocalDate.now());
         gamesRepository.save(game);
     }
     @PutMapping("{id}")

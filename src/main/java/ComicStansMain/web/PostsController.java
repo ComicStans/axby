@@ -14,7 +14,7 @@ import java.util.Date;
 @RequestMapping(value = "api/posts", headers = "Accept=application/json")
 public class PostsController {
     private final UsersRepository usersRepository;
-//    private final BoardsRepository boardsRepository;
+    private final BoardsRepository boardsRepository;
     private final PostsRepository postsRepository;
 
     @GetMapping
@@ -23,19 +23,20 @@ public class PostsController {
     }
 
     @GetMapping("postsByBoard")
-    private Collection<Post> getAllPostsByBoardId(@RequestParam Long boardId) {
-        System.out.println("This ID for that Board is " + boardId);
-        return postsRepository.findAllByBoardId(boardId);
+    private Collection<Post> getAllPostsByBoardId() {
+//        System.out.println("This ID for that Board is ");
+        return postsRepository.findAllByBoardId(boardsRepository.getById(1L));
     }
     @GetMapping("postsByAuthor")
-    private Collection<Post> getAllPostsByUserId(@RequestParam Long authorId) {
-        return postsRepository.findAllByAuthorId(authorId);
+    private Collection<Post> getAllPostsByUserId() {
+        return postsRepository.findAllByAuthorId(usersRepository.getById(1L));
     }
 
     @PostMapping
-    private void createPost(@RequestBody Post newPost, String newPostType) {
-        Date postDate = new Date();
-        User author = usersRepository.findByUsername("dbc-hou");
+    private void createPost(@RequestBody Post newPost) {
+        User author = usersRepository.findByUsername("wesleyb");
+        newPost.setBoardId(boardsRepository.getById(1L));
+        newPost.setAuthorId(author);
         newPost.setPostTime(LocalDate.now());
 //        newPost.setAuthorId(author.getId());
         newPost.setPostType(Post.postType.ORIGINAL);

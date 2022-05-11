@@ -1,5 +1,6 @@
 package ComicStansMain.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,10 +26,12 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "board_id", nullable = false)
+    @JsonIgnoreProperties("posts")
     private Board boardId;
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
+    @JsonIgnoreProperties({"posts","boards"})
     private User authorId;
 
     @Column(name = "post_type", nullable = false)

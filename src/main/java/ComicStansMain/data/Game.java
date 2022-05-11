@@ -34,7 +34,7 @@ public class Game {
     private String platforms;
 
     @Column(name = "release_date")
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     @Column(name = "review")
     private String review;
@@ -54,5 +54,6 @@ public class Game {
     private WannaPlayList wannaPlayList;
 
     @OneToMany(mappedBy = "game")
+    @JsonIgnoreProperties("game")
     private Collection<Board> boards;
 }
