@@ -26,20 +26,21 @@ public class UsersController {
         this.ur = ur;
 //        this.pe = pe;
     }
-
+    @GetMapping
     private List<User> getAll() {
-        ArrayList<User> users = new ArrayList<>();
-        return users;
+        return ur.findAll();
     }
 
     @GetMapping("{userId}")
     private Optional<User> getByID(@PathVariable long userId) {
         return ur.findById(userId);
     }
+
     @GetMapping("username")
     private User getByUserName(@RequestParam String username) {
         return ur.findByUsername(username);
     }
+
     @GetMapping("email")
     private User getByEmail(@RequestParam String email) {
         return ur.findByEmail(email);

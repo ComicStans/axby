@@ -29,21 +29,23 @@ public class PlayedList {
     @Column(name = "date_created", nullable = false)
     private LocalDate dateCreated;
 
-//Each PlayedList can have many games; each game can appear on many PlayedLists
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            targetEntity = Game.class)
+//Each PlayedList can have many games; it doesn't matter that a game appears on
+//multiple users' PlayedLists.
+//    @ManyToMany(
+//            fetch = FetchType.LAZY,
+//            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
+//            targetEntity = Game.class)
+//
+//    @JoinTable(
+//            name="axby_game_played_list",
+//            joinColumns = {@JoinColumn(name = "played_list_id", nullable = false, updatable = false)},
+//            inverseJoinColumns = {@JoinColumn(name="game_id", nullable = false, updatable = false)},
+//            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+//            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+//    )
 
-    @JoinTable(
-            name="axby_game_played_list",
-            joinColumns = {@JoinColumn(name = "played_list_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="game_id", nullable = false, updatable = false)},
-            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
-    )
-
-    @JsonIgnoreProperties("games")
+    @OneToMany(mappedBy = "playedList", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("playedList")
     private Collection<Game> games;
 
 }

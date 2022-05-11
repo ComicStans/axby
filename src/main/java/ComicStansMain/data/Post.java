@@ -1,9 +1,11 @@
 package ComicStansMain.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -24,10 +26,12 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "board_id", nullable = false)
+    @JsonIgnoreProperties("posts")
     private Board boardId;
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
+    @JsonIgnoreProperties({"posts","boards"})
     private User authorId;
 
     @Column(name = "post_type", nullable = false)
@@ -37,8 +41,8 @@ public class Post {
     @Column(name = "post_text")
     private String postText;
 
-    @Column(name = "post_replied_to", nullable = false)
-    private long postRepliedTo;
+//    @Column(name = "post_replied_to")
+//    private long postRepliedTo;
 
     @Column(name = "post_time", nullable = false)
     private LocalDate postTime;

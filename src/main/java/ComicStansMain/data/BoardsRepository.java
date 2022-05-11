@@ -7,6 +7,6 @@ import java.util.Collection;
 public interface BoardsRepository extends JpaRepository<Board, Long> {
 
     Board findByName(String name);
-    Collection<Board> findAllByCreatorId(Long creatorId);
+    Collection<Board> findAllByCreator(User creator);
     Collection<Board> findAllByNameLike(String namePattern);
 }
