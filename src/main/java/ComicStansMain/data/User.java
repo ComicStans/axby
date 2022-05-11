@@ -66,12 +66,12 @@ public class User {
 
 //Each User will have one PlayedList and one WannaPlayList.
 //The played list will feature reviews of the Games listed.
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "played_list_id", referencedColumnName = "id")
     @JsonIgnoreProperties("user")
     private PlayedList played;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wanna_play_list_id", referencedColumnName = "id")
     @JsonIgnoreProperties("user")
     private WannaPlayList wannaPlay;

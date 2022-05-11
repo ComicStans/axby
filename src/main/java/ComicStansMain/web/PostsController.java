@@ -3,6 +3,8 @@ package ComicStansMain.web;
 import ComicStansMain.data.*;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -34,7 +36,7 @@ public class PostsController {
     private void createPost(@RequestBody Post newPost, String newPostType) {
         Date postDate = new Date();
         User author = usersRepository.findByUsername("dbc-hou");
-        newPost.setPostTime(postDate);
+        newPost.setPostTime(LocalDate.now());
 //        newPost.setAuthorId(author.getId());
         newPost.setPostType(Post.postType.ORIGINAL);
         postsRepository.save(newPost);
