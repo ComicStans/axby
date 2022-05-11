@@ -66,21 +66,22 @@ public class User {
 
 //Each User will have one PlayedList and one WannaPlayList.
 //The played list will feature reviews of the Games listed.
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JoinColumn(name = "played_list_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("played")
+    @JsonIgnoreProperties("user")
     private PlayedList played;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JoinColumn(name = "wanna_play_list_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("wannaPlay")
+    @JsonIgnoreProperties("user")
     private WannaPlayList wannaPlay;
 
 //Each User can belong to many Guilds, each of which can have many Users (or it wouldn't be a Guild, would it?).
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            targetEntity = Guild.class)
+            targetEntity = Guild.class
+    )
 
     @JoinTable(
             name="axby_guild_user",
@@ -90,7 +91,7 @@ public class User {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties("guilds")
+    @JsonIgnoreProperties("users")
     private Collection<Guild> guilds;
 
 //Each User can have many types of SensitiveContent that can be filtered out of view.
@@ -98,7 +99,8 @@ public class User {
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            targetEntity = SensitiveContent.class)
+            targetEntity = SensitiveContent.class
+    )
 
     @JoinTable(
             name="axby_user_content_filter",
@@ -108,26 +110,26 @@ public class User {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties("sensitiveContent")
+    @JsonIgnoreProperties("users")
     private Collection<SensitiveContent> sensitiveContent;
 
 //User one-to-many Collections: boards, posts, reports, preferences.
 //The reports table has two columns with Users as foreign keys: the user reporting
 //and the user reported.
     @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("preferences")
+    @JsonIgnoreProperties("userId")
     private Collection<Preference> preferences;
 
     @OneToMany(mappedBy = "userReporting", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("reports")
+    @JsonIgnoreProperties("userReporting")
     private Collection<Report> reports;
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("boards")
+    @JsonIgnoreProperties("creator")
     private Collection<Board> boards;
 
     @OneToMany(mappedBy = "authorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("posts")
+    @JsonIgnoreProperties("authorId")
     private Collection<Post> posts;
 
 }

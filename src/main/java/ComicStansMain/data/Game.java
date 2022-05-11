@@ -1,4 +1,5 @@
 package ComicStansMain.data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,4 +45,11 @@ public class Game {
     @Column(name = "similar_games")
     private String similarGames;
 
+    @ManyToOne
+    @JsonIgnoreProperties("games")
+    private PlayedList playedList;
+
+    @ManyToOne
+    @JsonIgnoreProperties("games")
+    private WannaPlayList wannaPlayList;
 }
