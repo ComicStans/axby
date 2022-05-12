@@ -16,9 +16,6 @@ import java.util.Collection;
 @Table(name = "axby_guilds")
 public class Guild {
 
-    //Guilds, of course, may contain many Users.
-    //Each user can belong to many Guilds.
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -32,6 +29,13 @@ public class Guild {
     @Column(name="date_created", nullable = false)
     private LocalDate dateCreated;
 
+//Each Guild has one associated Board, to be created at the same time as the Guild.
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guild_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("guild")
+    private GuildBoard guildBoard;
+
+//Each Guild can have many users as members; each user can belong to many Guilds.
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},

@@ -43,13 +43,13 @@ public class PostsController {
         postsRepository.save(newPost);
     }
     @PutMapping("{id}")
-    private void editPost(@PathVariable long id, @RequestBody Post postToEdit) {
+    private void editPost(@PathVariable Long id, @RequestBody Post postToEdit) {
         Post thisPost = postsRepository.getById(id);
         thisPost.setPostText(postToEdit.getPostText());
         postsRepository.save(thisPost);
     }
     @DeleteMapping("{id}")
-    private void deletePost(@PathVariable long id) {
+    private void deletePost(@PathVariable Long id) {
         postsRepository.deleteById(id);
     }
 }
