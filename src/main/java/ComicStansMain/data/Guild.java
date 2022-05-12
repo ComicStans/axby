@@ -32,7 +32,7 @@ public class Guild {
 //Each Guild has one associated Board, to be created at the same time as the Guild.
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "guild_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("guildBoard")
+    @JsonIgnoreProperties("guild")
     private GuildBoard guildBoard;
 
 //Each Guild can have many users as members; each user can belong to many Guilds.

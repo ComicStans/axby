@@ -25,7 +25,7 @@ public class GuildBoardPost {
 
     @ManyToOne
     @JoinColumn(name = "guild_board_id", nullable = false)
-    @JsonIgnoreProperties("posts")
+    @JsonIgnoreProperties("guildBoardPosts")
     private GuildBoard guildBoardId;
 
     @ManyToOne
