@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -13,8 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "axby_posts")
-public class Post {
+@Table(name = "axby_guild_board_posts")
+public class GuildBoardPost {
 
     //Each Post is associated with one board and one user.
     //Posts can be Original or Reply; if Reply, the Post has a post_replied_to value.
@@ -23,6 +22,16 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "guild_board_id", nullable = false)
+    @JsonIgnoreProperties("posts")
+    private GuildBoard guildBoardId;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
+    @JsonIgnoreProperties({"posts","boards"})
+    private User authorId;
 
     @Column(name = "post_type", nullable = false)
     @Enumerated
@@ -36,18 +45,5 @@ public class Post {
 
     @Column(name = "post_time", nullable = false)
     private LocalDate postTime;
-
-//One Board can have many Posts.
-    @ManyToOne
-    @JoinColumn(name = "board_id", nullable = false)
-    @JsonIgnoreProperties("posts")
-    private Board boardId;
-
-//One User can be the author of many Posts.
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    @JsonIgnoreProperties({"posts","boards"})
-    private User authorId;
-
 
 }
