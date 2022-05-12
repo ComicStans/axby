@@ -29,7 +29,7 @@ public class GamesController {
         return gamesRepository.findAllByCompanies(companies);
     }
     @GetMapping("name")
-    private Game FindByName(@RequestParam String name) {
+    private Game findByName(@RequestParam String name) {
         return gamesRepository.findByName(name);
     }
 
