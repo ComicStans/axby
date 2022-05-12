@@ -168,4 +168,8 @@ public class User {
     @JsonIgnoreProperties("authorId")
     private Collection<Post> posts;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private Collection<Review> reviews;
+
 }

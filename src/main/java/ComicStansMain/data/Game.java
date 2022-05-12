@@ -56,4 +56,8 @@ public class Game {
     @OneToMany(mappedBy = "game")
     @JsonIgnoreProperties("game")
     private Collection<Board> boards;
+
+    @OneToMany(mappedBy = "game")
+    @JsonIgnoreProperties("game")
+    private Collection<Review> reviews;
 }

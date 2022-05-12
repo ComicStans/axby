@@ -43,8 +43,8 @@ public class GuildBoard {
     private Guild guild;
 
 //Each GuildBoard can have many Posts.
-    @OneToMany(mappedBy = "guildboardId")
-    @JsonIgnoreProperties("guildboardId")
+    @OneToMany(mappedBy = "guildBoardId")
+    @JsonIgnoreProperties("guildBoardId")
     private Collection<GuildBoardPost> guildBoardPosts;
 
 //Each GuildBoard can have many Users as admins; a user may be an admin on many GuildBoards.
