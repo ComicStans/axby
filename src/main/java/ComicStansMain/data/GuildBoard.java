@@ -13,8 +13,8 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "axby_boards")
-public class Board {
+@Table(name = "axby_guild_boards")
+public class GuildBoard {
 
     //Each Board will have one Game or Game-type to which it is related.
     //Some Boards will be pre-created by the site admins, dedicated to most popular titles;
@@ -32,19 +32,22 @@ public class Board {
     @JsonIgnoreProperties("boards")
     private Game game;
 
-    @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
-    @JsonIgnoreProperties({"boards","posts", "played"})
-    private User creator;
-
     @Column(name = "date_created")
     private LocalDate dateCreated;
 
-    @OneToMany(mappedBy = "boardId")
-    @JsonIgnoreProperties("boardId")
-    private Collection<Post> posts;
+//Each Guild will have one GuildBoard.
+//The GuildBoard is created at the same time as the Guild.
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guild_board_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("guildBoard")
+    private Guild guild;
 
-//One Board can have many admin Users; each User can administer many Boards.
+//Each GuildBoard can have many Posts.
+    @OneToMany(mappedBy = "guildBoardId")
+    @JsonIgnoreProperties("guildBoardId")
+    private Collection<GuildBoardPost> guildBoardPosts;
+
+//Each GuildBoard can have many Users as admins; a user may be an admin on many GuildBoards.
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
@@ -52,13 +55,16 @@ public class Board {
     )
 
     @JoinTable(
-            name="axby_board_admin",
-            joinColumns = {@JoinColumn(name = "board_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="admin_id", nullable = false, updatable = false)},
+            name="axby_guildboard_admin",
+            joinColumns = {@JoinColumn(name = "guild_board_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="guild_admin_id", nullable = false, updatable = false)},
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
     @JsonIgnoreProperties("admins")
     private Collection<User> admins;
+
+
+
 }

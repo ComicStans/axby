@@ -10,7 +10,7 @@ export default function Navbar(props) {
             <a href="/about" data-link>About</a>
             <a href="/friends" data-link>Friends</a>
             <a href="/login" data-link>Login</a>
-            <a href="/register" data-link>Register</a>
+            <a id="register-modal" href="/register" data-link>Register</a>
             <a href="/account" data-link>Account</a>
         </nav>
     `;

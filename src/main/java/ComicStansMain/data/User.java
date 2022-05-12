@@ -113,6 +113,42 @@ public class User {
     @JsonIgnoreProperties("users")
     private Collection<SensitiveContent> sensitiveContent;
 
+//Each User administer many Boards, each of which can have many admin Users.
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
+            targetEntity = User.class
+    )
+
+    @JoinTable(
+            name="axby_guildboard_admin",
+            joinColumns = {@JoinColumn(name = "admin_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="board_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
+
+    @JsonIgnoreProperties("guildBoardsAdministered")
+    private Collection<Board> BoardsAdministered;
+
+//Each User administer many GuildBoards, each of which can have many admin Users.
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
+            targetEntity = User.class
+    )
+
+    @JoinTable(
+            name="axby_guildboard_admin",
+            joinColumns = {@JoinColumn(name = "guild_admin_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="guild_board_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
+
+    @JsonIgnoreProperties("guildBoardsAdministered")
+    private Collection<GuildBoard> guildBoardsAdministered;
+
 //User one-to-many Collections: boards, posts, reports, preferences.
 //The reports table has two columns with Users as foreign keys: the user reporting
 //and the user reported.
