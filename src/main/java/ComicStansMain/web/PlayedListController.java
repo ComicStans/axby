@@ -39,4 +39,9 @@ public class PlayedListController {
         usersRepository.save(user);
         gamesRepository.save(game);
     }
+
+    @DeleteMapping("{id}")
+    private void deleteById(@PathVariable long id) {
+        playedListsRepository.deleteById(id);
+    }
 }
