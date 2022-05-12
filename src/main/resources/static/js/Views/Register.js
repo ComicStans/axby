@@ -29,7 +29,7 @@ export default function Register(props) {
                      </div>
                  </div>
                         <!--Content shown when popup is not displayed-->
-<!--                        <button class="open">Open</button>-->
+                        <button class="open">Open</button>
                </body>
         </html>
 `;
@@ -60,7 +60,7 @@ export function RegisterEvent() {
 
     })
     //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
-    $("#register-modal").on("click", function () {
+    $(".open").on("click", function () {
         $(".popup-overlay, .popup-content").addClass("active");
     });
 
