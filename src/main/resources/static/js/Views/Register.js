@@ -12,26 +12,24 @@ export default function Register(props) {
                <body>
                      <!--Creates the popup body-->
                  <div class="popup-overlay">
-                      <!--Creates the popup content-->
-                 <div class="popup-content">
-                     <h1>Register</h1>
-                     <form id="register-form">
-                        <label for="username">Username</label>
-                        <input id="username" name="username" type="text"/>
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="email">
-                        <label for="password">Password</label>
-                        <input id="password" name="password" type="password"/>
-                        <button id="register-btn" type="button">Register</button>
-                     </form>
-        
-                            <!--popup's close button-->
-                            <button class="close">Close</button> </div>
-                        </div>
+                          <!--Creates the popup content-->
+                     <div class="popup-content">
+                         <h1>Register</h1>
+                         <form id="register-form">
+                            <label for="username">Username</label>
+                            <input id="username" name="username" type="text"/>
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password"/>
+                            <button id="register-btn" type="button">Register</button>
+                         </form>
+                                <!--popup's close button-->
+                                <button class="close">Close</button> 
+                     </div>
+                 </div>
                         <!--Content shown when popup is not displayed-->
-                        <h2>jQuery Pop-Up Example</h2>
-                        <button class="open">Open</button>
-        
+<!--                        <button class="open">Open</button>-->
                </body>
         </html>
 `;
@@ -62,12 +60,12 @@ export function RegisterEvent() {
 
     })
     //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
-    $(".open").on("click", function () {
+    $("#register-modal").on("click", function () {
         $(".popup-overlay, .popup-content").addClass("active");
     });
 
 //removes the "active" class to .popup and .popup-content when the "Close" button is clicked
-    $(".close, .popup-overlay").on("click", function () {
+    $(".close").on("click", function () {
         $(".popup-overlay, .popup-content").removeClass("active");
     });
 
