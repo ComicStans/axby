@@ -13,5 +13,6 @@ export default function Navbar(props) {
             <a href="/register" data-link>Register</a>
             <a href="/account" data-link>Account</a>
         </nav>
+         <hr>
     `;
 }
