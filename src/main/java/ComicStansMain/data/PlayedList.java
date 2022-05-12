@@ -24,6 +24,7 @@ public class PlayedList {
     private long id;
 
     @OneToOne(mappedBy = "played")
+    @JsonIgnoreProperties({"played", "boards"})
     private User user;
 
     @Column(name = "date_created", nullable = false)

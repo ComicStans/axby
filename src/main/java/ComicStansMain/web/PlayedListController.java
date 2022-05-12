@@ -28,10 +28,15 @@ public class PlayedListController {
     }
 
     @PostMapping
-    private void createList(@RequestBody PlayedList list) {
+    public void createList(@RequestBody PlayedList list) {
         list.setDateCreated(LocalDate.now());
-        list.setUser(usersRepository.getById(1L));
         list.setGames(gamesRepository.findAll());
-        playedListsRepository.save(list);
+        list = playedListsRepository.save(list);
+        User user = usersRepository.getById(1L);
+        Game game = gamesRepository.getById(1L);
+        game.setPlayedList(list);
+        user.setPlayed(list);
+        usersRepository.save(user);
+        gamesRepository.save(game);
     }
 }
