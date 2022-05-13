@@ -32,4 +32,11 @@ public class BoardsController {
         board.setDateCreated(LocalDate.now());
         boardsRepository.save(board);
     }
+
+    @PutMapping("{id}")
+    private void updateBoard(@PathVariable long id, @RequestBody Board board) {
+        Board boardUpdated = boardsRepository.getById(id);
+        boardUpdated.setName(board.getName());
+        boardsRepository.save(boardUpdated);
+    }
 }
