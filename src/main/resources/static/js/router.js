@@ -6,13 +6,15 @@ import Loading from "./Views/Loading.js";
 import Login from "./Views/Login.js";
 import LoginEvent from "./auth.js";
 import Register from "./Views/Register.js"
-import {RegisterEvent} from "./Views/Register.js";
+// import {RegisterEvent} from "./Views/Register.js";
 import {PostEvents} from "./Views/MessageBoards.js";
 import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
 import Profile from "./Views/Profile.js";
 import Friends from "./Views/Friends.js";
+// import {CreateUser} from "./Views/Register.js";
+import {user} from "./Views/Register.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -34,13 +36,13 @@ export default function router(URI) {
         //     title: "Login",
         //     viewEvent: LoginEvent
         // },
-        // // '/register': {
-        //     returnView: Register,
-        //     state: {},
-        //     uri: '/register',
-        //     title: 'Register',
-        //     viewEvent: RegisterEvent
-        // },
+        '/register': {
+            returnView: Register,
+            state: {},
+            uri: '/register',
+            title: 'Register',
+            viewEvent: user
+        },
         '/account': {
             returnView: UserIndex,
             state: {
