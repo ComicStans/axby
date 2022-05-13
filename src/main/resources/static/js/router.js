@@ -15,6 +15,7 @@ import Profile from "./Views/Profile.js";
 import Friends from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
+import Account from "./Views/Account.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -44,9 +45,9 @@ export default function router(URI) {
             viewEvent: user
         },
         '/account': {
-            returnView: UserIndex,
+            returnView: Account,
             state: {
-                users: "/api/account/me"
+                users: "/api/users/3"
             },
             uri: "/account",
             title: 'account',

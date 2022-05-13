@@ -2,7 +2,8 @@ import createView from "../createView.js";
 
 const URL = 'http://localhost:8081/api/account';
 
-export default function UserIndex(props) {
+export default function Account(props) {
+    console.log(props)
     return `
 <head><title></title>    
 </head>
@@ -58,7 +59,7 @@ export function UserEvents() {
             }).catch(error => {
             console.log(`${request.method} ERROR: ${error}`);
         }).finally(() => {
-            createView("/users");
+            createView("/account");
         });
     });
 }

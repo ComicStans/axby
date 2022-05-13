@@ -80,9 +80,9 @@ export function user(){
 function CreateUser(){
     $("#Create").click(function (){
         let newUser = {
-            username: $("#username").val(),
+            username: $("#newUsername").val(),
             email: $("#email").val(),
-            password: $("#password").val()
+            password: $("#userPassword").val()
         }
         console.log(newUser);
 
