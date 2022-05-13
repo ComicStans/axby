@@ -27,20 +27,20 @@ export default function router(URI) {
             uri: '/',
             title: 'Home',
         },
-        '/login': {
-            returnView: Login,
-            state: {},
-            uri: '/login',
-            title: "Login",
-            viewEvent: LoginEvent
-        },
-        '/register': {
-            returnView: Register,
-            state: {},
-            uri: '/register',
-            title: 'Register',
-            viewEvent: RegisterEvent
-        },
+        // '/login': {
+        //     returnView: Login,
+        //     state: {},
+        //     uri: '/login',
+        //     title: "Login",
+        //     viewEvent: LoginEvent
+        // },
+        // // '/register': {
+        //     returnView: Register,
+        //     state: {},
+        //     uri: '/register',
+        //     title: 'Register',
+        //     viewEvent: RegisterEvent
+        // },
         '/account': {
             returnView: UserIndex,
             state: {
