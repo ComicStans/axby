@@ -3,6 +3,7 @@ import Login from "./Login.js";
 
 
 export default function Navbar(props) {
+    console.log(props);
     return `
 <nav class="navbar navbar-expand-lg navbar-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +25,10 @@ export default function Navbar(props) {
             <a href="/friends" data-link>Friends</a>
       </li>
             <li class="nav-item">
-            <a id="login-link" data-toggle="modal" data-target="#login" data-link href="#"" data-link>Login</a>
+            <a id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>
       </li>
       <li class="nav-item">
-            <a id="register-link" data-toggle="modal" data-target="#register" data-link href="#">Register</a>
+            <a id="register-link"  data-target="#register" data-link href="/register">Register</a>
       </li>
 
       <li class="nav-item dropdown">
@@ -47,7 +48,9 @@ export default function Navbar(props) {
     </ul>
   </div>
 </nav>
-${Register(props)}
-${Login(props)}
+
     `;
 }
+// ${Register(props)}
+//
+// ${Login(props)}
