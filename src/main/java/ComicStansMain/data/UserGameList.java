@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -13,8 +12,8 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "axby_reviews")
-public class Review {
+@Table(name = "axby_user_game_lists")
+public class UserGameList {
     public enum status {PLAYED, WANNAPLAY}
     //This class will contain a collection of Games;
     //each game will have properties of its own, including an optional user-authored rating & review.
@@ -25,12 +24,12 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties("reviews")
+    @JsonIgnoreProperties("userGameLists")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    @JsonIgnoreProperties("reviews")
+    @JoinColumn(name = "game_id")
+    @JsonIgnoreProperties("userGameLists")
     private Game game;
 
     @Column(name = "status")
@@ -56,9 +55,9 @@ public class Review {
 //            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
 //            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
 //    )
-
-    @OneToMany(mappedBy = "playedList", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("playedList")
-    private Collection<Game> games;
+//
+//    @OneToMany(mappedBy = "playedList", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    @JsonIgnoreProperties("playedList")
+//    private Collection<Game> games;
 
 }

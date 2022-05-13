@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -45,19 +44,11 @@ public class Game {
     @Column(name = "similar_games")
     private String similarGames;
 
-    @ManyToOne
-    @JsonIgnoreProperties("games")
-    private PlayedList playedList;
-
-    @ManyToOne
-    @JsonIgnoreProperties("games")
-    private WannaPlayList wannaPlayList;
-
     @OneToMany(mappedBy = "game")
     @JsonIgnoreProperties("game")
     private Collection<Board> boards;
 
     @OneToMany(mappedBy = "game")
     @JsonIgnoreProperties("game")
-    private Collection<Review> reviews;
+    private Collection<UserGameList> userGameLists;
 }
