@@ -5,6 +5,6 @@ export default function Home(props) {
     <header>
         <h1>HOME</h1>
     </header>
-    ;`
+    `
 
 }

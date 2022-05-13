@@ -10,10 +10,19 @@ export default function Register(props) {
                 <title>Register</title>
             </head>
                <body>
-                     <!--Creates the popup body-->
-                 <div class="popup-overlay">
-                          <!--Creates the popup content-->
-                     <div class="popup-content">
+
+
+<!-- Modal -->
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
                          <h1>Register</h1>
                          <form id="register-form">
                             <label for="username">Username</label>
@@ -24,12 +33,14 @@ export default function Register(props) {
                             <input id="password" name="password" type="password"/>
                             <button id="register-btn" type="button">Register</button>
                          </form>
-                                <!--popup's close button-->
-                                <button class="close">Close</button> 
-                     </div>
-                 </div>
-                        <!--Content shown when popup is not displayed-->
-                        <button class="open">Open</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
                </body>
         </html>
 `;
@@ -59,14 +70,4 @@ export function RegisterEvent() {
             })
 
     })
-    //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
-    $(".open").on("click", function () {
-        $(".popup-overlay, .popup-content").addClass("active");
-    });
-
-//removes the "active" class to .popup and .popup-content when the "Close" button is clicked
-    $(".close").on("click", function () {
-        $(".popup-overlay, .popup-content").removeClass("active");
-    });
-
 }

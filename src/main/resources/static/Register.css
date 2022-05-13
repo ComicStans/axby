@@ -54,3 +54,8 @@
     background: #666666;
     color: #ffffff;
 }
+
+.btn-primary {
+    background-color: #202124 !important;
+    border-color: #b70c95;
+}
