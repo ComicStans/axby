@@ -48,13 +48,13 @@ public class User {
     @Column(nullable = false, name = "date_joined")
     private LocalDate dateJoined;
 
-    @Column(nullable = false)
+    @Column(name = "preferred_language")
     private String preferredLanguage;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "location_region", length = 50)
     private String locationRegion;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "location_country", length = 50)
     private String locationCountry;
 
     @Column
