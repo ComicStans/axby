@@ -39,4 +39,9 @@ public class BoardsController {
         boardUpdated.setName(board.getName());
         boardsRepository.save(boardUpdated);
     }
+
+    @DeleteMapping("{id}")
+    private void DeleteById(@PathVariable long id) {
+        boardsRepository.deleteById(id);
+    }
 }
