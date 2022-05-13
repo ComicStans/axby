@@ -48,13 +48,13 @@ public class User {
     @Column(nullable = false, name = "date_joined")
     private LocalDate dateJoined;
 
-    @Column(nullable = false)
+    @Column(name = "preferred_language", length = 50)
     private String preferredLanguage;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "location_region", length = 50)
     private String locationRegion;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "location_country", length = 50)
     private String locationCountry;
 
     @Column
@@ -66,15 +66,15 @@ public class User {
 
 //Each User will have one PlayedList and one WannaPlayList.
 //The played list will feature reviews of the Games listed.
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "played_list_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("user")
-    private PlayedList played;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "wanna_play_list_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("user")
-    private WannaPlayList wannaPlay;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "played_list_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties("user")
+//    private PlayedList played;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "wanna_play_list_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties("user")
+//    private WannaPlayList wannaPlay;
 
 //Each User can belong to many Guilds, each of which can have many Users (or it wouldn't be a Guild, would it?).
     @ManyToMany(
@@ -117,7 +117,7 @@ public class User {
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            targetEntity = User.class
+            targetEntity = Board.class
     )
 
     @JoinTable(
@@ -135,7 +135,7 @@ public class User {
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            targetEntity = User.class
+            targetEntity = GuildBoard.class
     )
 
     @JoinTable(
@@ -167,5 +167,9 @@ public class User {
     @OneToMany(mappedBy = "authorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("authorId")
     private Collection<Post> posts;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private Collection<UserGameList> userGameLists;
 
 }
