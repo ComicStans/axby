@@ -21,7 +21,7 @@ public class UserGameListsController {
     private final UserGameListsRepository uglRepository;
 
     @GetMapping
-    private List<UserGameList> getAllReviews(){
+    private List<UserGameList> getAllListings(){
         return uglRepository.findAll();
     }
 
@@ -49,13 +49,14 @@ public class UserGameListsController {
         uglRepository.save(newUGL);
     }
     @PutMapping("{id}")
-    private void editReview(@PathVariable Long id, @RequestBody UserGameList userGameListToEdit) {
+    private void editListing(@PathVariable Long id, @RequestBody UserGameList userGameListToEdit) {
         UserGameList thisUserGameList = uglRepository.getById(id);
         thisUserGameList.setReview(userGameListToEdit.getReview());
+        thisUserGameList.setStatus(userGameListToEdit.getStatus());
         uglRepository.save(thisUserGameList);
     }
     @DeleteMapping("{id}")
-    private void deleteReview(@PathVariable Long id) {
+    private void deleteListing(@PathVariable Long id) {
         uglRepository.deleteById(id);
     }
 }
