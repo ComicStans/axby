@@ -33,7 +33,7 @@ public class UserGameList {
     private Game game;
 
     @Column(name = "status")
-    private status status;
+    private String status;
 
     @Column(name = "review_text")
     private String review;

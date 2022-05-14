@@ -1,6 +1,7 @@
 package ComicStansMain.web;
 
 import ComicStansMain.data.*;
+import ComicStansMain.dto.UserGameListTransfer;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,14 +36,17 @@ public class UserGameListsController {
     }
 
     @PostMapping
-    private void createListing(@RequestBody UserGameList newUserGameList, String review_text) {
-        User author = usersRepository.getById(2L);
-        Game gameReviewed = gamesRepository.getById(1L);
-        newUserGameList.setGame(gameReviewed);
-        newUserGameList.setUser(author);
-        newUserGameList.setDateUpdated(LocalDate.now());
-        newUserGameList.setReview(review_text);
-        uglRepository.save(newUserGameList);
+    private void createListing(@RequestBody UserGameListTransfer newUserGameList) {
+//        User author = usersRepository.getById(2L);
+//        Game gameReviewed = gamesRepository.getById(1L);
+        UserGameList newUGL = new UserGameList();
+        newUGL.setGame(gamesRepository.getById(newUserGameList.getGameId()));
+        newUGL.setUser(usersRepository.getById(newUserGameList.getUserId()));
+        newUGL.setDateUpdated(LocalDate.now());
+        newUGL.setStatus(newUserGameList.getStatus());
+        newUGL.setReview(newUserGameList.getReview());
+        System.out.println(newUGL.getReview());
+        uglRepository.save(newUGL);
     }
     @PutMapping("{id}")
     private void editReview(@PathVariable Long id, @RequestBody UserGameList userGameListToEdit) {
