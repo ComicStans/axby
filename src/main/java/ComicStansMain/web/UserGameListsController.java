@@ -25,6 +25,10 @@ public class UserGameListsController {
         return uglRepository.findAll();
     }
 
+    private UserGameList getOneListing(Long id){
+        return uglRepository.getById(id);
+    }
+
     //User argument hardcoded in the next to Get methods; this will change, of course.
     @GetMapping("listingsByAuthorPlayed")
     private Collection<UserGameList> getAllListingsByUserPlayed() {
