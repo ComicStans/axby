@@ -1,12 +1,17 @@
 package ComicStansMain.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
 
 public interface ConnectionsRepository extends JpaRepository<Connection, Long> {
 
-    Collection<User> findAllByRequesterId(Long requesterId);
-    Collection<User> findAllByRecipientId(Long recipientId);
+    @Query(value = "select ac.id as connection_id, us2.username as recipient\n" +
+            "            from axby_connections ac join axby_users us on\n" +
+            "            us.id = ac.requester_id join axby_users us2 on us2.id = ac.recipient_id\n" +
+            "            where ac.date_accepted is not null and (ac.requester_id = ?1 or ac.recipient_id = ?1)",
+        nativeQuery = true)
+    Collection<Connection> findAllByRequesterOrRecipient(User user);
 
 }

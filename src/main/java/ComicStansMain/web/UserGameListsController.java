@@ -5,6 +5,7 @@ import ComicStansMain.dto.UserGameListTransfer;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +27,7 @@ public class UserGameListsController {
     }
 
     private UserGameList getOneListing(Long id){
-        return uglRepository.getById(id);
+            return uglRepository.getById(id);
     }
 
     //User argument hardcoded in the next to Get methods; this will change, of course.
