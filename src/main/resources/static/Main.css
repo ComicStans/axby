@@ -1,12 +1,15 @@
 a {
     padding: 2em;
     text-align: center;
-    color: #b70c95 !important;
+    color: #ffffff !important;
 
 }
-.navbar{
+.navbar, .dropdown-menu{
     background-color: #202124;
 }
 .nav-link {
-    color: #b70c95 !important;
+    color: #ffffff !important;
+}
+.dropdown-item {
+    color: #ffffff;
 }
