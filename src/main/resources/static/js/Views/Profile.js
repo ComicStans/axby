@@ -2,14 +2,18 @@
 export default function Profile(props) {
     return `
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
    
-
-    <title>Hello, world!</title>
+    <title>Profile!</title>
+    <style>
+        .img-circle {
+    border-radius: 100%;
+    border: 4px solid ;
+}  
+    </style>
   </head>
       <body>
        
@@ -18,12 +22,16 @@ export default function Profile(props) {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h1>User Name</h1>
-                        <img>
-                        <button type="button" class="btn btn-outline-dark">Add Friend</button>
-                        <button type="button" class="btn btn-outline-danger">Block User</button>
+                        <h1 class="displayUsername">User Name</h1>
+                        <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
+                        <br>
+                        <button type="button" class="btn btn-outline-dark addFriend">Add Friend</button>
+                        <button type="button" class="btn btn-outline-danger blockUser">Block User</button>
+                        <br>
                         <h2>About Me</h2>
-                            <p id="lyrics">
+<!--                        <button type="button" class="btn editAboutMeBtn" onclick='setP()'><i class="fas fa-edit"></i></button>-->
+                            <input type='button' onclick='setP()' value='Edit' id='bt' />
+                            <p id="aboutMe">
                                 I have a pen
                                 I have an apple
                                 Ah
@@ -38,8 +46,9 @@ export default function Profile(props) {
                                 Pen Pineapple Apple Pen
                                 Pen Pineapple Apple Pen
                             </p>
+                            
                         <h2>Friend List</h2>
-                            <ul class="list" id="list1">
+                            <ul class="friendList" >
                                 <li id="list-item1"> <a href="#">Bob</a></li>
                                 <li id="list-item2"> <a href="#">Micah</a></li>
                                 <li id="list-item3"> <a href="#">Rachel</a></li>
@@ -49,7 +58,7 @@ export default function Profile(props) {
                                 
                             </ul>
                         <h2>Wish List</h2>
-                            <ul class="list" id="list1">
+                            <ul class="wishList" >
                                 <li id="list-item1"> <a href="#">Sonic</a></li>
                                 <li id="list-item2"> <a href="#">Super Mario</a></li>
                                 <li id="list-item3"> <a href="#">Aladin</a></li>
@@ -84,47 +93,33 @@ export default function Profile(props) {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                <!-- Optional JavaScript; choose one of the two! -->
-            
-                <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-                
-            
-                <!-- Option 2: Separate Popper and Bootstrap JS -->
-                <!--
-                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-                -->
                 <script>
-                 "use strict";
-                 
-                 $(document).ready(function() {
-
-                 // INSERT JAVASCRIPT CODE SAMPLE HERE
-                 
-                 $('.btn').click(function () {
-                     $(this).
-                 })
-                 
-            
-                    
-            
+                  $(document).ready(function () {
+                    $('#bt').click(function () {
+                      $('#theEle')
+                              .attr('contenteditable', 'true')
+                              .focus();
+                    });
+                  });
+                </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
                
             
+               
+                
                 
             
-                });
+          
+              
+                
                  
                  
                  
@@ -133,8 +128,7 @@ export default function Profile(props) {
                  
                  
                  
-                 
-                </script>
+                
       </body>
     `;
 }
