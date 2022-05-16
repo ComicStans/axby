@@ -30,13 +30,13 @@ export default function router(URI) {
             uri: '/',
             title: 'Home',
         },
-        // '/login': {
-        //     returnView: Login,
-        //     state: {},
-        //     uri: '/login',
-        //     title: "Login",
-        //     viewEvent: LoginEvent
-        // },
+        '/login': {
+            returnView: Login,
+            state: {},
+            uri: '/login',
+            title: "Login",
+            viewEvent: LoginEvent
+        },
         '/register': {
             returnView: Register,
             state: {},
