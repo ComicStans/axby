@@ -7,11 +7,11 @@ import java.util.Collection;
 
 public interface ConnectionsRepository extends JpaRepository<Connection, Long> {
 
-    @Query(value = "select ac.id as connection_id, us2.username as recipient\n" +
+    @Query(value = "select ac.*, us.username, us2.username\n" +
             "            from axby_connections ac join axby_users us on\n" +
             "            us.id = ac.requester_id join axby_users us2 on us2.id = ac.recipient_id\n" +
             "            where ac.date_accepted is not null and (ac.requester_id = ?1 or ac.recipient_id = ?1)",
         nativeQuery = true)
-    Collection<Connection> findAllByRequesterOrRecipient(User user);
+    Collection<Connection> findAllByRequesterOrRecipient(Long id);
 
 }
