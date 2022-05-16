@@ -1,8 +1,3 @@
-/*body {*/
-/*    background-color: red;*/
-/*}*/
-
-
 #register-form {
     display: grid;
     font-family: "Helvetica Neue", sans-serif;
@@ -38,27 +33,29 @@
     visibility: visible;
 }
 
-#Create {
+#Create, .btn-secondary, .btn-primary {
+    margin-top: .5em;
     display: inline-block;
     vertical-align: middle;
     border-radius: 30px;
-    margin: .20rem;
+    /*margin: .20rem;*/
     font-size: 1rem;
-    color: #666666;
-    background: #ffffff;
-    border: 1px solid #666666;
+    background: #202124;
+    border-color: #666666;
+}
+#Create{
+    color:#ffffff;
 }
 
-#register-btn:hover {
+#register-btn:hover, #Create:hover {
     border: 1px solid #666666;
     background: #666666;
     color: #ffffff;
 }
 
-.btn-primary {
-    background-color: #202124 !important;
-    border-color: #b70c95;
-}
+/*.btn-primary {*/
+/*    background-color: #202124 !important;*/
+/*}*/
 /*#account-form {*/
 /*     display: grid;*/
 /*     font-family: "Helvetica Neue", sans-serif;*/

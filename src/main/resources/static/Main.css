@@ -1,8 +1,8 @@
-a {
-    padding: 2em;
+.nav-item {
+    padding-right: 2em;
     text-align: center;
 
-    color: white !important;
+    color: green !important;
 
 }
 .navbar{
@@ -26,4 +26,8 @@ a {
     to {
         text-shadow: 0 0 20px #fff, 0 0 30px #28dc0c, 0 0 40px #28dc0c, 0 0 50px #28dc0c, 0 0 60px #28dc0c, 0 0 70px #28dc0c, 0 0 80px #28dc0c;
     }
+}
+
+h1 {
+    margin-left: .5em;
 }

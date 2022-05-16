@@ -1,22 +1,48 @@
+.account-body{
+    display: block;
+}
+
 .img-circle {
     border-radius: 100%;
     border: 4px solid;
+    margin-left: 1em;
 }
 label {
-    display: block;
+    position: inherit;
+    /*display: block;*/
     margin-top: 1em;
+    display: flex;
 }
-button {
+#change-password-button {
     margin-top: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 30px;
+    font-size: 1rem;
+    background: #202124;
+    border-color: #666666;
+    color: #ffffff;
 }
+#change-password-button:hover, #change-password-button:hover {
+    border: 1px solid #666666;
+    background: #666666;
+    color: #ffffff;
+}
+
 #profile {
     display: block;
 }
-.profile-info {
+p.profile-info {
     color: #3da153;
-    font-size: small;
+    display: block;
+    width: 50%;
+    margin-left: 0.5em;
 }
-p{
+
+#register-form, .account-page, #change-password-button{
+    width: 20%;
     margin-left: .5em;
-    text-align: left;
+}
+h3 {
+    margin-left: 0.5em;
 }
