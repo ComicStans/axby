@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -13,9 +12,9 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "axby_played_lists")
-public class PlayedList {
-
+@Table(name = "axby_user_game_lists")
+public class UserGameList {
+    public enum status {PLAYED, WANNAPLAY}
     //This class will contain a collection of Games;
     //each game will have properties of its own, including an optional user-authored rating & review.
 
@@ -23,11 +22,24 @@ public class PlayedList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(mappedBy = "played")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties("userGameLists")
     private User user;
 
-    @Column(name = "date_created", nullable = false)
-    private LocalDate dateCreated;
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    @JsonIgnoreProperties("userGameLists")
+    private Game game;
+
+    @Column(name = "status")
+    private status status;
+
+    @Column(name = "review_text")
+    private String review;
+
+    @Column(name = "date_updated")
+    private LocalDate dateUpdated;
 
 //Each PlayedList can have many games; it doesn't matter that a game appears on
 //multiple users' PlayedLists.
@@ -43,9 +55,9 @@ public class PlayedList {
 //            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
 //            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
 //    )
-
-    @OneToMany(mappedBy = "playedList", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("playedList")
-    private Collection<Game> games;
+//
+//    @OneToMany(mappedBy = "playedList", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    @JsonIgnoreProperties("playedList")
+//    private Collection<Game> games;
 
 }
