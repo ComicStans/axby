@@ -1,12 +1,10 @@
 
 export default function Profile(props) {
     return `
+
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   
+    
+
     <title>Profile!</title>
     <style>
         .img-circle {
@@ -15,8 +13,8 @@ export default function Profile(props) {
 }  
     </style>
   </head>
-      <body>
-       
+      
+       <main>
             <h1>Profile</h1>
             
             <div class="container">
@@ -25,13 +23,67 @@ export default function Profile(props) {
                         <h1 class="displayUsername">User Name</h1>
                         <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                         <br>
-                        <button type="button" class="btn btn-outline-dark addFriend">Add Friend</button>
-                        <button type="button" class="btn btn-outline-danger blockUser">Block User</button>
+                        
+                        <!-- Button trigger for add friend modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                         Add Friend
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Confirm Friend Request</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to send " " a friend request?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Confirm</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blockUser">
+                          Block
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Block User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to block " " ?
+                                You will no longer see their profile, boards or receive messages from them.
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Confirm</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <br>
                         <h2>About Me</h2>
-<!--                        <button type="button" class="btn editAboutMeBtn" onclick='setP()'><i class="fas fa-edit"></i></button>-->
-                            <input type='button' onclick='setP()' value='Edit' id='bt' />
+                        
+                            <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
+                            
                             <p id="aboutMe">
+                           
                                 I have a pen
                                 I have an apple
                                 Ah
@@ -93,42 +145,27 @@ export default function Profile(props) {
     
     
     
-                <script>
-                  $(document).ready(function () {
-                    $('#bt').click(function () {
-                      $('#theEle')
-                              .attr('contenteditable', 'true')
-                              .focus();
-                    });
-                  });
-                </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
                
-            
-               
-                
-                
-            
-          
-              
-                
                  
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                
-      </body>
+                  
+                  
+                     
+           
+                </main>
+    
     `;
+}
+export function ProfileEvents() {
+    $(document).ready(function () {
+
+        $('#edit-button').click(function () {
+            console.log(true)
+            $('#aboutMe').attr('contenteditable', 'true')
+        });
+
+        $('#end-editing').click(function () {
+            console.log(false)
+            $('#aboutMe').attr('contenteditable', 'false')
+        })
+    })
 }
