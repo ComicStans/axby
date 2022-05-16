@@ -28,7 +28,7 @@ export default function Login(props) {
     <label for="username">Email</label>
     <input id="username" name="username" type="text"/><br>
     <label for="password">Password</label>
-    <input id="password" name="password" type="password"/>
+    <input id="password" name="password" type="password"/><br>
     <input id="login-btn" type="submit" value="Log In"/>
 </form>
 <!--      </div>-->

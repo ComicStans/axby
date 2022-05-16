@@ -24,7 +24,7 @@ export default function Register(props) {
 <!--      </div>-->
 <!--      <div class="modal-body">-->
                          <h1>Register</h1>
-                         <form id="register-form">
+                         <form id="register-form" style="margin-left: 1em; margin-right: 1em; width: 70%">
                             <label for="newUsername">Username</label>
                             <input id="newUsername" name="username" type="text"/>
                             <label for="email">Email</label>
@@ -32,7 +32,7 @@ export default function Register(props) {
                             <label for="userPassword">Password</label>
                             <input id="userPassword" name="password" type="password"/>
 <!--                            <button id="register-btn" type="button">Register</button>-->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: maroon">Cancel</button>
         <button type="button" class="btn btn-primary" id="Create">Create</button>
                          </form>
 <!--      </div>-->

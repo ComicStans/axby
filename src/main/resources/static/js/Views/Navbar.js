@@ -11,35 +11,35 @@ export default function Navbar(props) {
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
        <ul class="navbar-nav glow">
-          <li class="nav-item">
+          <li>
 
-  <a href="/" data-link>Home</a>
+  <a class="nav-item active" href="/" data-link>Home</a>
       </li>
-      <li class="nav-item active">
-            <a href="/marketPlace" data-link>Market Place</a>
+      <li >
+            <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
       </li>
-      <li class="nav-item">
-            <a href="/messageBoards" data-link>Message Boards</a>
+      <li>
+            <a class="nav-item" href="/messageBoards" data-link>Message Boards</a>
       </li>
 
-      <li class="nav-item">
-            <a href="/friends" data-link>Friends</a>
+      <li>
+            <a class="nav-item" href="/friends" data-link>Friends</a>
       </li>
-            <li class="nav-item">
-            <a id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>
+            <li>
+            <a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>
       </li>
-      <li class="nav-item">
-            <a id="register-link"  data-target="#register" data-link href="/register">Register</a>
+      <li>
+            <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           More
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/profile" data-link>Profile</a></a>
-          <a class="dropdown-item" href="/about" data-link>About</a>
-          <a class="dropdown-item" href="/account" data-link>Account</a>
+          <a class="dropdown-item nav-item" href="/profile" data-link>Profile</a></a>
+          <a class="dropdown-item nav-item" href="/about" data-link>About</a>
+          <a class="dropdown-item nav-item" href="/account" data-link>Account</a>
         </div>
       </li>
       <li><!-- Button trigger modal -->
