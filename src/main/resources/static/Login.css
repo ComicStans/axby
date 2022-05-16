@@ -1,0 +1,18 @@
+form#login-form{
+    margin-left: .5em;
+}
+#login-btn{
+    margin-top: .5em;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 30px;
+    font-size: 1rem;
+    background: #202124;
+    border-color: #666666;
+    color: #ffffff;
+}
+#login-btn:hover, #login:hover {
+    border: 1px solid #666666;
+    background: #666666;
+    color: #ffffff;
+}
