@@ -10,8 +10,9 @@ export default function Navbar(props) {
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+       <ul class="navbar-nav glow">
           <li class="nav-item">
+
   <a href="/" data-link>Home</a>
       </li>
       <li class="nav-item active">
@@ -42,10 +43,11 @@ export default function Navbar(props) {
         </div>
       </li>
       <li><!-- Button trigger modal -->
+
 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
 <!--  Register-->
 <!--</button></li>-->
-    </ul>
+       </ul>
   </div>
 </nav>
 

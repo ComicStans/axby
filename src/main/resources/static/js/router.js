@@ -11,7 +11,7 @@ import {PostEvents} from "./Views/MessageBoards.js";
 import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
-import Profile from "./Views/Profile.js";
+import Profile, {ProfileEvents} from "./Views/Profile.js";
 import Friends from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
@@ -30,13 +30,13 @@ export default function router(URI) {
             uri: '/',
             title: 'Home',
         },
-        // '/login': {
-        //     returnView: Login,
-        //     state: {},
-        //     uri: '/login',
-        //     title: "Login",
-        //     viewEvent: LoginEvent
-        // },
+        '/login': {
+            returnView: Login,
+            state: {},
+            uri: '/login',
+            title: "Login",
+            viewEvent: LoginEvent
+        },
         '/register': {
             returnView: Register,
             state: {},
@@ -91,6 +91,7 @@ export default function router(URI) {
             state: {},
             uri: '/profile',
             title: "Profile",
+            viewEvent: ProfileEvents
         },
          '/friends': {
              returnView: Friends,
