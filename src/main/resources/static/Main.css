@@ -1,8 +1,8 @@
 .nav-item {
     padding-right: 2em;
     text-align: center;
-
-    color: green !important;
+    font-family: 'Caveat Brush', cursive;
+    color: white !important;
 
 }
 .navbar{
@@ -14,20 +14,30 @@
 
 .glow {
     font-family: "Comic Sans MS", serif;
-    font-size: 35px;
-    color: #fff;
+    font-size: 25px;
+    color: #6f11d1;
     text-align: center;
-    animation: glow 1s ease-in-out infinite alternate;
+    text-shadow:2px 2px 10px #6f11d1, 2px 2px 10px #ccc;
+
+    /*animation: glow 1s ease-in-out infinite alternate;*/
 }
-@-webkit-keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #08ed17, 0 0 40px #08ed17, 0 0 50px #08ed17, 0 0 60px #08ed17, 0 0 70px #08ed17;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #28dc0c, 0 0 40px #28dc0c, 0 0 50px #28dc0c, 0 0 60px #28dc0c, 0 0 70px #28dc0c, 0 0 80px #28dc0c;
-    }
-}
+/*@-webkit-keyframes glow {*/
+/*    from {*/
+/*        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #08ed17, 0 0 40px #08ed17, 0 0 50px #08ed17, 0 0 60px #08ed17, 0 0 70px #08ed17;*/
+/*    }*/
+/*    to {*/
+/*        text-shadow: 0 0 20px #fff, 0 0 30px #28dc0c, 0 0 40px #28dc0c, 0 0 50px #28dc0c, 0 0 60px #28dc0c, 0 0 70px #28dc0c, 0 0 80px #28dc0c;*/
+/*    }*/
+/*}*/
 
 h1 {
     margin-left: .5em;
 }
+.dropdown-menu {
+    background-color: #000000;
+}
+/*body{*/
+/*    background-image: url("/Images/pexels-sunglasses.jpg");*/
+/*    background-size: auto;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
