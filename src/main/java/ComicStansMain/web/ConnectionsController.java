@@ -24,6 +24,11 @@ public class ConnectionsController {
         return connectionsRepository.findAllByRequesterOrRecipient(userId);
     }
 
+    @GetMapping("{userId}")
+    public Collection<Connection> listOpenRequestsSentToMe(@PathVariable Long userId) {
+        return connectionsRepository.findAllByRecipient(userId);
+    }
+
     @PostMapping
     public void createConnection(@RequestBody Connection newConnection) {
         newConnection.setRequester(newConnection.getRequester());

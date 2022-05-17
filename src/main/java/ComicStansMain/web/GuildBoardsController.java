@@ -16,9 +16,19 @@ public class GuildBoardsController {
     private final UsersRepository usersRepository;
     private final GamesRepository gamesRepository;
 
-    @GetMapping
+    @GetMapping("guildboards")
     private Collection<GuildBoard> getAll() {
         return gbr.findAll();
+    }
+
+    @GetMapping("guildboards")
+    private GuildBoard findGuildBoardByName(@RequestParam String name) {
+        return gbr.findByName(name);
+    }
+
+    @GetMapping
+    private Collection<GuildBoard> findGuildBoardSearchPattern(@RequestParam String pattern) {
+        return gbr.findAllByNameLike(pattern);
     }
 
     @GetMapping("creator")
