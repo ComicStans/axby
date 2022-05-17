@@ -7,6 +7,6 @@ import java.util.Collection;
 public interface PostsRepository extends JpaRepository<Post, Long> {
 
     Collection<Post> findAllByAuthorId(User author);
-    Collection<Post>  findAllByBoardId(Board board);
+    Collection<Post> findAllByBoardId(Board board);
 
 }
