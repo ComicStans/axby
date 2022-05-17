@@ -9,47 +9,65 @@ export default function MessageBoards(props) {
         <header>
             <h1>My Blogs</h1>
         </header>
-        <main>
-            <h3>This is my Blog</h3>
-            <br>
-            <div id="posts-container">
-                ${props.posts.map(post => { 
-                    return `
-<div class="card" style="margin-bottom: 2em;">
-    <h4 class="card-header" style="background-color: #bdade8">
-        <span id="title-${post.id}">${post.title}</span>
-    </h4>
-    <div class="card-body">
-        <p id="content-${post.id}" class="card-text">${post.content}</p>
-    </div>
-    <div class="card-footer text-muted" style="background-color: #bdade8">            
-        <span><a href="#" class="edit-post-button" data-id="${post.id}">Edit</a></span>
-        <span><a href="#" class="delete-post-button" data-id="${post.id}">Delete</a></span>
-    </div>  
-</div>`;
-    }).join('')}
-            </div>
-            <hr>
-            <h3>Add a Post</h3>
-            <form id="add-post-form">
-                <div class="mb-3">
-                    <input disabled type="text" class="form-control" id="add-post-id" value="0">
+            <main>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                             <h3>Popular Game Boards</h3>
+                             <hr>
+                            <div class="card" style="width: 69em;">
+                              
+                              <div class="card-header">
+                                Board   Topics  Msgs 
+                              </div>
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a>Super Mario</a></li>
+                                <li class="list-group-item">Sonic</li>
+                                <li class="list-group-item">Duck Hunter</li>
+                              </ul>
+                            </div>
+                            <br>
+                            <div id="posts-container">
+                                    ${props.posts.map(post => { 
+                                        return `
+                                <div class="card" style="margin-bottom: 2em;">
+                                    <h4 class="card-header" style="background-color: #bdade8">
+                                        <span id="title-${post.id}">${post.title}</span>
+                                    </h4>
+                                    <div class="card-body">
+                                        <p id="content-${post.id}" class="card-text">${post.content}</p>
+                                    </div>
+                                    <div class="card-footer text-muted" style="background-color: #bdade8">            
+                                        <span><a href="#" class="edit-post-button" data-id="${post.id}">Edit</a></span>
+                                        <span><a href="#" class="delete-post-button" data-id="${post.id}">Delete</a></span>
+                                    </div>  
+                                </div>`;
+                                     }).join('')}
+                            </div>
+                            <hr>
+                            <h3>Add a Post</h3>
+                            <form id="add-post-form">
+                                <div class="mb-3">
+                                    <input disabled type="text" class="form-control" id="add-post-id" value="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="add-post-title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="add-post-title" placeholder="Post title">
+                                </div>
+                                <label for="add-post-content" class="form-label">Content</label>
+                                <textarea class="form-control" id="add-post-content" rows="3" placeholder="Post content"></textarea>
+                                
+                                <br>
+                                    <!--           MIGHT CHANGE THESE BUTTONS            -->
+                                <button id="clear-post-button" type="submit" class="btn btn-primary mb-3"
+                                        onclick="document.querySelector('#add-post-id').value = 0; document.querySelector('#add-post-title').value = ''; 
+                                        document.querySelector('#add-post-content').value = '';"> Cancel </button>
+                                <button id="add-post-button" type="submit" class="btn btn-primary mb-3">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="add-post-title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="add-post-title" placeholder="Post title">
-                </div>
-                <label for="add-post-content" class="form-label">Content</label>
-                <textarea class="form-control" id="add-post-content" rows="3" placeholder="Post content"></textarea>
-                </div>
-                <br>
-                    <!--           MIGHT CHANGE THESE BUTTONS            -->
-                <button id="clear-post-button" type="submit" class="btn btn-primary mb-3"
-                        onclick="document.querySelector('#add-post-id').value = 0; document.querySelector('#add-post-title').value = ''; 
-                        document.querySelector('#add-post-content').value = '';"> Cancel </button>
-                <button id="add-post-button" type="submit" class="btn btn-primary mb-3">Submit</button>
-            </form>
-        </main>
+            </main>
     `;
 }
 
