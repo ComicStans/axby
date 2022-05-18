@@ -36,8 +36,14 @@ h1 {
 .dropdown-menu {
     background-color: #000000;
 }
-/*body{*/
-/*    background-image: url("/Images/pexels-sunglasses.jpg");*/
-/*    background-size: auto;*/
-/*    background-repeat: no-repeat;*/
-/*}*/
+body{
+    /*background-image: url("/Images/pexels-sunglasses.jpg");*/
+    /*background-size: auto;*/
+    /*background-repeat: no-repeat;*/
+    background: #cecdcf;
+
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url(https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff) !important;
+}
