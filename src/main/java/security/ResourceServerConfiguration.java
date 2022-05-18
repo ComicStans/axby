@@ -7,25 +7,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-
-        import com.errors.CustomAccessDeniedHandler;
-        import com.errors.CustomAuthenticationEntryPoint;
-        import org.springframework.context.annotation.Configuration;
-        import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-        import org.springframework.security.config.http.SessionCreationPolicy;
-        import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-        import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-        import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-
-    public ResourceServerConfiguration(CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
-        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
-    }
+//    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+//
+//    public ResourceServerConfiguration(CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
+//        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
+//    }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
@@ -53,8 +43,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(customAuthenticationEntryPoint)
-                .accessDeniedHandler(new CustomAccessDeniedHandler());
+                .exceptionHandling();
+//                .authenticationEntryPoint(customAuthenticationEntryPoint)
+//                .accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 }
