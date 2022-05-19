@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @AllArgsConstructor
@@ -73,20 +72,20 @@ public class UsersController {
         ur.save(tempUser);
     }
 
-    @PutMapping("{id}/password")
-    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
-        User u = ur.getById(id);
-        oldPassword = u.getPassword();
-        if (newPassword != oldPassword || newPassword.length() > 8) {
-            u.setPassword(newPassword);
+    @PutMapping("password")
+    private void updatePassword(@Valid @Size(min = 3) @RequestParam String newPassword, OAuth2Authentication auth) {
+        User u = ur.findByEmail(auth.getName());
+        String oldPassword = u.getPassword();
+        if (!newPassword.equals(oldPassword) && newPassword.length() > 2) {
+            u.setPassword(pe.encode(newPassword));
             ur.save(u);
         }
-        if (newPassword == oldPassword) {
+        if (newPassword.equals(oldPassword)) {
             System.out.println("Sorry, you may not repeat your previous password");
         } else if (newPassword.length() <= 2) {
             System.out.println("Please make sure that your password is at least 3 characters in length.");
         } else {
-            System.out.println("Password for user #" + id + " has been updated.");
+            System.out.println("Password for user " + auth.getName() + " has been updated.");
         }
     }
 
