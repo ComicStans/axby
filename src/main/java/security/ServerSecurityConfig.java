@@ -20,7 +20,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    public ServerSecurityConfig(@Qualifier("userService")
+    public ServerSecurityConfig(@Qualifier("userService")//this is not working with UserService
             UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
