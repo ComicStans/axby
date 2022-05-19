@@ -58,11 +58,11 @@ export default function router(URI) {
         '/messageBoards': {
             returnView: MessageBoards,
             state: {
-                posts: '/api/posts'
+                posts: '/api/boards'
             },
-            uri: '/posts',
-            title: 'All Posts',
-            viewEvent: PostEvents
+            uri: '/boards',
+            title: 'All Boards',
+            viewEvent: BoardEvents
         },
         '/about': {
             returnView: About,
