@@ -1,4 +1,4 @@
-package security;
+package ComicStansMain.security;
 
 import ComicStansMain.data.User;
 import ComicStansMain.data.UsersRepository;

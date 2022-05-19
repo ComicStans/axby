@@ -3,8 +3,8 @@ package ComicStansMain.web;
 
 import ComicStansMain.data.User;
 import ComicStansMain.data.UsersRepository;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.oauth2.provider.OAuth2Authentication;
+//import org.springframework.ComicStansMain.security.crypto.password.PasswordEncoder;
+//import org.springframework.ComicStansMain.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
