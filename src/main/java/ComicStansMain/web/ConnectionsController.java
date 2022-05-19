@@ -20,8 +20,11 @@ public class ConnectionsController {
     private UsersRepository usersRepository;
 
     @GetMapping("{userId}")
-    public Collection<Connection> listMyConnections(@PathVariable Long userId) {
-        return connectionsRepository.findAllByRequesterOrRecipient(userId);
+    public Collection<Connection> listMyConnections(@PathVariable Long userId, @RequestParam Long requester) {
+        if (requester == userId) {
+            return connectionsRepository.findAllByRequesterOrRecipient(userId);
+        }
+        return connectionsRepository.findAllByRecipient(userId);
     }
 
     @PostMapping
