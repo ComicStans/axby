@@ -28,6 +28,32 @@ export default function Account(props) {
                 <input class="account-page" id="new-password" name="new-password" type="text" value=""/><br>
                 <button id="change-password-button" type="button">Change Password</button>
             </form>
+<!--            &lt;!&ndash; On rows &ndash;&gt;-->
+<!--<tr class="table-active">Hello</tr>-->
+
+<!--<tr class="table-primary">GoodBye</tr>-->
+<!--<tr class="table-secondary">...</tr>-->
+<!--<tr class="table-success">...</tr>-->
+<!--<tr class="table-danger">...</tr>-->
+<!--<tr class="table-warning">...</tr>-->
+<!--<tr class="table-info">...</tr>-->
+<!--<tr class="table-light">...</tr>-->
+<!--<tr class="table-dark">...</tr>-->
+
+<!--&lt;!&ndash; On cells (\`td\` or \`th\`) &ndash;&gt;-->
+<!--<tr>-->
+<!--  <td class="table-active">Is </td>-->
+
+<!--  <td class="table-primary">there</td>-->
+<!--  <td class="table-secondary">color??</td>-->
+<!--  <td class="table-success">...</td>-->
+<!--  <td class="table-danger">...</td>-->
+<!--  <td class="table-warning">...</td>-->
+<!--  <td class="table-info">...</td>-->
+<!--  <td class="table-light">...</td>-->
+<!--  <td class="table-dark">...</td>-->
+<!--</tr>-->
+<!--            -->
             <hr>
             </body>
             ${props.users.posts.map(post => {
