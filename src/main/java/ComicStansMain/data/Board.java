@@ -27,10 +27,8 @@ public class Board {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    @JsonIgnoreProperties("boards")
-    private Game game;
+    @Column
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)

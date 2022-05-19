@@ -13,7 +13,6 @@ import java.util.Collection;
 public class BoardsController {
     private final BoardsRepository boardsRepository;
     private final UsersRepository usersRepository;
-    private final GamesRepository gamesRepository;
 
     @GetMapping
     private Collection<Board> getAll() {
@@ -28,7 +27,6 @@ public class BoardsController {
     @PostMapping
     private void createBoard(@RequestBody Board board) {
         board.setCreator(usersRepository.getById(1L));
-        board.setGame(gamesRepository.getById(1L));
         board.setDateCreated(LocalDate.now());
         boardsRepository.save(board);
     }
