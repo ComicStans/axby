@@ -7,6 +7,7 @@ import ComicStansMain.data.UsersRepository;
 //import org.springframework.ComicStansMain.security.oauth2.provider.OAuth2Authentication;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,11 +46,11 @@ public class UsersController {
         return ur.findByEmail(email);
     }
 
-//    @GetMapping("me")
-//    private User getMyInfo(OAuth2Authentication auth) {
-//        String email = auth.getName(); // yes, the email is found under "getName()"
-//        return ur.findByEmail(email);
-//    }
+    @GetMapping("me")
+    private User getMyInfo(OAuth2Authentication auth) {
+        String email = auth.getName(); // yes, the email is found under "getName()"
+        return ur.findByEmail(email);
+    }
 
     @PostMapping
     private void createUser(@RequestBody User newUser) {
@@ -80,13 +81,13 @@ public class UsersController {
             u.setPassword(newPassword);
             ur.save(u);
         }
-//        if (newPassword == oldPassword) {
-//            System.out.println("Sorry, you may not repeat your previous password");
-//        } else if (newPassword.length() <= 2) {
-//            System.out.println("Please make sure that your password is at least 3 characters in length.");
-//        } else {
-//            System.out.println("Password for user #" + id + " has been updated.");
-//        }
+        if (newPassword == oldPassword) {
+            System.out.println("Sorry, you may not repeat your previous password");
+        } else if (newPassword.length() <= 2) {
+            System.out.println("Please make sure that your password is at least 3 characters in length.");
+        } else {
+            System.out.println("Password for user #" + id + " has been updated.");
+        }
     }
 
     @DeleteMapping("{id}")
