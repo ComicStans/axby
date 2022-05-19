@@ -6,6 +6,12 @@ export default function Navbar(props) {
     console.log(props);
     return `
 <header>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Fluid jumbotron</h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+  </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -13,25 +19,24 @@ export default function Navbar(props) {
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
        <ul class="navbar-nav glow">
           <li>
-
-  <a class="nav-item active" href="/" data-link>Home</a>
-      </li>
-      <li >
-            <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
-      </li>
-      <li>
-            <a class="nav-item" href="/messageBoards" data-link>Message Boards</a>
-      </li>
-
-      <li>
-            <a class="nav-item" href="/friends" data-link>Friends</a>
-      </li>
-            <li>
-            <a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>
-      </li>
-      <li>
-            <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
-      </li>
+          <a class="nav-item active" href="/" data-link>Home</a>
+          </li>
+          <li >
+                <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
+          </li>
+          <li>
+                <a class="nav-item" href="/messageBoards" data-link>Message Boards</a>
+          </li>
+    
+          <li>
+                <a class="nav-item" href="/friends" data-link>Friends</a>
+          </li>
+                <li>
+                <a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>
+          </li>
+          <li>
+                <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
+          </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

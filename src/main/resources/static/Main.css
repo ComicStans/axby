@@ -11,7 +11,15 @@
 .nav-link {
     /*color: #b70c95 !important;*/
 }
+#navbarNavDropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
+.jumbotron {
+    margin-bottom: 0;
+}
 .glow {
     font-family: "Comic Sans MS", serif;
     font-size: 25px;

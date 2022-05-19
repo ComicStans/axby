@@ -16,6 +16,8 @@ import Friends from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
+import BoardView, {BoardEvents} from "./Views/BoardView.js";
+import TopicView from "./Views/TopicView.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -99,8 +101,26 @@ export default function router(URI) {
              uri: '/friends',
              title: "Friends",
         
-         }
-    };
+         },
+        '/boardView': {
+            returnView: BoardView,
+            state: {
+                posts: '/api/boards'
+            },
+            uri: '/boards',
+            title: 'Game Board',
+            viewEvent: BoardEvents
+        },
+        '/topicView': {
+            returnView: TopicView,
+            state: {
+                posts: '/api/posts'
+            },
+            uri: '/posts',
+            title: 'All Posts',
+            viewEvent: PostEvents
+        }
+    }
 
     return routes[URI];
 }
