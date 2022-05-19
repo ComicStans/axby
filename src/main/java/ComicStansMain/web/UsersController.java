@@ -7,12 +7,12 @@ import ComicStansMain.data.UsersRepository;
 //import org.springframework.ComicStansMain.security.oauth2.provider.OAuth2Authentication;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @AllArgsConstructor
@@ -45,11 +45,11 @@ public class UsersController {
         return ur.findByEmail(email);
     }
 
-//    @GetMapping("me")
-//    private User getMyInfo(OAuth2Authentication auth) {
-//        String email = auth.getName(); // yes, the email is found under "getName()"
-//        return ur.findByEmail(email);
-//    }
+    @GetMapping("me")
+    private User getMyInfo(OAuth2Authentication auth) {
+        String email = auth.getName(); // yes, the email is found under "getName()"
+        return ur.findByEmail(email);
+    }
 
     @PostMapping
     private void createUser(@RequestBody User newUser) {
@@ -72,21 +72,21 @@ public class UsersController {
         ur.save(tempUser);
     }
 
-    @PutMapping("{id}/password")
-    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
-        User u = ur.getById(id);
-        oldPassword = u.getPassword();
-        if (newPassword != oldPassword || newPassword.length() > 8) {
-            u.setPassword(newPassword);
+    @PutMapping("password")
+    private void updatePassword(@Valid @Size(min = 3) @RequestParam String newPassword, OAuth2Authentication auth) {
+        User u = ur.findByEmail(auth.getName());
+        String oldPassword = u.getPassword();
+        if (!newPassword.equals(oldPassword) && newPassword.length() > 2) {
+            u.setPassword(pe.encode(newPassword));
             ur.save(u);
         }
-//        if (newPassword == oldPassword) {
-//            System.out.println("Sorry, you may not repeat your previous password");
-//        } else if (newPassword.length() <= 2) {
-//            System.out.println("Please make sure that your password is at least 3 characters in length.");
-//        } else {
-//            System.out.println("Password for user #" + id + " has been updated.");
-//        }
+        if (newPassword.equals(oldPassword)) {
+            System.out.println("Sorry, you may not repeat your previous password");
+        } else if (newPassword.length() <= 2) {
+            System.out.println("Please make sure that your password is at least 3 characters in length.");
+        } else {
+            System.out.println("Password for user " + auth.getName() + " has been updated.");
+        }
     }
 
     @DeleteMapping("{id}")
