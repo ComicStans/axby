@@ -5,6 +5,8 @@ import ComicStansMain.data.User;
 import ComicStansMain.data.UsersRepository;
 //import org.springframework.ComicStansMain.security.crypto.password.PasswordEncoder;
 //import org.springframework.ComicStansMain.security.oauth2.provider.OAuth2Authentication;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,19 +15,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/users", headers = "Accept=application/json")
 
 public class UsersController {
     private final UsersRepository ur;
-//    private final PasswordEncoder pe;
+    private final PasswordEncoder pe;
 
-    public UsersController(UsersRepository ur) {
-        this.ur = ur;
-//        this.pe = pe;
-    }
+
     @GetMapping
     private List<User> getAll() {
         return ur.findAll();
@@ -55,9 +54,9 @@ public class UsersController {
     @PostMapping
     private void createUser(@RequestBody User newUser) {
         newUser.setAccessLevel(User.Role.USER);
-//        String encryptedPassword = newUser.getPassword();
-//        encryptedPassword = pe.encode(encryptedPassword);
-//        newUser.setPassword(encryptedPassword);
+        String encryptedPassword = newUser.getPassword();
+        encryptedPassword = pe.encode(encryptedPassword);
+        newUser.setPassword(encryptedPassword);
         newUser.setDateJoined(LocalDate.now());
         ur.save(newUser);
     }
