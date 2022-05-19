@@ -28,7 +28,7 @@ public class UserGameList {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
+    @JoinColumn(name = "guild_  id")
     @JsonIgnoreProperties("userGameLists")
     private Game game;
 

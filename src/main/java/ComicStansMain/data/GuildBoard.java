@@ -27,11 +27,6 @@ public class GuildBoard {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    @JsonIgnoreProperties("boards")
-    private Game game;
-
     @Column(name = "date_created")
     private LocalDate dateCreated;
 
