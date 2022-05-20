@@ -24,7 +24,6 @@ export default function Profile(props) {
                 
                 <label for="username">Username</label>
                 <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
-<!--                        <h1 class="displayUsername">User Name</h1>-->
                         <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                         <br>
                         
