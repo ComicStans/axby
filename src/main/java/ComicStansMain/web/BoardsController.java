@@ -30,4 +30,16 @@ public class BoardsController {
         board.setDateCreated(LocalDate.now());
         boardsRepository.save(board);
     }
+
+    @PutMapping("{id}")
+    private void modifyBoard(@PathVariable Long id, @RequestBody Board boardToEdit) {
+        Board thisBoard = boardsRepository.getById(id);
+        thisBoard.setName(boardToEdit.getName());
+        boardsRepository.save(thisBoard);
+    }
+
+    @DeleteMapping("{id}")
+    private void deleteBoard(@PathVariable Long id) {
+        boardsRepository.deleteById(id);
+    }
 }

@@ -27,4 +27,16 @@ public class GuildBoardsController {
         board.setDateCreated(LocalDate.now());
         gbr.save(board);
     }
+
+    @PutMapping("{id}")
+    private void modifyBoard(@PathVariable Long id, @RequestBody GuildBoard board) {
+        GuildBoard gb = gbr.getById(id);
+        gb.setName(board.getName());
+        gbr.save(gb);
+    }
+
+    @DeleteMapping("{id}")
+    private void deleteBoard(@PathVariable Long id) {
+        gbr.deleteById(id);
+    }
 }
