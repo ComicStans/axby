@@ -46,7 +46,7 @@ public class Post {
 //One User can be the author of many Posts.
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
-    @JsonIgnoreProperties({"posts","boards"})
+    @JsonIgnoreProperties({"posts","boards", "guilds"})
     private User authorId;
 
 
