@@ -41,7 +41,7 @@ public class User {
     @Column
     private boolean emailVerified;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false)
     @ToString.Exclude
     private String password;
 
