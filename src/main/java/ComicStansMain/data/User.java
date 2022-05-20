@@ -85,13 +85,13 @@ public class User {
 
     @JoinTable(
             name="axby_guild_user",
-            joinColumns = {@JoinColumn(name = "id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="user_id", nullable = false, updatable = false)},
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="guild_id", nullable = false, updatable = false)},
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties("users")
+    @JsonIgnoreProperties("members")
     private Collection<Guild> guilds;
 
 //Each User can have many types of SensitiveContent that can be filtered out of view.
@@ -172,4 +172,7 @@ public class User {
     @JsonIgnoreProperties("user")
     private Collection<Game> games;
 
+    @OneToMany(mappedBy = "creator")
+    @JsonIgnoreProperties("creator")
+    private Collection<Guild> guildsCreated;
 }

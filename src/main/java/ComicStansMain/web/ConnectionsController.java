@@ -41,14 +41,10 @@ public class ConnectionsController {
     }
 
     @PutMapping("{id}")
-    public void updateConnectionStatus(@PathVariable Long id, @RequestParam boolean accepted) {
+    public void updateConnectionStatus(@PathVariable Long id) {
         Connection conn = connectionsRepository.getById(id);
         LocalDate thisDate = LocalDate.now();
-        if(accepted) {
-            conn.setDateAccepted(thisDate);
-        } else {
-            conn.setDateRejected(thisDate);
-        }
+        conn.setDateAccepted(thisDate);
         connectionsRepository.save(conn);
     }
 

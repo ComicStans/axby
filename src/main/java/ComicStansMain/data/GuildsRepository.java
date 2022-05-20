@@ -8,8 +8,11 @@ import java.util.Collection;
 public interface GuildsRepository extends JpaRepository<Guild, Long> {
 
     Guild findByName(String name);
-//    Collection<Guild> findAllByUsers(Long userId);
     Collection<Guild> findAllByNameLike(String namePattern);
+
+    Collection<Guild> findAllByCreator(User user);
+//    Collection<Guild> findAllByUsers (User user);
+
 
 
 }
