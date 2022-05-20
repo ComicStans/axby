@@ -13,18 +13,17 @@ import java.util.Collection;
 @RequestMapping(value = "api/guildboards", headers = "Accept=application/json")
 public class GuildBoardsController {
     private final GuildBoardsRepository gbr;
+    private final GuildsRepository gr;
 
     @GetMapping()
-    private Collection<GuildBoard> getAll(@RequestParam String pattern) {
-        if (pattern == null) {
+    private Collection<GuildBoard> getAll() {
             return gbr.findAll();
-        }
-        return gbr.findAllByNameLike(pattern);
     }
 
     @PostMapping
     private void createBoard(@RequestBody GuildBoard board) {
         board.setDateCreated(LocalDate.now());
+        board.setGuild(gr.getById(1L));
         gbr.save(board);
     }
 

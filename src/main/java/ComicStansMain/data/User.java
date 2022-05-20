@@ -91,7 +91,7 @@ public class User {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties("members")
+    @JsonIgnoreProperties({"members","creator"})
     private Collection<Guild> guilds;
 
 //Each User can have many types of SensitiveContent that can be filtered out of view.

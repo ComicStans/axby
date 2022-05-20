@@ -33,8 +33,8 @@ public class GuildBoard {
 //Each Guild will have one GuildBoard.
 //The GuildBoard is created at the same time as the Guild.
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "guild_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("guildBoard")
+    @JoinColumn(name = "guild_id", referencedColumnName = "id", unique = true)
+    @JsonIgnoreProperties({"guildBoard","guilds"})
     private Guild guild;
 
 //Each GuildBoard can have many Posts.
