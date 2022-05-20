@@ -27,10 +27,15 @@ public class ConnectionsController {
         return connectionsRepository.findAllByRecipient(userId);
     }
 
+    @GetMapping("requester/{id}")
+    public Collection<Connection> findAllByRequester(@PathVariable Long id) {
+        return connectionsRepository.findAllByRequester(usersRepository.getById(id));
+    }
+
     @PostMapping
     public void createConnection(@RequestBody Connection newConnection) {
-        newConnection.setRequester(newConnection.getRequester());
-        newConnection.setRecipient(newConnection.getRecipient());
+        newConnection.setRequester(usersRepository.getById(newConnection.getRequester().getId()));
+        newConnection.setRecipient(usersRepository.getById(newConnection.getRecipient().getId()));
         newConnection.setDateRequested(LocalDate.now());
         connectionsRepository.save(newConnection);
     }
