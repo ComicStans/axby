@@ -44,7 +44,8 @@ public class Game {
     @Column(name = "similar_games")
     private String similarGames;
 
-    @OneToMany(mappedBy = "game")
-    @JsonIgnoreProperties("game")
-    private Collection<UserGameList> userGameLists;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties("games")
+    private User user;
 }

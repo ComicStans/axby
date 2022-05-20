@@ -170,6 +170,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
-    private Collection<UserGameList> userGameLists;
+    private Collection<Game> games;
 
 }
