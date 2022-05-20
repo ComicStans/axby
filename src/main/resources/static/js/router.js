@@ -7,7 +7,6 @@ import Login from "./Views/Login.js";
 import LoginEvent from "./auth.js";
 import Register from "./Views/Register.js"
 // import {RegisterEvent} from "./Views/Register.js";
-import {PostEvents} from "./Views/MessageBoards.js";
 import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
@@ -16,8 +15,10 @@ import Friends from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
-import BoardView, {BoardEvents} from "./Views/BoardView.js";
-import TopicView from "./Views/TopicView.js";
+import {BoardEvents} from "./Views/MessageBoards.js";
+import BoardView ,{PostEvents} from "./Views/BoardView.js";
+
+
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -105,21 +106,13 @@ export default function router(URI) {
         '/boardView': {
             returnView: BoardView,
             state: {
-                posts: '/api/boards'
-            },
-            uri: '/boards',
-            title: 'Game Board',
-            viewEvent: BoardEvents
-        },
-        '/topicView': {
-            returnView: TopicView,
-            state: {
                 posts: '/api/posts'
             },
             uri: '/posts',
-            title: 'All Posts',
+            title: 'Game Boards',
             viewEvent: PostEvents
         }
+
     }
 
     return routes[URI];
