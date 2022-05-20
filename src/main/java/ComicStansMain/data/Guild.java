@@ -31,7 +31,7 @@ public class Guild {
 
     @ManyToOne
     @JoinColumn(name="creator_id", nullable = false)
-    @JsonIgnoreProperties("guildsCreated")
+    @JsonIgnoreProperties({"guildsCreated","guilds","boards"})
     private User creator;
 
 //Each Guild has one associated Board, to be created at the same time as the Guild.
