@@ -3,7 +3,7 @@ export default function BoardView(props) {
         <title></title>
     </head>
     <header>
-        <h1>Topic View</h1>
+        <h1>Board View</h1>
     </header>
 
     `
@@ -11,7 +11,7 @@ export default function BoardView(props) {
 }
 
 
-export function PostEvents() {
+export function BoardEvents() {
 
 
 }

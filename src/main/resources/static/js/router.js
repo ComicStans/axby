@@ -1,5 +1,4 @@
 import Home from "./Views/Home.js";
-import MessageBoards from "./Views/MessageBoards.js";
 import About from "./Views/About.js";
 import Error404 from "./Views/Error404.js";
 import Loading from "./Views/Loading.js";
@@ -15,8 +14,9 @@ import Friends from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
-import {BoardEvents} from "./Views/MessageBoards.js";
-import BoardView ,{PostEvents} from "./Views/BoardView.js";
+import MessageBoards, {MessageBoardEvents} from "./Views/MessageBoards.js";
+import BoardView, {BoardEvents} from "./Views/BoardView.js";
+
 
 
 
@@ -63,7 +63,7 @@ export default function router(URI) {
             },
             uri: '/boards',
             title: 'All Boards',
-            viewEvent: BoardEvents
+            viewEvent: MessageBoardEvents
         },
         '/about': {
             returnView: About,
@@ -110,7 +110,7 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'Game Boards',
-            viewEvent: PostEvents
+            viewEvent: BoardEvents
         }
 
     }
