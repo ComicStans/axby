@@ -10,7 +10,7 @@ import java.util.Collection;
 @CrossOrigin
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "api/posts", headers = "Accept=application/json")
+@RequestMapping(value = "api/guildboardposts", headers = "Accept=application/json")
 public class GuildBoardPostsController {
     private final UsersRepository usersRepository;
     private final GuildBoardPostsRepository gbpr;
