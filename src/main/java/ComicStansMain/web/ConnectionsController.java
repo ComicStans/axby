@@ -27,23 +27,24 @@ public class ConnectionsController {
         return connectionsRepository.findAllByRecipient(userId);
     }
 
+    @GetMapping("requester/{id}")
+    public Collection<Connection> findAllByRequester(@PathVariable Long id) {
+        return connectionsRepository.findAllByRequester(usersRepository.getById(id));
+    }
+
     @PostMapping
     public void createConnection(@RequestBody Connection newConnection) {
-        newConnection.setRequester(newConnection.getRequester());
-        newConnection.setRecipient(newConnection.getRecipient());
+        newConnection.setRequester(usersRepository.getById(newConnection.getRequester().getId()));
+        newConnection.setRecipient(usersRepository.getById(newConnection.getRecipient().getId()));
         newConnection.setDateRequested(LocalDate.now());
         connectionsRepository.save(newConnection);
     }
 
     @PutMapping("{id}")
-    public void updateConnectionStatus(@PathVariable Long id, @RequestParam boolean accepted) {
+    public void updateConnectionStatus(@PathVariable Long id) {
         Connection conn = connectionsRepository.getById(id);
         LocalDate thisDate = LocalDate.now();
-        if(accepted) {
-            conn.setDateAccepted(thisDate);
-        } else {
-            conn.setDateRejected(thisDate);
-        }
+        conn.setDateAccepted(thisDate);
         connectionsRepository.save(conn);
     }
 
