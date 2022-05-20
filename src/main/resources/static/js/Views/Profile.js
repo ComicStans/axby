@@ -1,5 +1,6 @@
 
 export default function Profile(props) {
+    console.log(props)
     return `
 
 <head>
@@ -161,13 +162,12 @@ export function ProfileEvents() {
     })
 }
 
-export function friendRequest(requester_id, recipient_id, date_requested, date_rejected, date_accepted){
+export function friendRequest(){
     $(document).ready(function (){
         const request = {};
         $('#friendRequest').click(function (){
-            request.method = "PUT";
-            requester_id = `${requester_id}`
-            .then(request.method = "POST");
+            request.method = "POST";
+
 
         })
     });

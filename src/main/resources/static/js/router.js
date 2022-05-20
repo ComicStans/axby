@@ -90,7 +90,8 @@ export default function router(URI) {
         },
         '/profile': {
             returnView: Profile,
-            state: {},
+            state: {
+                user: '/api/users/username?username='+location.href.split('=')[1]},
             uri: '/profile',
             title: "Profile",
             viewEvent: ProfileEvents
