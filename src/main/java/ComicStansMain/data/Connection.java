@@ -1,5 +1,6 @@
 package ComicStansMain.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Connection {
     private long id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "requester_id", nullable = false)
     private User requester;
 
