@@ -31,9 +31,6 @@ public class Connection {
     @Column(name="date_requested", nullable = false)
     private LocalDate dateRequested;
 
-    @Column(name="date_rejected")
-    private LocalDate dateRejected;
-
     @Column(name="date_accepted")
     private LocalDate dateAccepted;
 
