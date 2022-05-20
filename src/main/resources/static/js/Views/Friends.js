@@ -84,10 +84,12 @@ export default function Friends(props) {
       <div class="modal-body">
         Friends Requests
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Accept</button>
-        <button type="button" class="btn btn-primary">Decline</button>
+<!--  I NEED THIS LINE TO GENERATE FOR EVERY FRIEND REQUEST    -->
+      <div class="acceptOrDecline">
+        <button type="button" class="btn btn-primary" id="accept">Accept</button>
+        <button type="button" class="btn btn-primary" id="decline">Decline</button>
       </div>
+<!---------------------------------------------------------------->
     </div>
   </div>
 </div>
@@ -95,4 +97,11 @@ export default function Friends(props) {
         </html>
 `;
 
+}
+function friendsRequestListener() {
+    $("#requests").click(function () {
+        const newRequest = {
+            username: $("#Requester").val()
+        }
+    })
 }

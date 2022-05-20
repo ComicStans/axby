@@ -1,5 +1,6 @@
 
 export default function Profile(props) {
+    console.log(props)
     return `
 
 <head>
@@ -20,13 +21,15 @@ export default function Profile(props) {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h1 class="displayUsername">User Name</h1>
+                
+                <label for="username">Username</label>
+                <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
                         <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                         <br>
                         
                         <!-- Button trigger for add friend modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friendRequest">
-                         Add Friend
+                         Friend Request
                         </button>
                         
                         <!-- Modal -->
@@ -34,17 +37,17 @@ export default function Profile(props) {
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Confirm Friend Request</h5>
+                                <h5 class="modal-title" id="confirm">Confirm Friend Request</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
                               <div class="modal-body">
-                                Are you sure you want to send " " a friend request?
+                                Send friend request?
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
+                                <button type="button" class="btn btn-primary confirm">Confirm</button>
                               </div>
                             </div>
                           </div>
@@ -141,16 +144,7 @@ export default function Profile(props) {
                     </div>
                 </div>
             </div>
-    
-    
-    
-    
-               
-                 
-                  
-                  
-                    
-           
+
                 </main>
     
     `;
@@ -168,4 +162,16 @@ export function ProfileEvents() {
             $('#aboutMe').attr('contenteditable', 'false')
         })
     })
+}
+
+export function friendRequest(){
+    $(document).ready(function (){
+        const request = {};
+        $('#friendRequest').click(function (){
+            request.method = "POST";
+
+
+        })
+    });
+
 }

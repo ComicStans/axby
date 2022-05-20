@@ -1,0 +1,9 @@
+.username{
+    background: transparent;
+    border-color: transparent;
+
+}
+input#username.username {
+    font-size: large;
+    color: black;
+}
