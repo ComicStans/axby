@@ -14,7 +14,7 @@ import java.util.Collection;
 @CrossOrigin
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "api/users/myconnections", headers = "Accept=application/json")
+@RequestMapping(value = "api/users/friends", headers = "Accept=application/json")
 public class ConnectionsController {
     private ConnectionsRepository connectionsRepository;
     private UsersRepository usersRepository;
