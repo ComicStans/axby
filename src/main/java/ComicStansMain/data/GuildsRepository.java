@@ -11,7 +11,7 @@ public interface GuildsRepository extends JpaRepository<Guild, Long> {
     Collection<Guild> findAllByNameLike(String namePattern);
 
     Collection<Guild> findAllByCreator(User user);
-    Collection<Guild> findAllByUsers (User user);
+//    Collection<Guild> findAllByUsers (User user);
 
 
 

@@ -11,7 +11,7 @@ import java.util.Collection;
 @CrossOrigin
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "api/boards", headers = "Accept=application/json")
+@RequestMapping(value = "api/guilds", headers = "Accept=application/json")
 public class GuildsController {
     private final GuildsRepository guildsRepository;
     private final UsersRepository usersRepository;
@@ -37,8 +37,8 @@ public class GuildsController {
     }
 
     @PostMapping
-    private void createGuild(@RequestBody Guild newGuild, OAuth2Authentication auth) {
-        newGuild.setCreator(usersRepository.findByEmail(auth.getName()));
+    private void createGuild(@RequestBody Guild newGuild) {
+        newGuild.setCreator(usersRepository.findByEmail("bob@bob.com"));
         newGuild.setDateCreated(LocalDate.now());
         guildsRepository.save(newGuild);
     }
