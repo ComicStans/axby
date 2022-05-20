@@ -101,13 +101,8 @@ export default function Profile(props) {
                             
                         <h2>Friend List</h2>
                             <ul class="friendList" >
-                                <li id="list-item1"> <a href="#">Bob</a></li>
-                                <li id="list-item2"> <a href="#">Micah</a></li>
-                                <li id="list-item3"> <a href="#">Rachel</a></li>
-                                <li id="list-item4"> <a href="#">Jenn</a></li>
-                                <li id="list-item5"> <a href="#">Wesley</a></li>
-                                <li id="list-item6"> <a href="#">David</a></li>
-                                
+                            ${props.profile.connection.map(connection => {
+                            return `<li id="friend-${connection.id}"> <a href="#">${connection.name}</a></li>`}).join('')}
                             </ul>
                         <h2>Wish List</h2>
                             <ul class="wishList" >
