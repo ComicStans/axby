@@ -25,12 +25,12 @@ export default function Profile(props) {
                         <br>
                         
                         <!-- Button trigger for add friend modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friendRequest">
                          Add Friend
                         </button>
                         
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="friendRequest" tabindex="-1" role="dialog" aria-labelledby="friendRequestCenterTitle" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -56,7 +56,7 @@ export default function Profile(props) {
                         </button>
                         
                         <!-- Modal -->
-                        <div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="blockUserTitle" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -98,8 +98,8 @@ export default function Profile(props) {
                                 Pen Pineapple Apple Pen
                                 Pen Pineapple Apple Pen
                             </p>
-                            
-                        <h2>Friend List</h2>
+                           <h2> <a href="/friends" data-link style="color: black">Friends List</a></h2>
+<!--                        <h2>Friend List</h2>-->
                             <ul class="friendList" >
                                 <li id="list-item1"> <a href="#">Bob</a></li>
                                 <li id="list-item2"> <a href="#">Micah</a></li>
@@ -113,7 +113,7 @@ export default function Profile(props) {
                             <ul class="wishList" >
                                 <li id="list-item1"> <a href="#">Sonic</a></li>
                                 <li id="list-item2"> <a href="#">Super Mario</a></li>
-                                <li id="list-item3"> <a href="#">Aladin</a></li>
+                                <li id="list-item3"> <a href="#">Aladdin</a></li>
                                 <li id="list-item4"> <a href="#">Duck hunter</a></li>
                                 <li id="list-item5"> <a href="#">Street Fighter</a></li>
                                 <li id="list-item6"> <a href="#">Lion King</a></li>
