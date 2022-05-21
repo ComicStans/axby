@@ -8,4 +8,12 @@ input#username.username {
     color: #ffffff;
     font-family: 'Smooch', cursive;
     text-shadow: 1px 1px #666666;
+    margin-left: 1em;
+}
+body{
+    margin-bottom: 5em;
+}
+.img-circle {
+    border-radius: 100%;
+    border: 4px solid ;
 }

@@ -6,6 +6,8 @@
 @import "Account.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
 
 h1, h2 {
     color: #b70c95;
@@ -27,7 +29,6 @@ h1, h2 {
     /*color: #b70c95 !important;*/
 }
 #navbarNavDropdown {
-    display: flex;
     flex-direction: row;
     justify-content: center;
 }

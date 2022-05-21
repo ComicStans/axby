@@ -1,18 +1,11 @@
-
 export default function Profile(props) {
     console.log(props)
     return `
 
 <head>
     
+    <title>Profile</title>
 
-    <title>Profile!</title>
-    <style>
-        .img-circle {
-    border-radius: 100%;
-    border: 4px solid ;
-}  
-    </style>
   </head>
       
        <body>
@@ -140,11 +133,10 @@ export default function Profile(props) {
                     </div>
                 </div>
             </div>
-
                 </body>
-    
     `;
 }
+
 export function ProfileEvents() {
     $(document).ready(function () {
 
@@ -160,10 +152,10 @@ export function ProfileEvents() {
     })
 }
 
-export function friendRequest(){
-    $(document).ready(function (){
+export function friendRequest() {
+    $(document).ready(function () {
         const request = {};
-        $('#friendRequest').click(function (){
+        $('#friendRequest').click(function () {
             request.method = "POST";
 
 
