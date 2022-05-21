@@ -15,14 +15,10 @@ export default function Profile(props) {
     </style>
   </head>
       
-       <main>
-            <h1>Profile</h1>
-            
-            <div class="container">
+       <body>
+           <div class="container">
                 <div class="row">
                     <div class="col">
-                
-                <label for="username">Username</label>
                 <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
                         <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                         <br>
@@ -145,7 +141,7 @@ export default function Profile(props) {
                 </div>
             </div>
 
-                </main>
+                </body>
     
     `;
 }

@@ -4,6 +4,8 @@
 
 }
 input#username.username {
-    font-size: large;
-    color: black;
+    font-size: xxx-large;
+    color: #ffffff;
+    font-family: 'Smooch', cursive;
+    text-shadow: 1px 1px #666666;
 }
