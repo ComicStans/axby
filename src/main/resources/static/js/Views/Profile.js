@@ -70,7 +70,7 @@ export default function Profile(props) {
                         </div>
                         <br>
                         <h2>About Me</h2>
-                        
+                        <div id="userAbout">
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
                             
@@ -90,6 +90,7 @@ export default function Profile(props) {
                                 Pen Pineapple Apple Pen
                                 Pen Pineapple Apple Pen
                             </p>
+                        </div>
                            <h2> <a href="/friends" data-link style="color: black">Friends List</a></h2>
 <!--                        <h2>Friend List</h2>-->
                             <ul class="friendList" >

@@ -8,7 +8,7 @@ input#username.username {
     color: #ffffff;
     font-family: 'Smooch', cursive;
     text-shadow: 1px 1px #666666;
-    margin-left: 1em;
+    margin-left: .5em;
 }
 body{
     margin-bottom: 5em;
@@ -16,4 +16,28 @@ body{
 .img-circle {
     border-radius: 100%;
     border: 4px solid ;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #840b9f;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+#userAbout{
+    background-color: rgba(0,128,0,0.1);
+    color: #fff;
+    border: thick double #6f11d1;
+}
+/*#edit-button, #end-editing, #aboutMe{*/
+/*    opacity: 1 !important;*/
+/*}*/
+#aboutMe{
+    padding: 1em 1em 1em 1em;
+
 }
