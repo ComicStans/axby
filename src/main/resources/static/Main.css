@@ -34,7 +34,7 @@ h1, h2 {
 
 .jumbotron {
     margin-bottom: 0;
-    background-image: url(../Images/retro-game-synthwave.jpeg);
+    background-image: url(/Images/retro-game-synthwave.jpeg);
     background-size: cover;
     background-position: center center;
 }

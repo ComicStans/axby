@@ -9,7 +9,7 @@ export default function Profile(props) {
                 <div class="row">
                     <div class="col">
                         <div id="profileNameandImage">
-                            <!--     AUTO GENERATED LOGGED IN USERS NAME, ---WORKING        -->
+                            <!--     AUTO GENERATED USERNAME OF NAVIGATED PROFILE ---WORKING        -->
                             <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
                             <!--      NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
                             <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
