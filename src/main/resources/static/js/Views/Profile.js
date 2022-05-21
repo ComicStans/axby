@@ -86,7 +86,7 @@ export default function Profile(props) {
                                 Pen Pineapple Apple Pen
                             </p>
                         </div>
-                           <h2> <a href="/friends" data-link style="color: black">Friends List</a></h2>
+                           <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 <!--                        <h2>Friend List</h2>-->
                             <ul class="friendList" >
                                 <li id="list-item1"> <a href="#">Bob</a></li>
