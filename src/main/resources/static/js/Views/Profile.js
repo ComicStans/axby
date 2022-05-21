@@ -1,26 +1,24 @@
 export default function Profile(props) {
     console.log(props)
     return `
-
-<head>
-    
+<head>    
     <title>Profile</title>
-
   </head>
-      
        <body>
            <div class="container">
                 <div class="row">
                     <div class="col">
-                <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
-                        <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
-                        <br>
-                        
+                        <div id="profileNameandImage">
+                            <!--     AUTO GENERATED LOGGED IN USERS NAME, ---WORKING        -->
+                            <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
+                            <!--      NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
+                            <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
+                            <br>
+                        </div>
                         <!-- Button trigger for add friend modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friendRequest">
                          Friend Request
                         </button>
-                        
                         <!-- Modal -->
                         <div class="modal fade" id="friendRequest" tabindex="-1" role="dialog" aria-labelledby="friendRequestCenterTitle" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -41,12 +39,10 @@ export default function Profile(props) {
                             </div>
                           </div>
                         </div>
-                        
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blockUser">
                           Block
                         </button>
-                        
                         <!-- Modal -->
                         <div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="blockUserTitle" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -73,7 +69,6 @@ export default function Profile(props) {
                         <div id="userAbout">
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
-                            
                             <p id="aboutMe">
                            
                                 I have a pen
@@ -99,8 +94,7 @@ export default function Profile(props) {
                                 <li id="list-item3"> <a href="#">Rachel</a></li>
                                 <li id="list-item4"> <a href="#">Jenn</a></li>
                                 <li id="list-item5"> <a href="#">Wesley</a></li>
-                                <li id="list-item6"> <a href="#">David</a></li>
-                                
+                                <li id="list-item6"> <a href="#">David</a></li> 
                             </ul>
                         <h2>Wish List</h2>
                             <ul class="wishList" >
@@ -113,24 +107,19 @@ export default function Profile(props) {
                             </ul>
                     </div>
                    
-                    <div class="col">
+                    <div class="col" id="myCollection">
                          <h1>My Collection</h1>
                          <!-- Small button groups (default and split) -->
                             <div class="btn-group dropdown">
                               <button class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuLink" type="button" data-toggle="dropdown" aria-expanded="false">
                                 Game Category
                               </button>
-                              
                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                               </div>
-                              
-                              
-                              
-                            </div>
-                            
+                            </div>                            
                     </div>
                 </div>
             </div>
@@ -158,9 +147,6 @@ export function friendRequest() {
         const request = {};
         $('#friendRequest').click(function () {
             request.method = "POST";
-
-
         })
     });
-
 }
