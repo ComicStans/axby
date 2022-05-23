@@ -6,106 +6,208 @@ const URL = 'http://localhost:8081/api/posts';
 
 export default function MessageBoards(props) {
     return `
-        <header>
-            <h1>My Blogs</h1>
-        </header>
-            <main>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                             <h3>Popular Game Boards</h3>
-                             <hr>
-                            <div class="card" style="width: 69em;">
-                              
-                              <div class="card-header">
-                                Board   Topics  Msgs 
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                <div id="boardViewTitle"><h1>BOARDS</h1></div>
+<!--  CREATE A BOARD MODAL             ----------------------------------------------------------------->
+                    <div id="createTopicModal">
+                    <button type="button" class="btn btn-primary" id="add-topic-button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create A Board</button>
+                    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                         <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New Topic</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form>
+                              <div class="form-group">
+                                <label for="topicName" class="col-form-label" id="topic-title-label">Title</label>
+                                <input type="text" class="form-control" id="topicName">
                               </div>
-                              <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a class="board" href="/boardView" data-link>Super Mario</a></li>                                
-                                <li class="list-group-item">Sonic</li>
-                                <li class="list-group-item">Duck Hunter</li>
-                              </ul>
-                            </div>
-                            <br>
-                           
-                            <hr>
-                            
+                              <div class="form-group">
+                                <label for="description" class="col-form-label">Description:</label>
+                                <textarea class="form-control" id="description"></textarea>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="create-topic" data-dismiss="modal">Create Topic</button>
+                          </div>
                         </div>
+                      </div>
                     </div>
+                    </div>
+                    <hr>
+                     
+                    
+                    
+      <div class="card" style="width: 69em;">
+           <div class="card-header">
+             TOPIC
+           </div>
+           <ul class="list-group list-group-flush">
+            <div id="topic-container">
+            
+             ${props.posts.map(post => {
+
+        return `
+                 <li class="list-group-item"><h1 ><a class="topic" id="topic-${post.id}" href="/topicView" data-link><span id="post-name-${post.id}">${post.name}</span> - <span id="post-description-${post.id}">${post.description}</span></a>
+                 <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
+                 <button type="button" class="btn delete-topic-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
+ 
+<!-- EDIT A BOARD TITLE AND DESCRIPTION MODAL                ------------------------------------------------------------------>
+                 <div class="modal fade" id="edit-topic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Topic</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form>
+                              <div class="form-group">
+                                <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title ${post.name}</label>
+                                <input type="text" class="form-control" id="EditTopicName" value="${post.name}" data-link>
+                              </div>
+                              <div class="form-group">
+                                <label for="EditDescription" class="col-form-label">Description:</label>
+                                <textarea class="form-control" id="EditDescription"></textarea>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="save-changes" data-dismiss="modal">Save Changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+                  `
+    }).join('')}
+             
+             </div>
+             
+             
+           </ul>
+         </div>
+    
+     <br>                                                       
+     <hr>
+           
+                    
+                    
+
                 </div>
-            </main>
+            </div>
+        </div>
+    </main>
     `;
 }
 
-    export function PostEvents() {
-        createAddPostListener();
-        createEditPostListeners();
-        createDeletePostListeners();
-    }
-// ADD A POST   -------------------------------------->
-        function createAddPostListener() {
-            $("#add-post-button").click(function() {
-                const newPost = {
-                    title: $("#add-post-title").val(),
-                    content: $("#add-post-content").val()
-                }
-                const id = $("#add-post-id").val();
-                const request = {};
-                let uriExtra = "";
-                if(id > 0) {
-                    // newPost.id = id;
-                    request.method = "PUT";
-                    uriExtra = `/${id}`;
-                    console.log("Ready to update this post:");
-                } else {
-                    // newPost.id = 99999;
-                    request.method = "POST";
-                    console.log("Ready to add this post:");
-                }
-                request.headers = {
-                    'Content-Type': 'application/json'
-                };
-                request.body = JSON.stringify(newPost);
-                fetch(`${URL}${uriExtra}`, request)
-                    .then(res => {
-                        console.log(`${request.method} SUCCESS: ${res.status}`);
-                    }).catch(error => {
-                    console.log(`${request.method} ERROR: ${error}`);
-                }).finally(() => {
-                    createView("/posts");
-                });
-            });
-        }
-// EDIT A POST   -------------------------------------->
-        function createEditPostListeners() {
-            $(".edit-post-button").click(function() {
-                const id = $(this).data("id");
-                const oldTitle = $(`#title-${id}`).html();
-                const oldContent = $(`#content-${id}`).text();
-                $("#add-post-id").val(id);
-                $("#add-post-title").val(oldTitle);
-                $("#add-post-content").val(oldContent);
-            });
-        }
-// DELETE A POST   -------------------------------------->
-        function createDeletePostListeners() {
-            $(".delete-post-button").click(function() {
-                const id = $(this).data("id");
-                console.log("Ready to delete the post with id " + id);
+export function MessageBoardEvents() {
+    createAddTopicListener();
+    createDeleteTopicListeners();
+    createEditTopicListener();
+    createSaveChangesListener();
 
-                const request = {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                };
-                fetch(`${URL}/${id}`, request)
-                    .then(res => {
-                        console.log("DELETE SUCCESS: " + res.status);
-                    }).catch(error => {
-                    console.log("DELETE ERROR: " + error);
-                }).finally(() => {
-                    createView("/posts");
-                });
-            });
+}
+
+// Add a topic - works ----------------------->
+function createAddTopicListener() {
+    $("#create-topic").click(function () {
+        const description = $("#description").val();
+        const name = $("#topicName").val();
+        const newBoardTopic = {
+            name,
+            description
         }
+
+        const request = {
+            method: "POST",
+            headers: getHeaders(),
+            body: JSON.stringify(newBoardTopic)
+        }
+
+        fetch(URL, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/boards")
+            }).catch(error => {
+            console.log(error);
+            createView("/boards");
+        });
+    })
+}
+
+// Edit topic - not working yet ---------------->
+function createEditTopicListener() {
+
+    $(".edit-topic-button").click(function () {
+        const id = $(this).data("id");
+        const oldName = $(`#post-name-${id}`).text();
+        console.log(oldName);
+        const oldDescription = $(`#post-description-${id}`).text();
+        // $("#add-topic-id").val(id);
+        $("#EditTopicName").val(oldName);
+        $("#EditDescription").val(oldDescription);
+
+    });
+}
+
+function createSaveChangesListener() {
+    $("#save-changes").click(function () {
+        const description = $('#EditDescription').val();
+        const name = $('#EditTopicName').val();
+        const savedChanges = {
+            name,
+            description
+        }
+
+        const request = {
+            method: "PUT",
+            headers: getHeaders(),
+            body: JSON.stringify(savedChanges)
+        }
+
+        fetch(URL, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/boards")
+            }).catch(error => {
+            console.log(error);
+            createView("/boards");
+        });
+    })
+}
+
+// Delete topic works ------>
+function createDeleteTopicListeners() {
+    $(".delete-topic-button").click(function () {
+        const id = $(this).data("id");
+        const request = {
+            method: "DELETE",
+            headers: getHeaders(),
+        }
+
+        fetch(`http://localhost:8081/api/boards/${id}`, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/boards")
+            }).catch(error => {
+            console.log(error);
+            createView("/messageBoards");
+        });
+
+    });
+}

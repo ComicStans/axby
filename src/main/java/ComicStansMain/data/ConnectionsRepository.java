@@ -20,4 +20,6 @@ public interface ConnectionsRepository extends JpaRepository<Connection, Long> {
             "            where ac.date_accepted is null and ac.date_rejected is null and ac.recipient_id = ?1",
             nativeQuery = true)
     Collection<Connection> findAllByRecipient(Long id);
+
+    Collection<Connection> findAllByRequester(User user);
 }

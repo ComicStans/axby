@@ -29,6 +29,11 @@ public class Guild {
     @Column(name="date_created", nullable = false)
     private LocalDate dateCreated;
 
+    @ManyToOne
+    @JoinColumn(name="creator_id", nullable = false)
+    @JsonIgnoreProperties({"guildsCreated","guilds","boards"})
+    private User creator;
+
 //Each Guild has one associated Board, to be created at the same time as the Guild.
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "guild_board_id", referencedColumnName = "id")
@@ -43,11 +48,11 @@ public class Guild {
 
     @JoinTable(
             name="axby_guild_user",
-            joinColumns = {@JoinColumn(name = "id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="guild_id", nullable = false, updatable = false)},
+            joinColumns = {@JoinColumn(name = "guild_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="user_id", nullable = false, updatable = false)},
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
-    @JsonIgnoreProperties("users")
-    private Collection<User> users;
+    @JsonIgnoreProperties("guilds")
+    private Collection<User> members;
 }

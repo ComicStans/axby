@@ -9,7 +9,8 @@ export default function Home(props) {
     <header>
         <h1>HOME</h1>
     </header>
-    
+<!--    <body>    <img src="../../../Images/finished_Project_Logo.png" alt="games_on_tvStand">-->
+</body>
     `
 
 }
