@@ -12,6 +12,7 @@
 h1, h2 {
     color: #b70c95;
     text-shadow: 1px 1px #0e1b50;
+    font-family: 'Caveat Brush', cursive;
 }
 
 .nav-item {

@@ -7,9 +7,12 @@ export default function Home(props) {
         <title></title>
     </head>
     <header>
-        <h1>HOME</h1>
     </header>
-<!--    <body>    <img src="../../../Images/finished_Project_Logo.png" alt="games_on_tvStand">-->
+    <body>
+    <h2 style="padding: 1em 0 1em 2em">  Where organizing your video games has never been easier...</h2>
+    <div style="display: flex; justify-content: center; ">   
+        <img src="../../Images/finished_Project_Logo.png" alt="logo">
+    </div> 
 </body>
     `
 
