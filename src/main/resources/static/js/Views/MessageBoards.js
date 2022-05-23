@@ -59,7 +59,7 @@ export default function MessageBoards(props) {
              ${props.posts.map(post => {
 
         return `
-                 <li class="list-group-item"><h1 ><a class="topic" id="topic-${post.id}" href="/topicView" data-link><span id="post-name-${post.id}">${post.name}</span> - <span id="post-description-${post.id}">${post.description}</span></a>
+                 <li class="list-group-item"><h1><a class="topic" id="topic-${post.id}" href="/boardView" data-link>${post.name}</a><span id="post-description-${post.id}"> <span> - </span> ${post.description}</span>
                  <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
                  <button type="button" class="btn delete-topic-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
  
