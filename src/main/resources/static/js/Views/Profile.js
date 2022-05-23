@@ -71,18 +71,18 @@ export default function Profile(props) {
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
                             <p id="aboutMe">
                            
-                                I have a pen
-                                I have an apple
-                                Ah
-                                Apple pen
-                                I have a pen
-                                I have pineapple
-                                Ah
-                                Pineapple pen
-                                Apple pen
-                                Pineapple pen
-                                Ah
-                                Pen Pineapple Apple Pen
+                                I have a pen<br>
+                                I have an apple<br>
+                                Ah<br>
+                                Apple pen<br>
+                                I have a pen<br>
+                                I have pineapple<br>
+                                Ah<br>
+                                Pineapple pen<br>
+                                Apple pen<br>
+                                Pineapple pen<br>
+                                Ah<br>
+                                Pen Pineapple Apple Pen<br>
                                 Pen Pineapple Apple Pen
                             </p>
                         </div>
