@@ -88,8 +88,8 @@ export default function Profile(props) {
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 <!--                        <h2>Friend List</h2>-->
-                            <ul class="friendList" >
-                            </ul>
+                            ${props.profile.connection.map(connection => {
+                            return `<p id="friend-${connection.id}"> <a href="#">${connection.user.username}</a></p>`}).join('')}
                         <h2>Wish List</h2>
                             <ul class="wishList" >
                                 <li id="list-item1"> <a href="#">Sonic</a></li>
