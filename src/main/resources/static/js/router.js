@@ -92,28 +92,28 @@ export default function router(URI) {
         '/profile': {
             returnView: Profile,
             state: {
-                user: '/api/users/username?username='+location.href.split('=')[1]},
-            uri: '/profile',
-            title: "Profile",
-            viewEvent: ProfileEvents
-        },
-         '/friends': {
-             returnView: Friends,
-             state: {},
-             uri: '/friends',
-             title: "Friends",
-        
-         },
-        '/boardView': {
-            returnView: BoardView,
-            state: {
-                posts: '/api/posts'
+                user: '/api/users/me',
+                uri: '/profile',
+                title: "Profile",
+                viewEvent: ProfileEvents
             },
-            uri: '/posts',
-            title: 'Game Boards',
-            viewEvent: BoardEvents
-        }
+            '/friends': {
+                returnView: Friends,
+                state: {},
+                uri: '/friends',
+                title: "Friends",
 
+            },
+            '/boardView': {
+                returnView: BoardView,
+                state: {
+                    posts: '/api/posts'
+                },
+                uri: '/posts',
+                title: 'Game Boards',
+                viewEvent: BoardEvents
+            }
+        }
     }
 
     return routes[URI];
