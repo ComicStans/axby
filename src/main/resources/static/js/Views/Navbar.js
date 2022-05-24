@@ -8,7 +8,7 @@ export default function Navbar(props) {
 <header>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4 jumboTitle">Gamers Corner</h1>
+    <h1 class="display-4 jumboTitle">Gamerz Corner</h1>
   </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light">
