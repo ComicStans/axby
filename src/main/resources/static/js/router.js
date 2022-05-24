@@ -15,7 +15,7 @@ import Friends from "./Views/Friends.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
 import MessageBoards, {MessageBoardEvents} from "./Views/MessageBoards.js";
-import BoardView, {BoardEvents} from "./Views/BoardView.js";
+import BoardView, {BoardViewEvents} from "./Views/BoardView.js";
 
 
 
@@ -59,7 +59,7 @@ export default function router(URI) {
         '/messageBoards': {
             returnView: MessageBoards,
             state: {
-                posts: '/api/boards'
+                boards: '/api/boards'
             },
             uri: '/boards',
             title: 'All Boards',
@@ -112,7 +112,7 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'Game Boards',
-            viewEvent: BoardEvents
+            viewEvent: BoardViewEvents
         }
 
     }
