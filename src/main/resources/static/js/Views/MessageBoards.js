@@ -2,7 +2,7 @@ import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 
 
-const URL = 'http://localhost:8081/api/posts';
+const URL = 'http://localhost:8081/api/boards';
 
 export default function MessageBoards(props) {
     return `
@@ -59,7 +59,7 @@ export default function MessageBoards(props) {
              ${props.posts.map(post => {
 
         return `
-                 <li class="list-group-item"><h1 ><a class="topic" id="topic-${post.id}" href="/topicView" data-link><span id="post-name-${post.id}">${post.name}</span> - <span id="post-description-${post.id}">${post.description}</span></a>
+                 <li class="list-group-item"><h1><a class="topic" id="topic-${post.id}" href="/boardView" data-link>${post.name}</a><span id="post-description-${post.id}"> <span> - </span> ${post.description}</span>
                  <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
                  <button type="button" class="btn delete-topic-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
  
@@ -75,6 +75,7 @@ export default function MessageBoards(props) {
                           </div>
                           <div class="modal-body">
                             <form>
+                            <input type="hidden" value="${post.id}" id="edit-id">
                               <div class="form-group">
                                 <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title ${post.name}</label>
                                 <input type="text" class="form-control" id="EditTopicName" value="${post.name}" data-link>
@@ -128,6 +129,8 @@ function createAddTopicListener() {
     $("#create-topic").click(function () {
         const description = $("#description").val();
         const name = $("#topicName").val();
+        console.log(description);
+        console.log(name);
         const newBoardTopic = {
             name,
             description
@@ -142,10 +145,10 @@ function createAddTopicListener() {
         fetch(URL, request)
             .then(res => {
                 console.log(res.status);
-                createView("/boards")
+                createView("/messageBoards")
             }).catch(error => {
             console.log(error);
-            createView("/boards");
+            createView("/messageBoards");
         });
     })
 }
@@ -169,6 +172,9 @@ function createSaveChangesListener() {
     $("#save-changes").click(function () {
         const description = $('#EditDescription').val();
         const name = $('#EditTopicName').val();
+        const id = $('#edit-id').val();
+
+
         const savedChanges = {
             name,
             description
@@ -180,13 +186,13 @@ function createSaveChangesListener() {
             body: JSON.stringify(savedChanges)
         }
 
-        fetch(URL, request)
+        fetch(URL + `/${id}`, request)
             .then(res => {
                 console.log(res.status);
-                createView("/boards")
+                createView("/messageBoards")
             }).catch(error => {
             console.log(error);
-            createView("/boards");
+            createView("/messageBoards");
         });
     })
 }
@@ -200,10 +206,10 @@ function createDeleteTopicListeners() {
             headers: getHeaders(),
         }
 
-        fetch(`http://localhost:8081/api/boards/${id}`, request)
+        fetch(URL + `/${id}`, request)
             .then(res => {
                 console.log(res.status);
-                createView("/boards")
+                createView("/messageBoards")
             }).catch(error => {
             console.log(error);
             createView("/messageBoards");
