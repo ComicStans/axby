@@ -55,8 +55,7 @@ public class ConnectionsController {
     @PutMapping("{id}")
     public void updateConnectionStatus(@PathVariable Long id) {
         Connection conn = connectionsRepository.getById(id);
-        LocalDate thisDate = LocalDate.now();
-        conn.setDateAccepted(thisDate);
+        conn.setDateAccepted(LocalDate.now());
         connectionsRepository.save(conn);
     }
 
