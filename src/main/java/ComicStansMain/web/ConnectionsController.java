@@ -21,9 +21,16 @@ public class ConnectionsController {
     private UsersRepository usersRepository;
 
     @GetMapping("search")
-    public Collection<Connection> listMyConnections(@RequestBody User user) {
+    public Collection<Connection> listConnections(@RequestBody User user) {
         Collection<Connection> results = connectionsRepository.findAllByRecipient(usersRepository.findByUsername(user.getUsername()));
         results.addAll(connectionsRepository.findAllByRequester(usersRepository.findByUsername(user.getUsername())));
+        return results;
+    }
+
+    @GetMapping("search/me")
+    public Collection<Connection> listMyConnections(OAuth2Authentication auth) {
+        Collection<Connection> results = connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName()));
+        results.addAll(connectionsRepository.findAllByRequester(usersRepository.findByEmail(auth.getName())));
         return results;
     }
 
