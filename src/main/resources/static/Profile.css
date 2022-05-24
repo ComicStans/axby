@@ -1,4 +1,4 @@
-.username{
+.username, .aboutMe{
     background: transparent;
     border-color: transparent;
 
@@ -9,6 +9,10 @@ input#username.username {
     font-family: 'Smooch', cursive;
     text-shadow: 1px 1px #666666;
     /*margin-left: .5em;*/
+}
+input.aboutMe {
+    max-width: available;
+    max-height: inherit;
 }
 
 .img-circle {

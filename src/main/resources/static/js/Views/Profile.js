@@ -53,8 +53,9 @@ export default function Profile(props) {
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <div class="modal-body">
-                                Are you sure you want to block " " ?
+                              <div class="modal-body"> 
+                                Are you sure you want to block " " ?  
+                                <!--  //need to insert users name here ^^^^ -->
                                 You will no longer see their profile, boards or receive messages from them.
                               </div>
                               <div class="modal-footer">
@@ -69,22 +70,9 @@ export default function Profile(props) {
                         <div id="userAbout">
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
-                            <p id="aboutMe">
-                           
-                                I have a pen<br>
-                                I have an apple<br>
-                                Ah<br>
-                                Apple pen<br>
-                                I have a pen<br>
-                                I have pineapple<br>
-                                Ah<br>
-                                Pineapple pen<br>
-                                Apple pen<br>
-                                Pineapple pen<br>
-                                Ah<br>
-                                Pen Pineapple Apple Pen<br>
-                                Pen Pineapple Apple Pen
-                            </p>
+                                <p id="aboutMe">
+                                    <input class="aboutMe" name="aboutMe" value="${props.user.aboutUserText}" type="text"/><br>
+                                </p>
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 <!--                        <h2>Friend List</h2>-->
@@ -144,9 +132,18 @@ export function ProfileEvents() {
 
 export function friendRequest() {
     $(document).ready(function () {
-        const request = {};
+        const request = {
+            //requester id
+        };
         $('#friendRequest').click(function () {
             request.method = "POST";
+            //headers: {"Content-Type": "application/json"},
+            //body: JSON.stringify(newUser
         })
+        fetch("http://localhost:8081/api/friends", request) //location to send data
+            .then(response => {
+                console.log(response.status);
+                //what do I put here? ("/");
+            })
     });
 }
