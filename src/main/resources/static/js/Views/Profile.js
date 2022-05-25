@@ -88,8 +88,8 @@ export default function Profile(props) {
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 <!--                        <h2>Friend List</h2>-->
-                            ${props.user.map(user => {
-                            `<p id="friend-${user.id}"> <a href="#">${user.connection}</a></p>`}).join('')}
+                            ${props.user.connection.map(user => {
+                            `<p id="friend-${user.id}"> <a href="#">${user.connection}</a></p><br>`}).join('')}
                         <h2>Wish List</h2>
                             <ul class="wishList" >
                                 <li id="list-item1"> <a href="#">Sonic</a></li>
@@ -122,6 +122,7 @@ export default function Profile(props) {
 }
 
 export function ProfileEvents() {
+    console.log(props)
     $(document).ready(function () {
 
         $('#edit-button').click(function () {
