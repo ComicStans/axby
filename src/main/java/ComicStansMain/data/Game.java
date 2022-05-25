@@ -14,6 +14,12 @@ import java.util.Collection;
 @Entity
 @Table(name = "axby_games")
 
+//The Games table has a one-to-many relationship with Users:
+//Each User can add multiple Games to their lists of games played and
+//games they would like to play.
+//Games are added to the table from the data in the API provided by igdb.com
+//when users add them to their respective lists.
+
 public class Game {
     public enum Status {PLAYED, WANNAPLAY}
 

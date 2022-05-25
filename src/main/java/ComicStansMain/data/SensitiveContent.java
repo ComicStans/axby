@@ -14,6 +14,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "axby_sensitive_content")
 
+//This entity is in a many-to-many relationships with Users, via the User_Content_Filter table:
+//Each user can filter out various types of content separate from the Preferences table.
+
 public class SensitiveContent {
 
     @Id

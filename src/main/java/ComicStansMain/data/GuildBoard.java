@@ -16,9 +16,11 @@ import java.util.Collection;
 @Table(name = "axby_guild_boards")
 public class GuildBoard {
 
-    //Each Board will have one Game or Game-type to which it is related.
-    //Some Boards will be pre-created by the site admins, dedicated to most popular titles;
-    //other Boards will be created by Users (paid/premium users?).
+//Each GuildBoard will have one Guild to which it is related.
+//GuildBoards should be created immediately upon the creation of the related Guilds.
+//Each GuildBoard can have many GuildBoardPosts.
+//Each GuildBoard can have many GuildBoardAdmins (User entities);
+//each User can administer many GuildBoards.
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

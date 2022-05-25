@@ -17,11 +17,16 @@ import java.util.Collection;
 @Entity
 @Table(name = "axby_users")
 
-public class User {
+//The User is the central object in this social-networking-style application.
+//The Users table is related, one-to-many, to Boards, Games, and User_Preference.
+//It is related, many-to-many, to Guilds, Sensitive_Content, Connections, Reports,
+//Board_Admins, and GuildBoard_Admins.
 
-    //The User is the central object in this social-networking-style application.
-    //The Users table is related, one-to-many, to Boards, Lists, Reports, and User_Preference.
-    //It is related, many-to-many, to Games, Guilds, Sensitive_Content, and Connections
+//(Actually, in the case of Connections and Reports, the relationship is double-one-to-many:
+//both the Request and Recipient of a Connection are both User entities,
+//and both the User_Reporting and User_Reported fields represent User entities.)
+
+public class User {
 
     //Instance variables:
     public enum Role {VISITOR, USER, PREMIUM, ADMIN}
@@ -63,18 +68,6 @@ public class User {
     @Column(nullable = false)
     @Enumerated
     private Role accessLevel;
-
-//Each User will have one PlayedList and one WannaPlayList.
-//The played list will feature reviews of the Games listed.
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "played_list_id", referencedColumnName = "id")
-//    @JsonIgnoreProperties("user")
-//    private PlayedList played;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "wanna_play_list_id", referencedColumnName = "id")
-//    @JsonIgnoreProperties("user")
-//    private WannaPlayList wannaPlay;
 
 //Each User can belong to many Guilds, each of which can have many Users (or it wouldn't be a Guild, would it?).
     @ManyToMany(
@@ -149,8 +142,8 @@ public class User {
     @JsonIgnoreProperties("guildBoardsAdministered")
     private Collection<GuildBoard> guildBoardsAdministered;
 
-//User one-to-many Collections: boards, posts, reports, preferences.
-//The reports table has two columns with Users as foreign keys: the user reporting
+//User one-to-many Collections: boards, games, posts, reports, preferences, and guildsCreated.
+//The Reports table has two columns with Users as foreign keys: the user reporting
 //and the user reported.
     @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("userId")
