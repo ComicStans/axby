@@ -1,9 +1,9 @@
-.username, .aboutMe{
-    background: transparent;
-    border-color: transparent;
+/*.username, .aboutMe{*/
+/*    background: transparent;*/
+/*    border-color: transparent;*/
 
-}
-input#username.username {
+/*}*/
+.username {
     font-size: 450%;
     color: #ffffff;
     font-family: 'Smooch', cursive;
@@ -49,8 +49,5 @@ input.aboutMe {
     margin-top: 20em;
 }
 ul.friendList, ul.wishList {
-    list-style-type: circle;
-}
-#profileNameandImage{
-    align-items:center
+    list-style-type: none;
 }

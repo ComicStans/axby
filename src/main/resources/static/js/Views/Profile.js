@@ -8,9 +8,10 @@ export default function Profile(props) {
            <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div id="profileNameandImage">
+                            <!--      username and profile picture not aligning!!!!              -->
+                        <div id="profileNameandImage" class="username">
                             <!--     AUTO GENERATED USERNAME OF NAVIGATED PROFILE ---WORKING        -->
-                            <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
+                            ${props.user.username}
                             <!--      NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
                             <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                             <br>
@@ -67,11 +68,12 @@ export default function Profile(props) {
                         </div>
                         <br>
                         <h2>About Me</h2>
+                            <!--         EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
                         <div id="userAbout">
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
                                 <p id="aboutMe">
-                                    <input class="aboutMe" name="aboutMe" value="${props.user.aboutUserText}" type="text"/><br>
+                                    ${props.user.aboutUserText}
                                 </p>
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
