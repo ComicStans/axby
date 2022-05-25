@@ -1,5 +1,4 @@
 import Home from "./Views/Home.js";
-import MessageBoards from "./Views/MessageBoards.js";
 import About from "./Views/About.js";
 import Error404 from "./Views/Error404.js";
 import Loading from "./Views/Loading.js";
@@ -7,7 +6,6 @@ import Login from "./Views/Login.js";
 import LoginEvent from "./auth.js";
 import Register from "./Views/Register.js"
 // import {RegisterEvent} from "./Views/Register.js";
-import {PostEvents} from "./Views/MessageBoards.js";
 import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
@@ -16,8 +14,11 @@ import Friends from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
+import MessageBoards, {MessageBoardEvents} from "./Views/MessageBoards.js";
 import BoardView, {BoardEvents} from "./Views/BoardView.js";
-import TopicView from "./Views/TopicView.js";
+
+
+
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -58,11 +59,11 @@ export default function router(URI) {
         '/messageBoards': {
             returnView: MessageBoards,
             state: {
-                posts: '/api/posts'
+                posts: '/api/boards'
             },
-            uri: '/posts',
-            title: 'All Posts',
-            viewEvent: PostEvents
+            uri: '/boards',
+            title: 'All Boards',
+            viewEvent: MessageBoardEvents
         },
         '/about': {
             returnView: About,
@@ -90,7 +91,9 @@ export default function router(URI) {
         },
         '/profile': {
             returnView: Profile,
-            state: {},
+            state: {
+                user: '/api/users/me'
+            },
             uri: '/profile',
             title: "Profile",
             viewEvent: ProfileEvents
@@ -100,27 +103,45 @@ export default function router(URI) {
              state: {},
              uri: '/friends',
              title: "Friends",
-        
+
          },
         '/boardView': {
             returnView: BoardView,
             state: {
-                posts: '/api/boards'
-            },
-            uri: '/boards',
-            title: 'Game Board',
-            viewEvent: BoardEvents
-        },
-        '/topicView': {
-            returnView: TopicView,
-            state: {
                 posts: '/api/posts'
             },
             uri: '/posts',
-            title: 'All Posts',
-            viewEvent: PostEvents
-        }
+            title: 'Game Boards',
+            viewEvent: BoardEvents
+        },
+        '/userProfile': {
+            returnView: Profile,
+            state: {
+                userProfile: '/api/users/username?username=' + location.href.split('=')[1]
+            },
+            uri: '/profile',
+            title: "Profile",
+            viewEvent: ProfileEvents
+        },
+
     }
 
-    return routes[URI];
+    let piecesOfURI = URI.split("/");
+    for (const key in routes) {
+        if (key === URI) {
+            return routes[URI];
+        } else if (key.includes(`/${piecesOfURI[1]}`)) {
+            let stateBase = piecesOfURI[1];
+            let pieceOfState = "";
+            for (let i = 0; i < piecesOfURI.length; i++) {
+                if (i > 1) {
+                    pieceOfState += `/${piecesOfURI[i]}`;
+                }
+            }
+            routes[`/${piecesOfURI[1]}`].state[stateBase] = `${routes[`/${piecesOfURI[1]}`].state[stateBase]}${pieceOfState}`
+            console.log(routes[`/${piecesOfURI[1]}`])
+            return routes[`/${piecesOfURI[1]}`]
+        }
+    }
 }
+

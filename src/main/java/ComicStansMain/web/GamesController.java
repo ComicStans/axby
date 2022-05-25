@@ -3,6 +3,7 @@ package ComicStansMain.web;
 
 import ComicStansMain.data.Game;
 import ComicStansMain.data.GamesRepository;
+import ComicStansMain.data.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "api/games", headers = "Accept=application/json")
 public class GamesController {
     private final GamesRepository gamesRepository;
+    private final UsersRepository usersRepository;
 
     @GetMapping
     private Collection<Game> getAll(){
@@ -35,6 +37,7 @@ public class GamesController {
 
     @PostMapping
     private void createGame(@RequestBody Game game) {
+        game.setUser(usersRepository.getById(game.getUser().getId()));
         game.setReleaseDate(LocalDate.now());
         gamesRepository.save(game);
     }

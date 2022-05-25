@@ -32,7 +32,7 @@ public class Board {
 
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
-    @JsonIgnoreProperties({"boards","posts"})
+    @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated"})
     private User creator;
 
     @Column(name = "date_created")

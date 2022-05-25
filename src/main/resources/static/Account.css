@@ -2,16 +2,17 @@
     display: block;
 }
 
-.img-circle {
-    border-radius: 100%;
-    border: 4px solid;
-    margin-left: 1em;
-}
+/*.img-circle {*/
+/*    border-radius: 100%;*/
+/*    border: 4px solid;*/
+/*    margin-left: 1em;*/
+/*}*/
 label {
     position: inherit;
-    /*display: block;*/
     margin-top: 1em;
     display: flex;
+    color: #4fc5aa;
+    text-shadow: #666666;
 }
 #change-password-button {
     margin-top: 1em;
@@ -40,9 +41,12 @@ p.profile-info {
 }
 
 #register-form, .account-page, #change-password-button{
-    width: 20%;
+    width: 50%;
     margin-left: .5em;
 }
-h3 {
-    margin-left: 0.5em;
+/*h3 {*/
+/*    margin-left: 0.5em;*/
+/*}*/
+#change-password-button {
+    margin-bottom: 10em;
 }

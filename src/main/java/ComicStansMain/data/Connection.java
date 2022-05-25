@@ -20,12 +20,13 @@ public class Connection {
     private long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "guilds", "boards", "posts", "boardsAdministered"})
     @JoinColumn(name = "requester_id", nullable = false)
     private User requester;
 
     @ManyToOne
     @JoinColumn(name = "recipient_id", nullable = false)
+    @JsonIgnoreProperties({"guilds", "boards", "posts", "boardsAdministered"})
     private User recipient;
 
     @Column(name="date_requested", nullable = false)

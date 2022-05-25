@@ -51,6 +51,13 @@ public class UsersController {
         return ur.findByEmail(email);
     }
 
+    @PutMapping("aboutme")
+    private void updateAboutMe(@RequestBody User user, OAuth2Authentication auth) {
+        User yaboi = ur.findByEmail(auth.getName());
+        yaboi.setAboutUserText(user.getAboutUserText());
+        ur.save(yaboi);
+    }
+
     @PostMapping
     private void createUser(@RequestBody User newUser) {
         newUser.setAccessLevel(User.Role.USER);
