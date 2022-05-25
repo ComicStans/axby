@@ -8,11 +8,11 @@ export default function Profile(props) {
            <div class="container">
                 <div class="row">
                     <div class="col">
-                            <!--      username and profile picture not aligning!!!!              -->
+                            <!--  TODO:    USERNAME AND PROFILENAME NOT ALIGNING!!!!              -->
                         <div id="profileNameandImage" class="username">
-                            <!--     AUTO GENERATED USERNAME OF NAVIGATED PROFILE ---WORKING        -->
+                            <!--     AUTO GENERATED USERNAME OF LOGGED IN PROFILE ---WORKING        -->
                             ${props.user.username}
-                            <!--      NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
+                            <!-- TODO:     NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
                             <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                             <br>
                         </div>
@@ -55,8 +55,8 @@ export default function Profile(props) {
                                 </button>
                               </div>
                               <div class="modal-body"> 
-                                Are you sure you want to block " " ?  
-                                <!--  //need to insert users name here ^^^^ -->
+                                Are you sure you want to block ${props.user.username} ?  
+       <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ AND THE DISPLAY NAME BEING GENERTAED RIGHT NOW IS THE NAME OF THE CURRENT LOGGED-IN USER-->
                                 You will no longer see their profile, boards or receive messages from them.
                               </div>
                               <div class="modal-footer">
@@ -68,7 +68,7 @@ export default function Profile(props) {
                         </div>
                         <br>
                         <h2>About Me</h2>
-                            <!--         EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
+                            <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
                         <div id="userAbout">
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
@@ -77,7 +77,7 @@ export default function Profile(props) {
                                 </p>
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
-<!--                        <h2>Friend List</h2>-->
+                    <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
                             <ul class="friendList" >
                                 <li id="list-item1"> <a href="#">Bob</a></li>
                                 <li id="list-item2"> <a href="#">Micah</a></li>
@@ -87,6 +87,7 @@ export default function Profile(props) {
                                 <li id="list-item6"> <a href="#">David</a></li> 
                             </ul>
                         <h2>Wish List</h2>
+                        <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
                             <ul class="wishList" >
                                 <li id="list-item1"> <a href="#">Sonic</a></li>
                                 <li id="list-item2"> <a href="#">Super Mario</a></li>
@@ -99,17 +100,18 @@ export default function Profile(props) {
                    
                     <div class="col" id="myCollection">
                          <h1>My Collection</h1>
-                         <!-- Small button groups (default and split) -->
+                         <!-- TODO: THIS DROPDOWN BUTTON SHOULD ORGANIZE YOUR GAMES BASED ON OPTION YOU CHOOSE -->
                             <div class="btn-group dropdown">
                               <button class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuLink" type="button" data-toggle="dropdown" aria-expanded="false">
-                                Game Category
+                                SORT
                               </button>
                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">Genre</a>
+                                <a class="dropdown-item" href="#">Alphabetical</a>
+                                <a class="dropdown-item" href="#">Reverse Alphabetical</a>
                               </div>
-                            </div>                            
+                            </div>  
+                         <!--      TODO:         THIS AREA NEEDS TO BE CREEATED TO DISPLAY YOUR GAMES                                       -->
                     </div>
                 </div>
             </div>
@@ -131,7 +133,7 @@ export function ProfileEvents() {
         })
     })
 }
-
+//   THIS CODE IS NOT FINISHED YET
 export function friendRequest() {
     $(document).ready(function () {
         const request = {
