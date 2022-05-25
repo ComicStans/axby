@@ -46,6 +46,6 @@ public class Game {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties("games")
+    @JsonIgnoreProperties({"games", "guilds", "sensitiveContent", "guildBoardsAdministered", "preferences", "reports", "boards", "posts", "guildsCreated", "boardsAdministered"})
     private User user;
 }

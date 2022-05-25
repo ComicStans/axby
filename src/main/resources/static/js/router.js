@@ -113,9 +113,35 @@ export default function router(URI) {
             uri: '/posts',
             title: 'Game Boards',
             viewEvent: BoardEvents
-        }
+        },
+        '/userProfile': {
+            returnView: Profile,
+            state: {
+                userProfile: '/api/users/username?username=' + location.href.split('=')[1]
+            },
+            uri: '/profile',
+            title: "Profile",
+            viewEvent: ProfileEvents
+        },
 
     }
 
-    return routes[URI];
+    let piecesOfURI = URI.split("/");
+    for (const key in routes) {
+        if (key === URI) {
+            return routes[URI];
+        } else if (key.includes(`/${piecesOfURI[1]}`)) {
+            let stateBase = piecesOfURI[1];
+            let pieceOfState = "";
+            for (let i = 0; i < piecesOfURI.length; i++) {
+                if (i > 1) {
+                    pieceOfState += `/${piecesOfURI[i]}`;
+                }
+            }
+            routes[`/${piecesOfURI[1]}`].state[stateBase] = `${routes[`/${piecesOfURI[1]}`].state[stateBase]}${pieceOfState}`
+            console.log(routes[`/${piecesOfURI[1]}`])
+            return routes[`/${piecesOfURI[1]}`]
+        }
+    }
 }
+
