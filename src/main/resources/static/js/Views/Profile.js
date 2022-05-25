@@ -77,15 +77,15 @@ export default function Profile(props) {
                                 </p>
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
+
                     <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-                            <ul class="friendList" >
-                                <li id="list-item1"> <a href="#">Bob</a></li>
-                                <li id="list-item2"> <a href="#">Micah</a></li>
-                                <li id="list-item3"> <a href="#">Rachel</a></li>
-                                <li id="list-item4"> <a href="#">Jenn</a></li>
-                                <li id="list-item5"> <a href="#">Wesley</a></li>
-                                <li id="list-item6"> <a href="#">David</a></li> 
-                            </ul>
+                            ${props.connection.map(connection => {
+                                return connection.dateAccepted != null ?(
+                                    `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+                                :("")}).join('')
+                                
+                            }
+
                         <h2>Wish List</h2>
                         <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
                             <ul class="wishList" >
