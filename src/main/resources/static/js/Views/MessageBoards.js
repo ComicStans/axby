@@ -60,7 +60,7 @@ export default function MessageBoards(props) {
              ${props.boards.map(board => {
 
         return `
-                 <li class="list-group-item"><h1><a class="topic" id="topic-${board.id}" href="/boardView" data-link>${board.name}</a><span id="post-description-${board.id}"> <span> - </span> ${board.description}</span>
+                 <li class="list-group-item"><h1><span class="topic" id="topic-${board.id}" data-link>${board.name}</span><span id="post-description-${board.id}"> <span> - </span> ${board.description}</span>
                  <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${board.id}" data-id="${board.id}"><i class="fas fa-edit"></i></button>
                  <button type="button" class="btn delete-topic-button" id="delete-post-${board.id}" data-id="${board.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
  
@@ -218,3 +218,28 @@ function createDeleteTopicListeners() {
 
     });
 }
+
+function viewBoardPost() {
+    $('.topic').click(function () {
+        var boardId = $(this).id
+        boardId = boardId.replace("topic-", "")
+        const boardPost = {
+            boardId: {
+                id: parseInt(boardId)
+            }
+        }
+        const request = {
+            body: JSON.stringify(boardPost),
+            headers: getHeaders()
+        }
+
+        fetch(`http://localhost:8081/api/posts/${boardId}`, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/boardView")
+            }).catch(error => {
+            console.log(error);
+            createView("/boardVIew");
+        })
+
+    }
