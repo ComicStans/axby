@@ -8,9 +8,10 @@ export default function Profile(props) {
            <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div id="profileNameandImage">
+                            <!--      username and profile picture not aligning!!!!              -->
+                        <div id="profileNameandImage" class="username">
                             <!--     AUTO GENERATED USERNAME OF NAVIGATED PROFILE ---WORKING        -->
-                            <input class="username" disabled id="username" name="username" value="${props.user.username}" type="text"/><br>
+                            ${props.user.username}
                             <!--      NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
                             <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                             <br>
@@ -53,8 +54,9 @@ export default function Profile(props) {
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <div class="modal-body">
-                                Are you sure you want to block " " ?
+                              <div class="modal-body"> 
+                                Are you sure you want to block " " ?  
+                                <!--  //need to insert users name here ^^^^ -->
                                 You will no longer see their profile, boards or receive messages from them.
                               </div>
                               <div class="modal-footer">
@@ -66,25 +68,13 @@ export default function Profile(props) {
                         </div>
                         <br>
                         <h2>About Me</h2>
+                            <!--         EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
                         <div id="userAbout">
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
-                            <p id="aboutMe">
-                           
-                                I have a pen<br>
-                                I have an apple<br>
-                                Ah<br>
-                                Apple pen<br>
-                                I have a pen<br>
-                                I have pineapple<br>
-                                Ah<br>
-                                Pineapple pen<br>
-                                Apple pen<br>
-                                Pineapple pen<br>
-                                Ah<br>
-                                Pen Pineapple Apple Pen<br>
-                                Pen Pineapple Apple Pen
-                            </p>
+                                <p id="aboutMe">
+                                    ${props.user.aboutUserText}
+                                </p>
                         </div>
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 <!--                        <h2>Friend List</h2>-->
@@ -144,9 +134,18 @@ export function ProfileEvents() {
 
 export function friendRequest() {
     $(document).ready(function () {
-        const request = {};
+        const request = {
+            //requester id
+        };
         $('#friendRequest').click(function () {
             request.method = "POST";
+            //headers: {"Content-Type": "application/json"},
+            //body: JSON.stringify(newUser
         })
+        fetch("http://localhost:8081/api/friends", request) //location to send data
+            .then(response => {
+                console.log(response.status);
+                //what do I put here? ("/");
+            })
     });
 }
