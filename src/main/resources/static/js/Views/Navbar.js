@@ -37,7 +37,6 @@ export default function Navbar(props) {
           <li>
                 <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
           </li>
-
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           More
