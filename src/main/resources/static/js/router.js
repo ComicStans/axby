@@ -112,8 +112,19 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'Game Boards',
+
             viewEvent: BoardViewEvents
-        }
+        },
+        '/userProfile': {
+            returnView: Profile,
+            state: {
+                userProfile: '/api/users/username?username=' + location.href.split('=')[1]
+            },
+            uri: '/profile',
+            title: "Profile",
+            viewEvent: ProfileEvents
+        },
+
 
     }
 
@@ -135,3 +146,4 @@ export default function router(URI) {
         }
     }
 }
+

@@ -22,20 +22,21 @@ public class PostsController {
         return postsRepository.findAll();
     }
 
-    @GetMapping("postsByBoard")
-    private Collection<Post> getAllPostsByBoardId() {
+    @GetMapping("board/{id}")
+    private Collection<Post> getAllPostsByBoardId(@PathVariable Long id) {
 //        System.out.println("This ID for that Board is ");
-        return postsRepository.findAllByBoardId(boardsRepository.getById(1L));
+        Board board = boardsRepository.findById(id).get();
+        return board.getPosts();
     }
     @GetMapping("postsByAuthor")
     private Collection<Post> getAllPostsByUserId() {
         return postsRepository.findAllByAuthorId(usersRepository.getById(1L));
     }
 
-    @PostMapping
-    private void createPost(@RequestBody Post newPost) {
+    @PostMapping("board/{id}")
+    private void createPost(@RequestBody Post newPost, @PathVariable Long id) {
         User author = usersRepository.findByUsername("wesleyb");
-        newPost.setBoardId(boardsRepository.getById(1L));
+        newPost.setBoardId(boardsRepository.findById(id).get());
         newPost.setAuthorId(author);
         newPost.setPostTime(LocalDate.now());
 //        newPost.setAuthorId(author.getId());

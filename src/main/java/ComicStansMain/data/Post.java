@@ -40,7 +40,7 @@ public class Post {
 //One Board can have many Posts.
     @ManyToOne
     @JoinColumn(name = "board_id", nullable = false)
-    @JsonIgnoreProperties("posts")
+    @JsonIgnoreProperties({"posts", "boardID", "Author"})
     private Board boardId;
 
 //One User can be the author of many Posts.
