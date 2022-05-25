@@ -23,6 +23,10 @@ export default function Register(props) {
 <!--        </button>-->
 <!--      </div>-->
 <!--      <div class="modal-body">-->
+<!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT USER WAS REGISTERED -->
+<!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT PASSWORD AND USERNAME ARE OK -->
+<!--TODO: NEED TO HAVE MORE REQUIRED INFO TO REGISTER (STARS NEXT TO REQUIRED FIELDS) -->
+
                          <h1>Register</h1>
                          <form id="register-form" style="margin-left: 1em; margin-right: 1em; width: 70%">
                             <label for="newUsername">Username</label>

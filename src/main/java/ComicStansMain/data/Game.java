@@ -15,10 +15,15 @@ import java.util.Collection;
 @Table(name = "axby_games")
 
 public class Game {
+    public enum Status {PLAYED, WANNAPLAY}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private Status type;
 
     @Column(name = "art")
     private String art;
