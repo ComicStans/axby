@@ -88,14 +88,11 @@ export default function Profile(props) {
 
                         <h2>Wish List</h2>
                         <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            <ul class="wishList" >
-                                <li id="list-item1"> <a href="#">Sonic</a></li>
-                                <li id="list-item2"> <a href="#">Super Mario</a></li>
-                                <li id="list-item3"> <a href="#">Aladdin</a></li>
-                                <li id="list-item4"> <a href="#">Duck hunter</a></li>
-                                <li id="list-item5"> <a href="#">Street Fighter</a></li>
-                                <li id="list-item6"> <a href="#">Lion King</a></li>
-                            </ul>
+                            ${props.game.map(game => {
+                                return game.status === WANNAPLAY ? (
+                                    `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
+                                :("")}).join('')
+                            }
                     </div>
                    
                     <div class="col" id="myCollection">
