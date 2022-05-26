@@ -39,7 +39,7 @@ public class Board {
     private LocalDate dateCreated;
 
     @OneToMany(mappedBy = "boardId")
-    @JsonIgnoreProperties("boardId")
+    @JsonIgnoreProperties({"boardId", "authorId"})
     private Collection<Post> posts;
 
 //One Board can have many admin Users; each User can administer many Boards.

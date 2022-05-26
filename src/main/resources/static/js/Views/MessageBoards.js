@@ -5,6 +5,7 @@ import {getHeaders} from "../auth.js";
 const URL = 'http://localhost:8081/api/boards';
 
 export default function MessageBoards(props) {
+    console.log(props);
     return `
 
     <main>
@@ -56,12 +57,12 @@ export default function MessageBoards(props) {
            <ul class="list-group list-group-flush">
             <div id="topic-container">
             
-             ${props.posts.map(post => {
+             ${props.boards.map(board => {
 
         return `
-                 <li class="list-group-item"><h1><a class="topic" id="topic-${post.id}" href="/boardView" data-link>${post.name}</a><span id="post-description-${post.id}"> <span> - </span> ${post.description}</span>
-                 <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
-                 <button type="button" class="btn delete-topic-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
+                 <li class="list-group-item"><h1><span class="topic" id="topic-${board.id}" data-link>${board.name}</span><span id="post-description-${board.id}"> <span> - </span> ${board.description}</span>
+                 <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${board.id}" data-id="${board.id}"><i class="fas fa-edit"></i></button>
+                 <button type="button" class="btn delete-topic-button" id="delete-post-${board.id}" data-id="${board.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
  
 <!-- EDIT A BOARD TITLE AND DESCRIPTION MODAL                ------------------------------------------------------------------>
                  <div class="modal fade" id="edit-topic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -75,10 +76,10 @@ export default function MessageBoards(props) {
                           </div>
                           <div class="modal-body">
                             <form>
-                            <input type="hidden" value="${post.id}" id="edit-id">
+                            <input type="hidden" value="${board.id}" id="edit-id">
                               <div class="form-group">
-                                <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title ${post.name}</label>
-                                <input type="text" class="form-control" id="EditTopicName" value="${post.name}" data-link>
+                                <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title ${board.name}</label>
+                                <input type="text" class="form-control" id="EditTopicName" value="${board.name}" data-link>
                               </div>
                               <div class="form-group">
                                 <label for="EditDescription" class="col-form-label">Description:</label>
@@ -121,6 +122,7 @@ export function MessageBoardEvents() {
     createDeleteTopicListeners();
     createEditTopicListener();
     createSaveChangesListener();
+    viewBoardPost();
 
 }
 
@@ -216,4 +218,14 @@ function createDeleteTopicListeners() {
         });
 
     });
+}
+
+function viewBoardPost() {
+    $('.topic').click(function () {
+        var boardId = this.id
+        console.log(boardId)
+        boardId = boardId.replace("topic-", "")
+        console.log(boardId)
+        createView(`/boardView/api/boards/${boardId}`)
+    })
 }
