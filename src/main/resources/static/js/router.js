@@ -17,7 +17,7 @@ import Friends from "./Views/Friends.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
 import MessageBoards, {MessageBoardEvents} from "./Views/MessageBoards.js";
-import BoardView, {BoardEvents} from "./Views/BoardView.js";
+import BoardView, {BoardViewEvents} from "./Views/BoardView.js";
 
 
 
@@ -28,6 +28,8 @@ import BoardView, {BoardEvents} from "./Views/BoardView.js";
  * @returns {*}
  */
 export default function router(URI) {
+
+    console.log(URI)
     const routes = {
         '/': {
             returnView: Home,
@@ -68,7 +70,7 @@ export default function router(URI) {
         '/messageBoards': {
             returnView: MessageBoards,
             state: {
-                posts: '/api/boards'
+                boards: '/api/boards'
             },
             uri: '/boards',
             title: 'All Boards',
@@ -101,7 +103,8 @@ export default function router(URI) {
         '/profile': {
             returnView: Profile,
             state: {
-                user: '/api/users/me'
+                user: '/api/users/me',
+                connection: '/api/users/friends',
             },
             uri: '/profile',
             title: "Profile",
@@ -116,38 +119,47 @@ export default function router(URI) {
         '/boardView': {
             returnView: BoardView,
             state: {
-                posts: '/api/posts'
+                boardView: '',
+                boards: '/api/boards'
             },
             uri: '/posts',
             title: 'Game Boards',
-            viewEvent: BoardEvents
+
+            viewEvent: BoardViewEvents
         },
         '/userProfile': {
             returnView: Profile,
             state: {
-                userProfile: '/api/users/username?username=' + location.href.split('=')[1]
+                user: '/api/users/username?username=' + location.href.split('=')[1]
             },
-            uri: '/profile',
+            uri: '/userProfile',
             title: "Profile",
             viewEvent: ProfileEvents
         },
+
 
     }
 
     let piecesOfURI = URI.split("/");
     for (const key in routes) {
         if (key === URI) {
+            sessionStorage.clear()
+            sessionStorage.setItem("key", "Tom and jerry" )
             return routes[URI];
         } else if (key.includes(`/${piecesOfURI[1]}`)) {
             let stateBase = piecesOfURI[1];
+            console.log(stateBase)
             let pieceOfState = "";
             for (let i = 0; i < piecesOfURI.length; i++) {
                 if (i > 1) {
                     pieceOfState += `/${piecesOfURI[i]}`;
                 }
             }
+            console.log(pieceOfState)
             routes[`/${piecesOfURI[1]}`].state[stateBase] = `${routes[`/${piecesOfURI[1]}`].state[stateBase]}${pieceOfState}`
             console.log(routes[`/${piecesOfURI[1]}`])
+            sessionStorage.clear()
+            sessionStorage.setItem("key", "Tom and jerry" )
             return routes[`/${piecesOfURI[1]}`]
         }
     }

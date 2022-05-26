@@ -35,6 +35,7 @@ export default function Navbar(props) {
           <li>
                 <a class="nav-item" href="/friends" data-link>Friends</a>
           </li>
+
           <li>`;
     if (loggedIn) {
         html += `<a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>`;
@@ -54,6 +55,7 @@ export default function Navbar(props) {
                 <a class="dropdown-item nav-item" href="/profile" data-link>Profile</a></a>
             <a class="dropdown-item nav-item" href="/about" data-link>About</a>
             <a class="dropdown-item nav-item" href="/account" data-link>Account</a>
+
         </div>
     </li>
         <li><!-- Button trigger modal -->

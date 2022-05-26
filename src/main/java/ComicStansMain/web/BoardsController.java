@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 @CrossOrigin
 @AllArgsConstructor
@@ -23,6 +24,11 @@ public class BoardsController {
     @GetMapping("creator")
     private Collection<Board> findByCreator() {
         return boardsRepository.findAllByCreator(usersRepository.findByUsername("wesleyb"));
+    }
+
+    @GetMapping("{id}")
+    private Optional<Board> findByBoard(@PathVariable Long id) {
+        return boardsRepository.findById(id);
     }
 
     @PostMapping
