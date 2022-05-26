@@ -61,3 +61,12 @@ function setTokens(responseData) {
         console.log("Refresh token set")
     }
 }
+
+export function isLoggedIn() {
+    if (sessionStorage.getItem("access_token")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+

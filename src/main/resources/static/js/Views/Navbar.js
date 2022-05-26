@@ -1,11 +1,15 @@
 import Register from "./Register.js";
 import Login from "./Login.js";
+import logout from "./Logout.js";
+import {logoutEvents} from "./Logout.js";
+import {isLoggedIn} from "../auth.js";
 
 // TODO: WE NEED TO HAVE NAVBAR DISPLAY DIFFERENTLY BASED ON IF OUT ARE SIGNED IN OR NOT
 // TODO: SIGN OUT OPTION
 export default function Navbar(props) {
     console.log(props);
-    return `
+    const loggedIn = isLoggedIn();
+    let html = `
 <header>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
@@ -21,7 +25,7 @@ export default function Navbar(props) {
           <li>
           <a class="nav-item active" href="/" data-link>Home</a>
           </li>
-          <li >
+          <li>
                 <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
           </li>
           <li>
@@ -31,33 +35,40 @@ export default function Navbar(props) {
           <li>
                 <a class="nav-item" href="/friends" data-link>Friends</a>
           </li>
-                <li>
-                <a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>
-          </li>
-          <li>
-                <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
-          </li>
+          <li>`;
+    if (loggedIn) {
+        html += `<a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>`;
+    } else {
+        html += `<a class="nav-item" id="logout-link" data-toggle="modal" data-target="#login" data-link href="/logout" data-link>Logout</a>`;
+    }
+    html += `</li>
+        <li>
+            <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
+        </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          More
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item nav-item" href="/profile" data-link>Profile</a></a>
-          <a class="dropdown-item nav-item" href="/about" data-link>About</a>
-          <a class="dropdown-item nav-item" href="/account" data-link>Account</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item nav-item" href="/profile" data-link>Profile</a></a>
+            <a class="dropdown-item nav-item" href="/about" data-link>About</a>
+            <a class="dropdown-item nav-item" href="/account" data-link>Account</a>
         </div>
-      </li>
-      <li><!-- Button trigger modal -->
+    </li>
+        <li><!-- Button trigger modal -->
 
-<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
-<!--  Register-->
-<!--</button></li>-->
-       </ul>
-  </div>
-</nav>
-</header>
-    `;
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+            <!--  Register-->
+            <!--</button></li>-->
+        </ul>
+    </div>
+    </nav>
+    </header>
+        `;
+    return html;
+
+
 }
 // ${Register(props)}
 //
