@@ -118,9 +118,9 @@ export default function router(URI) {
         '/userProfile': {
             returnView: Profile,
             state: {
-                userProfile: '/api/users/username?username=' + location.href.split('=')[1]
+                user: '/api/users/username?username=' + location.href.split('=')[1]
             },
-            uri: '/profile',
+            uri: '/userProfile',
             title: "Profile",
             viewEvent: ProfileEvents
         },
