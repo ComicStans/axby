@@ -14,8 +14,13 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 @Table(name = "axby_guilds")
-public class Guild {
 
+//Many-to-many: Each Guild can have many Users as members, and each User can belong to many Guilds.
+//One-to-many: There is also a relationship between Users (as Creator) and Guilds in that one User can create
+//many Guilds.
+//One-to-one: Each Guild has exactly one associated GuildBoard.
+
+public class Guild {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

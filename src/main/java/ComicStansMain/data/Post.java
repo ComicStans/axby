@@ -14,10 +14,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "axby_posts")
+
+//Each Post is associated with one Board and one User.
+//(This feature is temporarily disabled): Posts can be Original or Reply;
+//if Reply, the Post has a post_replied_to value.
+
 public class Post {
 
-    //Each Post is associated with one board and one user.
-    //Posts can be Original or Reply; if Reply, the Post has a post_replied_to value.
     public enum postType {ORIGINAL, REPLY}
 
     @Id

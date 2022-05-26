@@ -14,6 +14,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "axby_user_preference")
 
+//This class represents User settings. Users can select different types of content that they
+//can filter out from viewing, based on age rating or content rating as enumerated in igdb.com's API.
+//There is a one-to-many relationship with Users: one User, many Preferences.
+
 public class Preference {
 
     @Id
