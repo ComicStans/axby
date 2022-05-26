@@ -122,6 +122,7 @@ export function MessageBoardEvents() {
     createDeleteTopicListeners();
     createEditTopicListener();
     createSaveChangesListener();
+    viewBoardPost();
 
 }
 
@@ -221,25 +222,10 @@ function createDeleteTopicListeners() {
 
 function viewBoardPost() {
     $('.topic').click(function () {
-        var boardId = $(this).id
+        var boardId = this.id
+        console.log(boardId)
         boardId = boardId.replace("topic-", "")
-        const boardPost = {
-            boardId: {
-                id: parseInt(boardId)
-            }
-        }
-        const request = {
-            body: JSON.stringify(boardPost),
-            headers: getHeaders()
-        }
-
-        fetch(`http://localhost:8081/api/posts/${boardId}`, request)
-            .then(res => {
-                console.log(res.status);
-                createView("/boardView")
-            }).catch(error => {
-            console.log(error);
-            createView("/boardVIew");
-        })
-
-    }
+        console.log(boardId)
+        createView(`/boardView/api/boards/${boardId}`)
+    })
+}

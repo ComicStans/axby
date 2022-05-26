@@ -1,19 +1,21 @@
 import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
 
-const URL = 'http://localhost:8081/api/posts';
+const URL = 'http://localhost:8081/api/posts/board/';
 
 export default function BoardView(props) {
-
+    // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
     console.log(props)
 
     return `
     <div class="container">
         <div class="row">
             <div class="col">
-        ${props.posts.map(post => {
+        ${props.boardView.posts.map(post => {
               return `
-                <p>${post.postText}</p>
+                <div >
+                    <p class="posts" id="post-${post.boardId}">${post.postText}</p>
+                </div>
               `
           }).join('')
     }
@@ -30,7 +32,7 @@ export default function BoardView(props) {
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:20px;">
-                                    <input  type="submit" class="saveComment" value="Save Post"/>
+                                    <input  type="submit" class="saveComment" id="${props.boardView.id}" value="Save Post">
                                     <input type="submit" value="Cancel" class="create-post-cancel">
                                 </div>
                             </form>
@@ -55,7 +57,9 @@ export function BoardViewEvents() {
 function createAddPostListener() {
     $(".saveComment").click(function () {
         const postText = $("#post-textBox").val();
+        const boardId = this.id
         const newPost = {
+
             postText
         }
 
@@ -65,13 +69,13 @@ function createAddPostListener() {
             body: JSON.stringify(newPost)
         }
 
-        fetch(URL, request)
+        fetch(URL + boardId, request)
             .then(res => {
                 console.log(res.status);
-                createView("/boardView")
+                createView(`/boardView/api/boards/${boardId}`)
             }).catch(error => {
             console.log(error);
-            createView("/boardView");
+            createView(`/boardView/api/boards/${boardId}`);
         });
     })
 }

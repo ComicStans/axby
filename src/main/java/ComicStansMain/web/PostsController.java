@@ -2,6 +2,7 @@ package ComicStansMain.web;
 
 import ComicStansMain.data.*;
 import lombok.AllArgsConstructor;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -34,8 +35,8 @@ public class PostsController {
     }
 
     @PostMapping("board/{id}")
-    private void createPost(@RequestBody Post newPost, @PathVariable Long id) {
-        User author = usersRepository.findByUsername("wesleyb");
+    private void createPost(@RequestBody Post newPost, @PathVariable Long id, OAuth2Authentication auth) {
+        User author = usersRepository.findByEmail(auth.getName());
         newPost.setBoardId(boardsRepository.findById(id).get());
         newPost.setAuthorId(author);
         newPost.setPostTime(LocalDate.now());

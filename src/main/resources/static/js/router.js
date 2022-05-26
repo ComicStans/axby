@@ -26,6 +26,8 @@ import BoardView, {BoardViewEvents} from "./Views/BoardView.js";
  * @returns {*}
  */
 export default function router(URI) {
+
+    console.log(URI)
     const routes = {
         '/': {
             returnView: Home,
@@ -108,7 +110,8 @@ export default function router(URI) {
         '/boardView': {
             returnView: BoardView,
             state: {
-                posts: '/api/posts'
+                boardView: '',
+                boards: '/api/boards'
             },
             uri: '/posts',
             title: 'Game Boards',
@@ -131,17 +134,23 @@ export default function router(URI) {
     let piecesOfURI = URI.split("/");
     for (const key in routes) {
         if (key === URI) {
+            sessionStorage.clear()
+            sessionStorage.setItem("key", "Tom and jerry" )
             return routes[URI];
         } else if (key.includes(`/${piecesOfURI[1]}`)) {
             let stateBase = piecesOfURI[1];
+            console.log(stateBase)
             let pieceOfState = "";
             for (let i = 0; i < piecesOfURI.length; i++) {
                 if (i > 1) {
                     pieceOfState += `/${piecesOfURI[i]}`;
                 }
             }
+            console.log(pieceOfState)
             routes[`/${piecesOfURI[1]}`].state[stateBase] = `${routes[`/${piecesOfURI[1]}`].state[stateBase]}${pieceOfState}`
             console.log(routes[`/${piecesOfURI[1]}`])
+            sessionStorage.clear()
+            sessionStorage.setItem("key", "Tom and jerry" )
             return routes[`/${piecesOfURI[1]}`]
         }
     }
