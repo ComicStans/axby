@@ -161,6 +161,7 @@ function createEditTopicListener() {
     $(".edit-topic-button").click(function () {
         const id = $(this).data("id");
         const oldName = $(`#topic-${id}`).text();
+        $("#edit-id").val(id)
         console.log(oldName);
         const oldDescription = $(`#post-description-${id}`).text();
         // $("#add-topic-id").val(id);
