@@ -11,12 +11,48 @@ export default function BoardView(props) {
     <div class="container">
         <div class="row">
             <div class="col">
-        ${props.boardView.posts.map(post => {
-              return `
-                <div >
-                    <p class="posts" id="post-${post.boardId}">${post.postText}</p>
+            
+             <div class="card" style="width: 69em;">
+    <div class="card-header">
+        TOPIC
+    </div>
+    <ul class="list-group list-group-flush">
+        <div id="posts-container">
+
+            ${props.boardView.posts.map(post => {
+        return `
+
+            <li class="list-group-item"><h1><span class="post" id="post-${post.boardId}" data-link>${post.postText}</span>
+                <button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
+
+            <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
+            <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="examplePostModalLabel">Edit Post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="hidden" value="${post.id}" id="edit-post-id">
+                                <div class="form-group">
+                                    <label for="EditPostText" class="col-form-label">Post:</label>
+                                    <textarea class="form-control" id="EditPostText"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="saveChanges" data-dismiss="modal">Save Changes</button>
+                        </div>
+                    </div>
                 </div>
-              `
+            </div>
+       `
           }).join('')
     }
         <li class="list-group-item">
@@ -51,6 +87,8 @@ export default function BoardView(props) {
 
 export function BoardViewEvents() {
     createAddPostListener();
+    createEditPostListener();
+    createSavePostChangesListener();
 
 }
 
@@ -76,6 +114,45 @@ function createAddPostListener() {
             }).catch(error => {
             console.log(error);
             createView(`/boardView/api/boards/${boardId}`);
+        });
+    })
+}
+
+// Edit topic - not working yet ---------------->
+function createEditPostListener() {
+
+    $(".edit-post-button").click(function () {
+        const id = $(this).data("id");
+        const oldPostText = $(`#edit-post-${id}`).text();
+        $("#EditPostText").val(oldPostText);
+
+    });
+}
+
+
+function createSavePostChangesListener() {
+    $("#saveChanges").click(function () {
+        const postText = $('#EditPostText').val();
+        const id = $('#edit-post-id').val();
+
+
+        const savedChanges = {
+            postText
+        }
+
+        const request = {
+            method: "PUT",
+            headers: getHeaders(),
+            body: JSON.stringify(savedChanges)
+        }
+
+        fetch(URL , request)
+            .then(res => {
+                console.log(res.status);
+                createView(`/boardView`)
+            }).catch(error => {
+            console.log(error);
+            createView(`/boardView`);
         });
     })
 }

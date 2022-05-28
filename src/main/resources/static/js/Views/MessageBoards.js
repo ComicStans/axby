@@ -60,7 +60,7 @@ export default function MessageBoards(props) {
              ${props.boards.map(board => {
 
         return `
-                 <li class="list-group-item"><h1><span class="topic" id="topic-${board.id}" data-link>${board.name}</span><span id="post-description-${board.id}"> <span> - </span> ${board.description}</span>
+                 <li class="list-group-item"><h1><span class="topic" id="topic-${board.id}" data-link>${board.name}</span><span> - </span><span id="post-description-${board.id}">${board.description}</span>
                  <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${board.id}" data-id="${board.id}"><i class="fas fa-edit"></i></button>
                  <button type="button" class="btn delete-topic-button" id="delete-post-${board.id}" data-id="${board.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
  
@@ -78,8 +78,8 @@ export default function MessageBoards(props) {
                             <form>
                             <input type="hidden" value="${board.id}" id="edit-id">
                               <div class="form-group">
-                                <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title ${board.name}</label>
-                                <input type="text" class="form-control" id="EditTopicName" value="${board.name}" data-link>
+                                <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title</label>
+                                <input type="text" class="form-control" id="EditTopicName" data-link>
                               </div>
                               <div class="form-group">
                                 <label for="EditDescription" class="col-form-label">Description:</label>
