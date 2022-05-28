@@ -27,7 +27,7 @@ export default function Account(props) {
                 <input class="account-page" id="new-password" name="new-password" type="text" value=""/><br>
                 <button id="change-password-button" type="button">Change Password</button>
             </form>
-            
+           
             </body>
             ${props.users.posts.map(post => {
         return `

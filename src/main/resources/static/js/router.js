@@ -3,6 +3,8 @@ import About from "./Views/About.js";
 import Error404 from "./Views/Error404.js";
 import Loading from "./Views/Loading.js";
 import Login from "./Views/Login.js";
+import logout from "./Views/Logout.js";
+import {logoutEvents} from "./Views/Logout.js";
 import LoginEvent from "./auth.js";
 import Register from "./Views/Register.js"
 // import {RegisterEvent} from "./Views/Register.js";
@@ -41,6 +43,13 @@ export default function router(URI) {
             uri: '/login',
             title: "Login",
             viewEvent: LoginEvent
+        },
+        '/logout': {
+            returnView: logout,
+            state: {},
+            uri: '/',
+            title: "Logout",
+            viewEvent: logoutEvents
         },
         '/register': {
             returnView: Register,
@@ -94,7 +103,8 @@ export default function router(URI) {
         '/profile': {
             returnView: Profile,
             state: {
-                user: '/api/users/me'
+                user: '/api/users/me',
+                connection: '/api/users/friends',
             },
             uri: '/profile',
             title: "Profile",
@@ -105,7 +115,6 @@ export default function router(URI) {
              state: {},
              uri: '/friends',
              title: "Friends",
-
          },
         '/boardView': {
             returnView: BoardView,
@@ -121,9 +130,9 @@ export default function router(URI) {
         '/userProfile': {
             returnView: Profile,
             state: {
-                userProfile: '/api/users/username?username=' + location.href.split('=')[1]
+                user: '/api/users/username?username=' + location.href.split('=')[1]
             },
-            uri: '/profile',
+            uri: '/userProfile',
             title: "Profile",
             viewEvent: ProfileEvents
         },

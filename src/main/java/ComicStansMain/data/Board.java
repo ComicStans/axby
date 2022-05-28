@@ -14,11 +14,15 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 @Table(name = "axby_boards")
-public class Board {
 
-    //Each Board will have one Game or Game-type to which it is related.
-    //Some Boards will be pre-created by the site admins, dedicated to most popular titles;
-    //other Boards will be created by Users (paid/premium users?).
+//One Board can have many Posts.
+//Some Boards will be pre-created by the site admins, dedicated to most popular titles;
+//other Boards will be created by Users (paid/premium users?).
+//Each Board has a single user, the creator, plus potentially multiple admin users.
+//Each User can create or administer many Boards.
+//So: Users to Boards = one-to-many and many-to-many (via the Board_Admins table)
+
+public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +34,16 @@ public class Board {
     @Column
     private String description;
 
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
+
+//Each Board has a single user that creates it, represented in the database as Creator.
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
     @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated"})
     private User creator;
 
-    @Column(name = "date_created")
-    private LocalDate dateCreated;
-
+//Each Board can contain many Posts.
     @OneToMany(mappedBy = "boardId")
     @JsonIgnoreProperties({"boardId", "authorId"})
     private Collection<Post> posts;

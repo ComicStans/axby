@@ -13,6 +13,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "axby_connections")
+
+//Each Connection has two related Users: the Requester and the Recipient of the the request.
+//There is a double one-to-many relationship between Users and Connections.
+//If the Recipient accepts the Connection request, the date_accepted field gets a date-time stamp;
+//if not, the Connection record is deleted.
+
 public class Connection {
 
     @Id
