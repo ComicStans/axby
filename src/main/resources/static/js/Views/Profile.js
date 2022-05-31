@@ -1,3 +1,6 @@
+import {getHeaders} from "../auth.js";
+import createView from "../createView.js";
+
 export default function Profile(props) {
     console.log(props)
     return `
@@ -17,29 +20,29 @@ export default function Profile(props) {
                             <br>
                         </div>
                         <!-- Button trigger for add friend modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friendRequest">
+                        <button type="button" id="confirmRequest" class="btn btn-primary" >
                          Friend Request
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="friendRequest" tabindex="-1" role="dialog" aria-labelledby="friendRequestCenterTitle" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="confirm">Confirm Friend Request</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                Send friend request?
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary confirm">Confirm</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+<!--                        <div class="modal fade" id="friendRequest" tabindex="-1" role="dialog" aria-labelledby="friendRequestCenterTitle" aria-hidden="true">-->
+<!--                          <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                            <div class="modal-content">-->
+<!--                              <div class="modal-header">-->
+<!--                                <h5 class="modal-title" id="confirm">Confirm Friend Request</h5>-->
+<!--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                  <span aria-hidden="true">&times;</span>-->
+<!--                                </button>-->
+<!--                              </div>-->
+<!--                              <div class="modal-body">-->
+<!--                                Send friend request?-->
+<!--                              </div>-->
+<!--                              <div class="modal-footer">-->
+<!--                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+<!--                                <button type="button" class="btn btn-primary confirm">Confirm</button>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blockUser">
                           Block
@@ -79,12 +82,7 @@ export default function Profile(props) {
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 
                     <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-                            ${props.connection.map(connection => {
-                                return connection.dateAccepted != null ?(
-                                    `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
-                                :("")}).join('')
-                                
-                            }
+
 
                         <h2>Wish List</h2>
                         <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
@@ -130,21 +128,32 @@ export function ProfileEvents() {
         })
     })
 }
-//   THIS CODE IS NOT FINISHED YET
-export function friendRequest() {
-    $(document).ready(function () {
-        const request = {
-            //requester id
-        };
-        $('#friendRequest').click(function () {
-            request.method = "POST";
-            //headers: {"Content-Type": "application/json"},
-            //body: JSON.stringify(newUser
+
+export function FriendRequest(props){
+    $("#confirmRequest").click(function (){
+        let connectionRequest = {
+            recipient: {
+                username: props.user.username
+            },
+
+        }
+        let newRequest = {
+            method: "post",
+            headers: getHeaders(),
+            body: JSON.stringify(connectionRequest)
+        }
+
+    fetch("http://localhost:8081/api/users/friends" , newRequest)
+        .then(response => {
+            createView("/")
         })
-        fetch("http://localhost:8081/api/friends", request) //location to send data
-            .then(response => {
-                console.log(response.status);
-                //what do I put here? ("/");
-            })
-    });
+        .catch(createView("/"));
+    })
 }
+// Friends List code
+// ${props.connection.map(connection => {
+//     return connection.dateAccepted != null ?(
+//         `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+// :("")}).join('')
+//
+// }
