@@ -89,6 +89,7 @@ export function BoardViewEvents() {
     createAddPostListener();
     createEditPostListener();
     createSavePostChangesListener();
+    createDeletePostListener();
 
 }
 
@@ -123,14 +124,17 @@ function createEditPostListener() {
 
     $(".edit-post-button").click(function () {
         const id = $(this).data("id");
-        const oldPostText = $(`#edit-post-${id}`).text();
+        $("#edit-post-id").val(id)
+        const oldPostText = $(`#post-${id}`).text();
         $("#EditPostText").val(oldPostText);
 
     });
+
 }
 
 
 function createSavePostChangesListener() {
+
     $("#saveChanges").click(function () {
         const postText = $('#EditPostText').val();
         const id = $('#edit-post-id').val();
@@ -146,7 +150,7 @@ function createSavePostChangesListener() {
             body: JSON.stringify(savedChanges)
         }
 
-        fetch(URL , request)
+        fetch(URL + `/${id}`, request)
             .then(res => {
                 console.log(res.status);
                 createView(`/boardView`)
@@ -155,4 +159,27 @@ function createSavePostChangesListener() {
             createView(`/boardView`);
         });
     })
+
+}
+
+
+function createDeletePostListener() {
+    $(".delete-post-button").click(function () {
+
+        const id = $(this).data("id");
+        const request = {
+            method: "DELETE",
+            headers: getHeaders(),
+        }
+
+        fetch(URL + `/${id}`, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/boardView")
+            }).catch(error => {
+            console.log(error);
+            createView("/boardView");
+        });
+
+    });
 }
