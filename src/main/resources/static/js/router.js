@@ -18,8 +18,7 @@ import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
 import MessageBoards, {MessageBoardEvents} from "./Views/MessageBoards.js";
 import BoardView, {BoardViewEvents} from "./Views/BoardView.js";
-
-
+import {FriendRequest} from "./Views/Profile.js";
 
 
 /**
@@ -36,12 +35,14 @@ export default function router(URI) {
             state: {},
             uri: '/',
             title: 'Home',
+            eventProps: false,
         },
         '/login': {
             returnView: Login,
             state: {},
             uri: '/login',
             title: "Login",
+            eventProps: false,
             viewEvent: LoginEvent
         },
         '/logout': {
@@ -49,6 +50,7 @@ export default function router(URI) {
             state: {},
             uri: '/',
             title: "Logout",
+            eventProps: false,
             viewEvent: logoutEvents
         },
         '/register': {
@@ -56,6 +58,7 @@ export default function router(URI) {
             state: {},
             uri: '/register',
             title: 'Register',
+            eventProps: false,
             viewEvent: user
         },
         '/account': {
@@ -65,7 +68,8 @@ export default function router(URI) {
             },
             uri: "/account",
             title: 'account',
-            viewEvent: UserEvents
+            viewEvent: UserEvents,
+            eventProps: false,
         },
         '/messageBoards': {
             returnView: MessageBoards,
@@ -74,6 +78,7 @@ export default function router(URI) {
             },
             uri: '/boards',
             title: 'All Boards',
+            eventProps: false,
             viewEvent: MessageBoardEvents
         },
         '/about': {
@@ -81,24 +86,28 @@ export default function router(URI) {
             state: {},
             uri: '/About',
             title: 'About',
+            eventProps: false,
         },
         '/error': {
             returnView: Error404,
             state: {},
             uri: location.pathname,
             title: 'ERROR',
+            eventProps: false,
         },
         '/loading': {
             returnView: Loading,
             state: {},
             uri: location.pathname,
             title: 'Loading',
+            eventProps: false,
         },
         '/marketPlace': {
             returnView: MarketPlace,
             state: {},
             uri: '/marketPlace',
             title: "Market Place",
+            eventProps: false,
         },
         '/profile': {
             returnView: Profile,
@@ -108,6 +117,7 @@ export default function router(URI) {
             },
             uri: '/profile',
             title: "Profile",
+            eventProps: false,
             viewEvent: ProfileEvents
         },
          '/friends': {
@@ -115,6 +125,7 @@ export default function router(URI) {
              state: {},
              uri: '/friends',
              title: "Friends",
+             eventProps: false,
          },
         '/boardView': {
             returnView: BoardView,
@@ -124,7 +135,7 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'Game Boards',
-
+            eventProps: false,
             viewEvent: BoardViewEvents
         },
         '/userProfile': {
@@ -134,7 +145,8 @@ export default function router(URI) {
             },
             uri: '/userProfile',
             title: "Profile",
-            viewEvent: ProfileEvents
+            viewEvent: FriendRequest,
+            eventProps: true
         },
 
 
