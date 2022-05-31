@@ -157,3 +157,13 @@ export function FriendRequest(props){
         `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
  :("")}).join('')
  } */
+
+
+
+/* SEEING PROBLEMS WITH FRIENDS LIST
+${props.connection.map(connection => {
+   return connection.dateAccepted != null ? (
+       `<p id="friend-${connection.id}"> <a href="/userProfile?username=${location.href.split('=')[1]}">${connection.requester.username}</a></p><br>`)
+    : ("")}).join('')
+}
+ */
