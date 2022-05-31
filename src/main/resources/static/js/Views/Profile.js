@@ -82,15 +82,15 @@ export default function Profile(props) {
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 
                     <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-
+                            ${props.connection.map(connection => {
+                                return connection.dateAccepted != null ? (
+                                    `<p id="friend-${connection.id}"> <a href="/userProfile?username=${location.href.split('=')[1]}">${connection.requester.username}</a></p><br>`)
+                                : ("")}).join('')
+                            }
 
                         <h2>Wish List</h2>
                         <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            ${props.game.map(game => {
-                                return game.status === WANNAPLAY ? (
-                                    `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
-                                :("")}).join('')
-                            }
+                            
                     </div>
                    
                     <div class="col" id="myCollection">
@@ -150,10 +150,10 @@ export function FriendRequest(props){
         .catch(createView("/"));
     })
 }
-// Friends List code
-// ${props.connection.map(connection => {
-//     return connection.dateAccepted != null ?(
-//         `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
-// :("")}).join('')
-//
-// }
+
+/* WORKING ON GAMES WISHLIST
+ ${props.game.map(game => {
+    return game.status === WANNAPLAY ? (
+        `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
+ :("")}).join('')
+ } */
