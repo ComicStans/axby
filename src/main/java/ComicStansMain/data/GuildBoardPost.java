@@ -13,6 +13,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "axby_guild_board_posts")
+
+//Each GuildBoard can have many GuildBoardPosts.
+//Each GuildBoardPost has one User as author.
+//The feature of GuildBoardPosts as either Original or Reply posts is temporarily disabled.
+
 public class GuildBoardPost {
 
     //Each Post is associated with one board and one user.
