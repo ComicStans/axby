@@ -14,7 +14,7 @@ export default function BoardView(props) {
             
              <div class="card" style="width: 69em;">
     <div class="card-header">
-        TOPIC
+       <h1>${props.boardView.name} - ${props.boardView.description}</h1>
     </div>
     <ul class="list-group list-group-flush">
         <div id="posts-container">
@@ -22,9 +22,10 @@ export default function BoardView(props) {
             ${props.boardView.posts.map(post => {
         return `
 
-            <li class="list-group-item"><h1><span class="post" id="post-${post.id}" data-link>${post.postText}</span>
+            <li class="list-group-item"><h3><span class="post" id="post-${post.id}" data-link>${post.postText}</span>
                 <button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
+                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h3><br>
+                  <h5>Created by: <a href="#">${post.authorId.username}</a></h5></li>
 
             <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
             <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">

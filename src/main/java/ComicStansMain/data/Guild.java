@@ -58,6 +58,6 @@ public class Guild {
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
-    @JsonIgnoreProperties("guilds")
+    @JsonIgnoreProperties({"guildsCreated","guilds","boards"})
     private Collection<User> members;
 }

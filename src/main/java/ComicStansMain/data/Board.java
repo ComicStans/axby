@@ -45,7 +45,7 @@ public class Board {
 
 //Each Board can contain many Posts.
     @OneToMany(mappedBy = "boardId")
-    @JsonIgnoreProperties({"boardId", "authorId"})
+    @JsonIgnoreProperties({"boardId"})
     private Collection<Post> posts;
 
 //One Board can have many admin Users; each User can administer many Boards.
