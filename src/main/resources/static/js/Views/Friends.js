@@ -1,3 +1,6 @@
+import {getHeaders} from "../auth.js";
+import createView from "../createView.js";
+
 export default function Friends(props) {
     return `<!DOCTYPE html>
 <html lang="en">
@@ -68,7 +71,7 @@ export default function Friends(props) {
 
 
 <!-- FRIENDS/CONNECTION Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requests">
+<button type="button" class="btn btn-primary" id="pendingRequests" data-toggle="modal" data-target="#requests">
   Friends Requests
 </button>
 <!-- Friends/Connections Modal -->
@@ -98,10 +101,39 @@ export default function Friends(props) {
 `;
 
 }
-function friendsRequestListener() {
-    $("#requests").click(function () {
-        const newRequest = {
-            username: $("#Requester").val()
+
+export function FindAllRequests(props) {
+    $("#pendingRequests").click(function () {
+        let requests = {
+            method: "GET",
+            headers: getHeaders()
+        }
+        fetch("http://localhost:8081/api/users/friends/search/me", requests)
+            .then(response => {
+                createView("/friends")
+            })
+            .catch(createView("/friendsRequest"));
+    })
+}
+
+export function AcceptRequest(props) {
+    $("#accept").click(function () {
+        let newConnection = {
+            method: "PUT",
+            headers: getHeaders()
+        }
+        fetch("http://localhost:8081/api/users/FriendsRequest/props", newConnection)
+            .then(response => {
+                createView("/")
+            })
+            .catch(createView("/friendsRequest"));
+    })
+}
+
+export function DeclineRequest() {
+    $("#decline").click(function () {
+        let decline = {
+            method: "DELETE"
         }
     })
 }

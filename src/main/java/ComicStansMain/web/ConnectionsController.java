@@ -29,9 +29,7 @@ public class ConnectionsController {
 
     @GetMapping("search/me")
     public Collection<Connection> listMyConnections(OAuth2Authentication auth) {
-        Collection<Connection> results = connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName()));
-        results.addAll(connectionsRepository.findAllByRequester(usersRepository.findByEmail(auth.getName())));
-        return results;
+        return connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName()));
     }
 
     @GetMapping
@@ -47,7 +45,6 @@ public class ConnectionsController {
     @PostMapping
     public void createConnection(@RequestBody Connection newConnection, OAuth2Authentication auth) {
         newConnection.setRequester(usersRepository.findByEmail(auth.getName()));
-//        newConnection.setRecipient(usersRepository.findByUsername(newConnection.getRequester().getUsername()));
         newConnection.setRecipient(usersRepository.findByUsername(newConnection.getRecipient().getUsername()));
         newConnection.setDateRequested(LocalDate.now());
         connectionsRepository.save(newConnection);

@@ -12,7 +12,7 @@ import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
 import Profile, {ProfileEvents} from "./Views/Profile.js";
-import Friends from "./Views/Friends.js";
+import Friends, {AcceptRequest} from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
@@ -149,7 +149,15 @@ export default function router(URI) {
             viewEvent: FriendRequest,
             eventProps: true
         },
-
+        '/friendsRequest': {
+            returnView: Profile,
+            state: {
+            },
+            uri: '/friendsRequest',
+            title: "Friends",
+            viewEvent: AcceptRequest,
+            eventProps: true
+        },
 
     }
 
