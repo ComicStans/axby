@@ -1,5 +1,6 @@
 import createView from "../createView.js";
 
+const countryList = ["United States", "United Kingdom", "Canada"]
 export default function Register(props) {
     return `
     <!DOCTYPE html>
@@ -35,6 +36,14 @@ export default function Register(props) {
                             <input id="email" name="email" type="email">
                             <label for="userPassword">Password</label>
                             <input id="userPassword" name="password" type="password"/>
+                            <label for="country">Country of Residence</label>
+                            <input id="country" name="country" type="text"/>
+                            <label for="region">State/Province/Region/County</label>
+                            <input id="region" name="region" type="text"/>
+                            <label for="language">Preferred Language</label>
+                            <input id="language" name="language" type="text"/>
+                            <label for="aboutme">A Bit About Me</label>
+                            <textarea id="aboutMe" name="aboutme" rows="4"></textarea>
 <!--                            <button id="register-btn" type="button">Register</button>-->
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: maroon">Cancel</button>
         <button type="button" class="btn btn-primary" id="Create">Create</button>
