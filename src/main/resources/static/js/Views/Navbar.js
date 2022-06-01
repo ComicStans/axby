@@ -37,10 +37,10 @@ export default function Navbar(props) {
           </li>
 
           <li>`;
-    if (loggedIn) {
-        html += `<a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>`;
-    } else {
+    if (isLoggedIn()) {
         html += `<a class="nav-item" id="logout-link" data-toggle="modal" data-target="#login" data-link href="/logout" data-link>Logout</a>`;
+    } else {
+        html += `<a class="nav-item" id="login-link" data-toggle="modal" data-target="#login" data-link href="/login" data-link>Login</a>`;
     }
     html += `</li>
         <li>

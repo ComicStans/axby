@@ -14,7 +14,7 @@ export default function BoardView(props) {
             
              <div class="card" style="width: 69em;">
     <div class="card-header">
-        TOPIC
+       <h1>${props.boardView.name} - ${props.boardView.description}</h1>
     </div>
     <ul class="list-group list-group-flush">
         <div id="posts-container">
@@ -22,9 +22,10 @@ export default function BoardView(props) {
             ${props.boardView.posts.map(post => {
         return `
 
-            <li class="list-group-item"><h1><span class="post" id="post-${post.boardId}" data-link>${post.postText}</span>
+            <li class="list-group-item"><h3><span class="post" id="post-${post.id}" data-link>${post.postText}</span>
                 <button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
+                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h3><br>
+                  <h5>Created by: <a href="#">${post.authorId.username}</a></h5></li>
 
             <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
             <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">
@@ -124,6 +125,7 @@ function createEditPostListener() {
 
     $(".edit-post-button").click(function () {
         const id = $(this).data("id");
+        console.log(id)
         $("#edit-post-id").val(id)
         const oldPostText = $(`#post-${id}`).text();
         $("#EditPostText").val(oldPostText);
@@ -136,6 +138,7 @@ function createEditPostListener() {
 function createSavePostChangesListener() {
 
     $("#saveChanges").click(function () {
+        var boardId = $(".saveComment").attr("id");
         const postText = $('#EditPostText').val();
         const id = $('#edit-post-id').val();
 
@@ -150,13 +153,13 @@ function createSavePostChangesListener() {
             body: JSON.stringify(savedChanges)
         }
 
-        fetch(URL + `/${id}`, request)
+        fetch(`http://localhost:8081/api/posts/${id}`, request)
             .then(res => {
                 console.log(res.status);
-                createView(`/boardView`)
+                createView(`/boardView/api/boards/${boardId}`)
             }).catch(error => {
             console.log(error);
-            createView(`/boardView`);
+            createView(`/boardView/api/boards/${boardId}`);
         });
     })
 
@@ -165,20 +168,21 @@ function createSavePostChangesListener() {
 
 function createDeletePostListener() {
     $(".delete-post-button").click(function () {
-
+      var boardId = $(".saveComment").attr("id");
+        console.log(boardId);
         const id = $(this).data("id");
         const request = {
             method: "DELETE",
             headers: getHeaders(),
         }
 
-        fetch(URL + `/${id}`, request)
+        fetch( `http://localhost:8081/api/posts/${id}`, request)
             .then(res => {
                 console.log(res.status);
-                createView("/boardView")
+                createView(`/boardView/api/boards/${boardId}`)
             }).catch(error => {
             console.log(error);
-            createView("/boardView");
+            createView(`/boardView/api/boards/${boardId}`);
         });
 
     });

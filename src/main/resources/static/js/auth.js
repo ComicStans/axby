@@ -19,7 +19,7 @@ export default function addLoginEvent() {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Basic ' + btoa('axby-client:secret')
             },
-            body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&client_id=axby-client`
+            body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&user_id=axby-client`
         };
 
         fetchData(
@@ -52,6 +52,7 @@ export function getHeaders() {
  * @param responseData
  */
 function setTokens(responseData) {
+    console.log(responseData);
     if (responseData.route['access_token']) {
         localStorage.setItem("access_token", responseData.route['access_token']);
         console.log("Access token set");
@@ -63,7 +64,7 @@ function setTokens(responseData) {
 }
 
 export function isLoggedIn() {
-    if (sessionStorage.getItem("access_token")) {
+    if (localStorage.getItem("access_token") || localStorage.getItem("refresh_token")) {
         return true;
     } else {
         return false;
