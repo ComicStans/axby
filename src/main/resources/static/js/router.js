@@ -12,7 +12,7 @@ import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
 import Profile, {ProfileEvents} from "./Views/Profile.js";
-import Friends, {AcceptRequest} from "./Views/Friends.js";
+import Friends, {AcceptRequest, FriendsEvents} from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
@@ -123,10 +123,13 @@ export default function router(URI) {
         },
          '/friends': {
              returnView: Friends,
-             state: {},
+             state: {
+                 connection: '/api/users/friends/search/me'
+             },
              uri: '/friends',
              title: "Friends",
              eventProps: false,
+             viewEvent: FriendsEvents
          },
         '/boardView': {
             returnView: BoardView,
@@ -150,7 +153,7 @@ export default function router(URI) {
             eventProps: true
         },
         '/friendsRequest': {
-            returnView: Profile,
+            returnView: Friends,
             state: {
             },
             uri: '/friendsRequest',

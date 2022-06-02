@@ -71,9 +71,10 @@ export default function Friends(props) {
 
 
 <!-- FRIENDS/CONNECTION Button trigger modal -->
-<button type="button" class="btn btn-primary" id="pendingRequests" data-toggle="modal" data-target="#requests">
+<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#requests">
   Friends Requests
 </button>
+<p id="pendingRequests"> here</p>
 <!-- Friends/Connections Modal -->
 <div class="modal fade" id="requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -88,6 +89,7 @@ export default function Friends(props) {
         Friends Requests
       </div>
 <!--  I NEED THIS LINE TO GENERATE FOR EVERY FRIEND REQUEST    -->
+
       <div class="acceptOrDecline">
         <button type="button" class="btn btn-primary" id="accept">Accept</button>
         <button type="button" class="btn btn-primary" id="decline">Decline</button>
@@ -101,19 +103,28 @@ export default function Friends(props) {
 `;
 
 }
-
-export function FindAllRequests(props) {
+export function FriendsEvents(){
+    FindAllRequests();
+    AcceptRequest();
+    DeclineRequest();
+}
+export function FindAllRequests() {
+    console.log("hello")
     $("#pendingRequests").click(function () {
+        console.log("I clicked it")
         let requests = {
             method: "GET",
             headers: getHeaders()
         }
+
+
         fetch("http://localhost:8081/api/users/friends/search/me", requests)
             .then(response => {
                 createView("/friends")
             })
-            .catch(createView("/friendsRequest"));
+            .catch(createView("/Error404"));
     })
+
 }
 
 export function AcceptRequest(props) {
