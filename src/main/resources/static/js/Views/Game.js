@@ -17,14 +17,29 @@ export function gameListeners() {
 
 const populateGames = function() {
     $("#gameSearchButton").click(function () {
+        $("#gameResults").html("")
         let game = $('#gameSearchBar').val()
         fetch(`http://localhost:8081/api/search?gameName=${game}`)
             .then(res => res.json())
             .then(res => {
                 console.log(res)
                 for (let game of res) {
-                    $("#gameResults").append(game.name)
+                    let html = `<ul class="list-group list-group-flush">`
+                    game.involved_companies.forEach(company => {
+                        html += `<li>${company.company.name}</li>`
+                    })
+                    html += `</ul>`
+                    console.log(game.cover.url)
+                    $("#gameResults").append(`<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${game.cover.url}" alt="${game.name}" width="20">
+  <div class="card-body">
+    <h5 class="card-title">${game.name}</h5>
+    <p class="card-text">${game.summary}</p>
+    ${html}
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>`)
                 }
-            })    //this is just to test the API call
+            })
     })
 }
