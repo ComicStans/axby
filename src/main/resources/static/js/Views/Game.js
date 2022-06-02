@@ -24,19 +24,29 @@ const populateGames = function() {
             .then(res => {
                 console.log(res)
                 for (let game of res) {
-                    let html = `<ul class="list-group list-group-flush">`
+                    console.log(game.id)
+                    let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
                     game.involved_companies.forEach(company => {
-                        html += `<li>${company.company.name}</li>`
+                        html += `${company.company.name}, `
                     })
-                    html += `</ul>`
+                    html = html.substr(0, html.length-2);
+                    html += `</p>`
+                    let htmlg = `<h5>platforms: </h5><p id="platforms-${game.id}">`
+                    game.platforms.forEach(platform => {
+                        htmlg += `${platform.name}, `
+                    })
+                    htmlg = htmlg.substr(0, html.length-2);
+                    htmlg += `</p>`
                     console.log(game.cover.url)
                     $("#gameResults").append(`<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="${game.cover.url}" alt="${game.name}" width="20">
+  <img class="card-img-top" id="cover-${game.id}" src="${game.cover.url}" alt="${game.name}" width="20">
   <div class="card-body">
-    <h5 class="card-title">${game.name}</h5>
-    <p class="card-text">${game.summary}</p>
+    <h5 class="card-title" id="title-${game.id}">${game.name}</h5>
+    <p class="card-text" id="summary-${game.id}">Summary: ${game.summary}</p>
+    <p class="card-text" id="storyline-${game.id}">Storyline: ${game.storyline ?? "No storyline listed"}</p>
     ${html}
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    ${htmlg}
+    <a href="#" class="btn btn-primary" id="savePlayed-${game.id}">Played it</a>
   </div>
 </div>`)
                 }
