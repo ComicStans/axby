@@ -71,58 +71,50 @@ export default function Friends(props) {
 
 
 <!-- FRIENDS/CONNECTION Button trigger modal -->
-<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#requests">
+<button type="button" class="btn btn-primary" id="pendingRequests">
   Friends Requests
 </button>
-<p id="pendingRequests"> here</p>
-<!-- Friends/Connections Modal -->
-<div class="modal fade" id="requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Requests</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Friends Requests
-      </div>
+             ${props.connection.map(friend => {
+
+        return `
 <!--  I NEED THIS LINE TO GENERATE FOR EVERY FRIEND REQUEST    -->
 
       <div class="acceptOrDecline">
         <button type="button" class="btn btn-primary" id="accept">Accept</button>
         <button type="button" class="btn btn-primary" id="decline">Decline</button>
       </div>
-<!---------------------------------------------------------------->
-    </div>
-  </div>
-</div>
+                  `
+    }).join('')}
+
                </body>
         </html>
 `;
 
 }
-export function FriendsEvents(){
+
+export function FriendsEvents() {
     FindAllRequests();
     AcceptRequest();
     DeclineRequest();
 }
+
 export function FindAllRequests() {
-    console.log("hello")
     $("#pendingRequests").click(function () {
-        console.log("I clicked it")
         let requests = {
             method: "GET",
             headers: getHeaders()
+
         }
-
-
-        fetch("http://localhost:8081/api/users/friends/search/me", requests)
+        fetch("http://localhost:8081/api/users/friends/search/me" +`/${id}`, requests)
             .then(response => {
                 createView("/friends")
+
             })
-            .catch(createView("/Error404"));
+            // .catch(createView("/loading"));
+            .catch(error => {
+                console.log("ERROR: " + error);
+                createView("/Error404")
+            });
     })
 
 }

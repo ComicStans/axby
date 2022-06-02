@@ -154,8 +154,7 @@ export default function router(URI) {
         },
         '/friendsRequest': {
             returnView: Friends,
-            state: {
-            },
+            state: {},
             uri: '/friendsRequest',
             title: "Friends",
             viewEvent: AcceptRequest,

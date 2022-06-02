@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.apache.tomcat.jni.Local;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.Collection;
 
