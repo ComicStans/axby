@@ -58,7 +58,7 @@ const populateGames = function() {
 }
 
 const addToPlayed = function() {
-    $(".playButton").click(function () {
-        console.log("Literally anything")
+    $("body").on("click", ".playButton", function () {
+        console.log(this.id)
     })
 }
