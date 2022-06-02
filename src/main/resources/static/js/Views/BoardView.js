@@ -1,7 +1,8 @@
-import {getHeaders} from "../auth.js";
+import {getHeaders, getUser} from "../auth.js";
 import createView from "../createView.js";
 
 const URL = 'http://localhost:8081/api/posts/board/';
+const loggedInUser = getUser();
 
 export default function BoardView(props) {
     // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
@@ -18,13 +19,10 @@ export default function BoardView(props) {
     </div>
     <ul class="list-group list-group-flush">
         <div id="posts-container">
+        
+        ${buildPostTopics(loggedInUser)}
+    
 
-            ${props.boardView.posts.map(post => {
-        return `
-
-            <li class="list-group-item"><h1><span class="post" id="post-${post.id}" data-link>${post.postText}</span>
-                <button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>
 
             <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
             <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">
@@ -52,9 +50,7 @@ export default function BoardView(props) {
                     </div>
                 </div>
             </div>
-       `
-          }).join('')
-    }
+
         <li class="list-group-item">
             <div id="b_news">
                 <form method="post" action="">
@@ -68,7 +64,7 @@ export default function BoardView(props) {
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:20px;">
-                                    <input  type="submit" class="saveComment" id="${props.boardView.id}" value="Save Post">
+                                    <input type="submit" class="saveComment" id="${props.boardView.id}" value="Save Post">
                                     <input type="submit" value="Cancel" class="create-post-cancel">
                                 </div>
                             </form>
@@ -84,13 +80,39 @@ export default function BoardView(props) {
 
 }
 
+function buildPostTopics(posts, loggedInUser) {
+    return posts.map(post => {
+        return `${buildPostRow(post, loggedInUser)}`
+    }).join('');
+}
+
+function buildPostRow(post, loggedInUser) {
+        return `
+            <li class="list-group-item"><h1><span class="post" id="post-${post.id}" data-link>${post.postText}</span></h1>
+            ${buildPostTopicEditButton(board, loggedInUser)}
+            ${buildPostTopicDeleteButton(board, loggedInUser)}
+            </li>`
+}
+
+function buildPostTopicEditButton(board,loggedInUser) {
+    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== board.creator.email) {
+        return "";
+    }
+    return `<button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>`
+}
+
+function buildPostTopicDeleteButton(board,loggedInUser) {
+    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== board.creator.email) {
+        return "";
+    }
+    return `<button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>`
+}
 
 export function BoardViewEvents() {
     createAddPostListener();
     createEditPostListener();
     createSavePostChangesListener();
     createDeletePostListener();
-
 }
 
 function createAddPostListener() {
