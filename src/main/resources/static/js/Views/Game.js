@@ -13,6 +13,7 @@ export default function Games(props) {
 
 export function gameListeners() {
     populateGames()
+    addToPlayed()
 }
 
 const populateGames = function() {
@@ -25,6 +26,8 @@ const populateGames = function() {
                 console.log(res)
                 for (let game of res) {
                     console.log(game.id)
+                    let buttons = `<span class="btn btn-primary playButton" id="savePlayed-${game.id}">Played it</span>
+                                    <span  class="btn btn-primary wishButton" id="Wishlist-${game.id}">Wanna play it</span>`
                     let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
                     game.involved_companies.forEach(company => {
                         html += `${company.company.name}, `
@@ -46,10 +49,16 @@ const populateGames = function() {
     <p class="card-text" id="storyline-${game.id}">Storyline: ${game.storyline ?? "No storyline listed"}</p>
     ${html}
     ${htmlg}
-    <a href="#" class="btn btn-primary" id="savePlayed-${game.id}">Played it</a>
+    ${buttons}
   </div>
 </div>`)
                 }
             })
+    })
+}
+
+const addToPlayed = function() {
+    $(".playButton").click(function () {
+        console.log("Literally anything")
     })
 }
