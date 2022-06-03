@@ -1,5 +1,6 @@
 import createView from "../createView.js";
 
+const countryList = ["United States", "United Kingdom", "Canada"]
 export default function Register(props) {
     return `
     <!DOCTYPE html>
@@ -26,6 +27,7 @@ export default function Register(props) {
 <!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT USER WAS REGISTERED -->
 <!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT PASSWORD AND USERNAME ARE OK -->
 <!--TODO: NEED TO HAVE MORE REQUIRED INFO TO REGISTER (STARS NEXT TO REQUIRED FIELDS) -->
+
        <div class="container">
            <div class="row">
                <div class="col">
@@ -47,7 +49,7 @@ export default function Register(props) {
         </div>
            
            
-           
+       
 <!--      </div>-->
 <!--      <div class="modal-footer">-->
 <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
