@@ -128,8 +128,8 @@ export default function router(URI) {
              },
              uri: '/friends',
              title: "Friends",
-             eventProps: true,
-             viewEvent: FindAllRequests
+             eventProps: false,
+             viewEvent: FriendsEvents
          },
         '/boardView': {
             returnView: BoardView,

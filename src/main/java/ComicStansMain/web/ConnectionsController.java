@@ -28,14 +28,12 @@ public class ConnectionsController {
 
     @GetMapping("search/me")
     public Collection<Connection> listMyConnections(OAuth2Authentication auth) {
-        System.out.println(connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName())));
         return connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName()));
 
     }
 
     @GetMapping
     private Collection<Connection> findAll(OAuth2Authentication auth) {
-        System.out.println(connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName())));
         return connectionsRepository.findAll();
     }
 

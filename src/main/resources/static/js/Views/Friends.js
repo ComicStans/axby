@@ -75,15 +75,10 @@ export default function Friends(props) {
   Friends Requests
 </button>
 
-<!--  I NEED THIS LINE TO GENERATE FOR EVERY FRIEND REQUEST    -->
+<!--  I NEED THESE LINES TO GENERATE FOR EVERY FRIEND REQUEST    -->
+      <div id="acceptOrDecline">
+        
 
-                 
-
-
-      <div class="acceptOrDecline">
-      <p >SHOW ME FRIENDS!!</p>
-        <button type="button" class="btn btn-primary" id="accept">Accept</button>
-        <button type="button" class="btn btn-primary" id="decline">Decline</button>
       </div>
                   
 
@@ -94,12 +89,12 @@ export default function Friends(props) {
 }
 
 export function FriendsEvents() {
-    FindAllRequests(props);
+    FindAllRequests();
     AcceptRequest();
     DeclineRequest();
 }
 
-export function FindAllRequests(props) {
+export function FindAllRequests() {
     $("#pendingRequests").click(function () {
         let requests = {
             method: "GET",
@@ -107,8 +102,14 @@ export function FindAllRequests(props) {
         }
         fetch("http://localhost:8081/api/users/friends/search/me", requests)
             .then(response => {
-                createView("/friendsRequest")
+            response.json().then(response=>{console.log(response)
+                $("#acceptOrDecline").html("");
+            response.forEach(connection =>{
+                $("#acceptOrDecline").append(`<p id="requester-${connection.id}">${connection.requester.username}</p>
 
+    <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
+    <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button>`)
+                })})
             })
             .catch(error => {
                 console.log("ERROR: " + error);
@@ -133,9 +134,11 @@ export function AcceptRequest(props) {
 }
 
 export function DeclineRequest() {
-    $("#decline").click(function () {
+    $("body").on("click", ".decline", function () {
+        let id = this.id
         let decline = {
             method: "DELETE"
         }
+        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(FindAllRequests)
     })
 }
