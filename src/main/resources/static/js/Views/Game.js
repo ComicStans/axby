@@ -29,11 +29,16 @@ const populateGames = function() {
                     let buttons = `<span class="btn btn-primary playButton" id="${game.id}">Played it</span>
                                     <span  class="btn btn-primary wishButton" id="${game.id}">Wanna play it</span>`
                     let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
-                    game.involved_companies.forEach(company => {
-                        html += `${company.company.name}, `
-                    })
-                    html = html.substr(0, html.length-2);
-                    html += `</p>`
+                    if(game.involved_companies !== null) {
+                        game.involved_companies.forEach(company => {
+                            html += `${company.company.name}, `
+                        })
+                        html = html.substr(0, html.length - 2);
+                        html += `</p>`
+                    } else {
+                        html += "Information not available"
+                        html += `</p>`
+                    }
                     let htmlg = `<h5>platforms: </h5><p id="platforms-${game.id}">`
                     game.platforms.forEach(platform => {
                         htmlg += `${platform.name}, `
@@ -63,8 +68,10 @@ const addToPlayed = function() {
         let id = this.id
         let game = {
             art: $("#cover-" + id).attr("src"),
-            companies: $("#companies-" + id).val(),
-            platforms: $("#platforms-" + id).val()
+            companies: $("#companies-" + id).text(),
+            platforms: $("#platforms-" + id).text(),
+            summary: $("#summary-" + id).text(),
         }
+        console.log(game)
     })
 }
