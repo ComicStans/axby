@@ -60,6 +60,16 @@ public class GamesController {
         usersRepository.save(user);
         gamesRepository.save(game);
     }
+    @PostMapping("wish")
+    private void addWish(OAuth2Authentication auth, @RequestBody Game game) {
+        User user = usersRepository.findByEmail(auth.getName());
+        Collection<Game> myGames = new ArrayList<Game>(user.getGames());
+        game.setType(Game.Status.WANNAPLAY);
+        myGames.add(game);
+        user.setGames(myGames);
+        usersRepository.save(user);
+        gamesRepository.save(game);
+    }
     @DeleteMapping("{id}")
     private void deleteGame(@PathVariable long id) {
         gamesRepository.deleteById(id);
