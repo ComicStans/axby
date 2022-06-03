@@ -157,8 +157,8 @@ public class User {
     @JsonIgnoreProperties("creator")
     private Collection<Board> boards;
 
-    @OneToMany(mappedBy = "authorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("authorId")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties("author")
     private Collection<Post> posts;
 
     @OneToMany(mappedBy = "user")

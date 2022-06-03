@@ -50,7 +50,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     @JsonIgnoreProperties({"posts","boards", "guilds"})
-    private User authorId;
+    private User author;
 
 
 }
