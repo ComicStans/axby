@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -49,14 +50,18 @@ public class GamesController {
         editedGame.setArt(game.getArt());
         gamesRepository.save(editedGame);
     }
-    @PutMapping("add")
+    @PostMapping("add")
     private void addGame(OAuth2Authentication auth, @RequestBody Game game) {
         User user = usersRepository.findByEmail(auth.getName());
-        Collection<Game> myGames= user.getGames();
+        Collection<Game> myGames = new ArrayList<Game>();
+        if (user.getGames()!= null) {
+            myGames = user.getGames();
+        }
         game.setType(Game.Status.PLAYED);
         myGames.add(game);
         user.setGames(myGames);
         usersRepository.save(user);
+        gamesRepository.save(game);
     }
     @DeleteMapping("{id}")
     private void deleteGame(@PathVariable long id) {

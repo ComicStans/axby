@@ -67,7 +67,12 @@ const addToPlayed = function() {
             companies: $("#companies-" + id).text(),
             platforms: $("#platforms-" + id).text(),
             summary: $("#summary-" + id).text(),
+            name: $("#title-" + id).text(),
         }
-        console.log(game)
+        let request ={
+            method: 'POST',
+            body: JSON.stringify(game),
+        }
+        fetch(`http://localhost:8081/api/games/add`, request);
     })
 }
