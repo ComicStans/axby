@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 @CrossOrigin
 @AllArgsConstructor
@@ -38,7 +37,7 @@ public class PostsController {
     private void createPost(@RequestBody Post newPost, @PathVariable Long id, OAuth2Authentication auth) {
         User author = usersRepository.findByEmail(auth.getName());
         newPost.setBoardId(boardsRepository.findById(id).get());
-        newPost.setAuthorId(author);
+        newPost.setAuthor(author);
         newPost.setPostTime(LocalDate.now());
 //        newPost.setAuthorId(author.getId());
         newPost.setPostType(Post.postType.ORIGINAL);
