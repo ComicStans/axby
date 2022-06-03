@@ -114,6 +114,7 @@ export default function router(URI) {
             state: {
                 user: '/api/users/me',
                 connection: '/api/users/friends',
+                // game: 'api/users/game'
             },
             uri: '/profile',
             title: "Profile",

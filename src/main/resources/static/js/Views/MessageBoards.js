@@ -52,12 +52,14 @@ function buildBoardPage(boards, loggedInUser) {
                     
       <div class="card" style="width: 69em;">
            <div class="card-header">
-             TOPIC
+             <h1>TOPIC</h1>
            </div>
            <ul class="list-group list-group-flush">
             <div id="topic-container">
             
+
             ${buildBoardTopics(boards, loggedInUser)}
+
              
              </div>
              

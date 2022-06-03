@@ -15,7 +15,7 @@ export default function BoardView(props) {
             
              <div class="card" style="width: 69em;">
     <div class="card-header">
-        TOPIC
+       <h1>${props.boardView.name} - ${props.boardView.description}</h1>
     </div>
     <ul class="list-group list-group-flush">
         <div id="posts-container">
@@ -26,6 +26,7 @@ export default function BoardView(props) {
         <li class="list-group-item">
             <div id="b_news">
                 <form method="post" action="">
+
 
                     <div class="creat-post-content">
                         <div class="container">
@@ -56,6 +57,7 @@ function buildPostTopics(posts, loggedInUser) {
         return `${buildPostRow(post, loggedInUser)}`
     }).join('');
 }
+
 
 function buildPostRow(post, loggedInUser) {
         return `
