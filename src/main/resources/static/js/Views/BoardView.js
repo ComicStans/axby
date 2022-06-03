@@ -1,4 +1,4 @@
-import {getHeaders} from "../auth.js";
+import {getHeaders, getUser} from "../auth.js";
 import createView from "../createView.js";
 
 const URL = 'http://localhost:8081/api/posts/board/';
@@ -6,6 +6,7 @@ const URL = 'http://localhost:8081/api/posts/board/';
 export default function BoardView(props) {
     // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
     console.log(props)
+    const loggedInUser = getUser();
 
     return `
     <div class="container">
@@ -18,15 +19,52 @@ export default function BoardView(props) {
     </div>
     <ul class="list-group list-group-flush">
         <div id="posts-container">
+        
+        ${buildPostTopics(props.boardView.posts,loggedInUser)}
+    
 
-            ${props.boardView.posts.map(post => {
+        <li class="list-group-item">
+            <div id="b_news">
+                <form method="post" action="">
+
+
+                    <div class="creat-post-content">
+                        <div class="container">
+                            <form method="post" action="">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <textarea id="post-textBox" class="text-box" rows="6" cols="50"  placeholder="Post text here......" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:20px;">
+                                    <input type="submit" class="saveComment" id="${props.boardView.id}" value="Save Post">
+                                    <input type="submit" value="Cancel" class="create-post-cancel">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+            </div>
+        </div>
+    </div>
+     `
+}
+
+function buildPostTopics(posts, loggedInUser) {
+    return posts.map(post => {
+        return `${buildPostRow(post, loggedInUser)}`
+    }).join('');
+}
+
+
+function buildPostRow(post, loggedInUser) {
         return `
-
-            <li class="list-group-item"><h3><span class="post" id="post-${post.id}" data-link>${post.postText}</span>
-                <button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h3><br>
-                  <h5>Created by: <a href="#">${post.authorId.username}</a></h5></li>
-
+            <li class="list-group-item"><h1><span class="post" id="post-${post.id}" data-link>${post.postText}</span></h1>
+            ${buildPostTopicEditButton(post, loggedInUser)}
+            ${buildPostTopicDeleteButton(post, loggedInUser)}
+            </li>
             <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
             <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -52,46 +90,28 @@ export default function BoardView(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-       `
-          }).join('')
-    }
-        <li class="list-group-item">
-            <div id="b_news">
-                <form method="post" action="">
-
-                    <div class="creat-post-content">
-                        <div class="container">
-                            <form method="post" action="">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <textarea id="post-textBox" class="text-box" rows="6" cols="50"  placeholder="Post text here......" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top:20px;">
-                                    <input  type="submit" class="saveComment" id="${props.boardView.id}" value="Save Post">
-                                    <input type="submit" value="Cancel" class="create-post-cancel">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
-            </div>
-        </div>
-    </div>
-     `
-
+            </div>`
 }
 
+function buildPostTopicEditButton(post,loggedInUser) {
+    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== post.author.email) {
+        return "";
+    }
+    return `<button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>`
+}
+
+function buildPostTopicDeleteButton(post,loggedInUser) {
+    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== post.author.email) {
+        return "";
+    }
+    return `<button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>`
+}
 
 export function BoardViewEvents() {
     createAddPostListener();
     createEditPostListener();
     createSavePostChangesListener();
     createDeletePostListener();
-
 }
 
 function createAddPostListener() {

@@ -1,5 +1,11 @@
-p#about{
-    display: block;
-    margin: .5em;
-    color: red !important;
+p#about, .aboutUs{
+    /*display: block;*/
+    margin: 1em;
+    color: white !important;
+    text-align: center;
+}
+.ourTeam {
+    text-align: center;
+    color: navajowhite;
+    margin: 1em;
 }

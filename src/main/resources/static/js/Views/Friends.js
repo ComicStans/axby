@@ -1,3 +1,6 @@
+import {getHeaders} from "../auth.js";
+import createView from "../createView.js";
+
 export default function Friends(props) {
     return `<!DOCTYPE html>
 <html lang="en">
@@ -68,40 +71,74 @@ export default function Friends(props) {
 
 
 <!-- FRIENDS/CONNECTION Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requests">
+<button type="button" class="btn btn-primary" id="pendingRequests">
   Friends Requests
 </button>
-<!-- Friends/Connections Modal -->
-<div class="modal fade" id="requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Requests</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
+<!--  I NEED THESE LINES TO GENERATE FOR EVERY FRIEND REQUEST    -->
+      <div id="acceptOrDecline">
+        
+
       </div>
-      <div class="modal-body">
-        Friends Requests
-      </div>
-<!--  I NEED THIS LINE TO GENERATE FOR EVERY FRIEND REQUEST    -->
-      <div class="acceptOrDecline">
-        <button type="button" class="btn btn-primary" id="accept">Accept</button>
-        <button type="button" class="btn btn-primary" id="decline">Decline</button>
-      </div>
-<!---------------------------------------------------------------->
-    </div>
-  </div>
-</div>
+                  
+
                </body>
         </html>
 `;
 
 }
-function friendsRequestListener() {
-    $("#requests").click(function () {
-        const newRequest = {
-            username: $("#Requester").val()
+
+export function FriendsEvents() {
+    FindAllRequests();
+    AcceptRequest();
+    DeclineRequest();
+}
+
+export function FindAllRequests() {
+    $("#pendingRequests").click(function () {
+        let requests = {
+            method: "GET",
+            headers: getHeaders()
         }
+        fetch("http://localhost:8081/api/users/friends/search/me", requests)
+            .then(response => {
+            response.json().then(response=>{console.log(response)
+                $("#acceptOrDecline").html("");
+            response.forEach(connection =>{
+                $("#acceptOrDecline").append(`<p id="requester-${connection.id}">${connection.requester.username}</p>
+
+    <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
+    <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button>`)
+                })})
+            })
+            .catch(error => {
+                console.log("ERROR: " + error);
+                createView("/Error404")
+            });
+    })
+
+}
+
+export function AcceptRequest(props) {
+    $("#accept").click(function () {
+        let newConnection = {
+            method: "PUT",
+            headers: getHeaders()
+        }
+        fetch("http://localhost:8081/api/users/FriendsRequest/props", newConnection)
+            .then(response => {
+                createView("/")
+            })
+            .catch(createView("/friendsRequest"));
+    })
+}
+
+export function DeclineRequest() {
+    $("body").on("click", ".decline", function () {
+        let id = this.id
+        let decline = {
+            method: "DELETE"
+        }
+        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(FindAllRequests)
     })
 }

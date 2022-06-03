@@ -83,11 +83,7 @@ export default function Profile(props) {
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 
                     <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-                            ${props.connection.map(connection => {
-                                return connection.dateAccepted != null ? (
-                                    `<p id="friend-${connection.id}"> <a href="/userProfile?username=${location.href.split('=')[1]}">${connection.requester.username}</a></p><br>`)
-                                : ("")}).join('')
-                            }
+
 
                         <h2>Wish List</h2>
                         <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
@@ -135,11 +131,12 @@ export function FriendRequest(props){
         let connectionRequest = {
             recipient: {
                 username: props.user.username
+                // ^^ uses (newConnection.getRecipient().getUsername()) from createConnection on ConnectionsController.java
             },
 
         }
         let newRequest = {
-            method: "post",
+            method: "POST",
             headers: getHeaders(),
             body: JSON.stringify(connectionRequest)
         }
@@ -148,7 +145,7 @@ export function FriendRequest(props){
         .then(response => {
             createView("/")
         })
-        .catch(createView("/"));
+        .catch(createView("/profile"));
     })
 }
 

@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.apache.tomcat.jni.Local;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -29,13 +28,12 @@ public class ConnectionsController {
 
     @GetMapping("search/me")
     public Collection<Connection> listMyConnections(OAuth2Authentication auth) {
-        Collection<Connection> results = connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName()));
-        results.addAll(connectionsRepository.findAllByRequester(usersRepository.findByEmail(auth.getName())));
-        return results;
+        return connectionsRepository.findAllByRecipient(usersRepository.findByEmail(auth.getName()));
+
     }
 
     @GetMapping
-    private Collection<Connection> findAll() {
+    private Collection<Connection> findAll(OAuth2Authentication auth) {
         return connectionsRepository.findAll();
     }
 
@@ -47,7 +45,6 @@ public class ConnectionsController {
     @PostMapping
     public void createConnection(@RequestBody Connection newConnection, OAuth2Authentication auth) {
         newConnection.setRequester(usersRepository.findByEmail(auth.getName()));
-//        newConnection.setRecipient(usersRepository.findByUsername(newConnection.getRequester().getUsername()));
         newConnection.setRecipient(usersRepository.findByUsername(newConnection.getRecipient().getUsername()));
         newConnection.setDateRequested(LocalDate.now());
         connectionsRepository.save(newConnection);

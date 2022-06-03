@@ -1,14 +1,14 @@
 import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
-
-
+import {getUser} from "../auth.js";
 const URL = 'http://localhost:8081/api/boards';
-
 export default function MessageBoards(props) {
     console.log(props);
-    return `
-
-    <main>
+    const loggedInUser = getUser();
+    return buildBoardPage(props.boards, loggedInUser);
+}
+function buildBoardPage(boards, loggedInUser) {
+    return `<main>
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -57,47 +57,9 @@ export default function MessageBoards(props) {
            <ul class="list-group list-group-flush">
             <div id="topic-container">
             
-             ${props.boards.map(board => {
 
-        return `
-                 <li class="list-group-item"><h3><span class="topic" id="topic-${board.id}" data-link>${board.name}</span><span> - </span><span id="post-description-${board.id}">${board.description}</span>
-                 <button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${board.id}" data-id="${board.id}"><i class="fas fa-edit"></i></button>
-                 <button type="button" class="btn delete-topic-button" id="delete-post-${board.id}" data-id="${board.id}"><i class="fas fa-trash-alt"></i></button></h3><br>
-                 <h5>Created by: <a href="#">${board.creator.username}</a></h5></li>
- 
-<!-- EDIT A BOARD TITLE AND DESCRIPTION MODAL                ------------------------------------------------------------------>
-                 <div class="modal fade" id="edit-topic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Topic</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form>
-                            <input type="hidden" value="${board.id}" id="edit-id">
-                              <div class="form-group">
-                                <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title</label>
-                                <input type="text" class="form-control" id="EditTopicName" data-link>
-                              </div>
-                              <div class="form-group">
-                                <label for="EditDescription" class="col-form-label">Description:</label>
-                                <textarea class="form-control" id="EditDescription"></textarea>
-                              </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" id="save-changes" data-dismiss="modal">Save Changes</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                 
-                  `
-    }).join('')}
+            ${buildBoardTopics(boards, loggedInUser)}
+
              
              </div>
              
@@ -110,12 +72,67 @@ export default function MessageBoards(props) {
            
                     
                     
-
                 </div>
             </div>
         </div>
     </main>
-    `;
+    `
+}
+function buildBoardTopics(boards, loggedInUser) {
+    return boards.map(board => {
+        return `${buildBoardRow(board, loggedInUser)}`
+    }).join('');
+}
+
+function buildBoardRow(board, loggedInUser) {
+    return `<li class="list-group-item"><h1><span class="topic" id="topic-${board.id}" data-link>${board.name}</span></h1>
+        <p><span id="post-description-${board.id}">${board.description}</span></p>
+        ${buildBoardTopicEditButton(board, loggedInUser)}
+        ${buildBoardTopicDeleteButton(board,loggedInUser)}
+        </li>
+    <!-- EDIT A BOARD TITLE AND DESCRIPTION MODAL                ------------------------------------------------------------------>
+    <div class="modal fade" id="edit-topic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Topic</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+    <div class="modal-body">
+        <form>
+            <input type="hidden" value="${board.id}" id="edit-id">
+                <div class="form-group">
+                    <label for="EditTopicName" class="col-form-label" id="topic-title-label" data-link>Title</label>
+                    <input type="text" class="form-control" id="EditTopicName" data-link>
+                </div>
+                <div class="form-group">
+                    <label for="EditDescription" class="col-form-label">Description:</label>
+                    <textarea class="form-control" id="EditDescription"></textarea>
+                </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="save-changes" data-dismiss="modal">Save Changes</button>
+    </div>
+</div>
+</div>
+</div>`;
+}
+function buildBoardTopicEditButton(board, loggedInUser) {
+    if(loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== board.creator.email) {
+        return "";
+    }
+    return `<button type="button" class="btn edit-topic-button" data-toggle="modal" data-target="#edit-topic" id="edit-topic-${board.id}" data-id="${board.id}"><i class="fas fa-edit"></i></button>`;
+}
+
+function buildBoardTopicDeleteButton(board, loggedInUser) {
+    if(loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== board.creator.email) {
+        return "";
+    }
+    return `<button type="button" class="btn delete-topic-button" id="delete-post-${board.id}" data-id="${board.id}"><i class="fas fa-trash-alt"></i></button>`
 }
 
 export function MessageBoardEvents() {
@@ -124,9 +141,7 @@ export function MessageBoardEvents() {
     createEditTopicListener();
     createSaveChangesListener();
     viewBoardPost();
-
 }
-
 // Add a topic - works ----------------------->
 function createAddTopicListener() {
     $("#create-topic").click(function () {
@@ -138,13 +153,11 @@ function createAddTopicListener() {
             name,
             description
         }
-
         const request = {
             method: "POST",
             headers: getHeaders(),
             body: JSON.stringify(newBoardTopic)
         }
-
         fetch(URL, request)
             .then(res => {
                 console.log(res.status);
@@ -155,10 +168,8 @@ function createAddTopicListener() {
         });
     })
 }
-
 // Edit topic - not working yet ---------------->
 function createEditTopicListener() {
-
     $(".edit-topic-button").click(function () {
         const id = $(this).data("id");
         const oldName = $(`#topic-${id}`).text();
@@ -168,28 +179,22 @@ function createEditTopicListener() {
         // $("#add-topic-id").val(id);
         $("#EditTopicName").val(oldName);
         $("#EditDescription").val(oldDescription);
-
     });
 }
-
 function createSaveChangesListener() {
     $("#save-changes").click(function () {
         const description = $('#EditDescription').val();
         const name = $('#EditTopicName').val();
         const id = $('#edit-id').val();
-
-
         const savedChanges = {
             name,
             description
         }
-
         const request = {
             method: "PUT",
             headers: getHeaders(),
             body: JSON.stringify(savedChanges)
         }
-
         fetch(URL + `/${id}`, request)
             .then(res => {
                 console.log(res.status);
@@ -200,7 +205,6 @@ function createSaveChangesListener() {
         });
     })
 }
-
 // Delete topic works ------>
 function createDeleteTopicListeners() {
     $(".delete-topic-button").click(function () {
@@ -209,7 +213,6 @@ function createDeleteTopicListeners() {
             method: "DELETE",
             headers: getHeaders(),
         }
-
         fetch(URL + `/${id}`, request)
             .then(res => {
                 console.log(res.status);
@@ -218,10 +221,8 @@ function createDeleteTopicListeners() {
             console.log(error);
             createView("/messageBoards");
         });
-
     });
 }
-
 function viewBoardPost() {
     $('.topic').click(function () {
         var boardId = this.id
