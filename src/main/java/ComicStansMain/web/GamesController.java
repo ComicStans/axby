@@ -3,9 +3,11 @@ package ComicStansMain.web;
 
 import ComicStansMain.data.Game;
 import ComicStansMain.data.GamesRepository;
+import ComicStansMain.data.User;
 import ComicStansMain.data.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -46,6 +48,14 @@ public class GamesController {
         Game editedGame = gamesRepository.getById(id);
         editedGame.setArt(game.getArt());
         gamesRepository.save(editedGame);
+    }
+    @PutMapping("add")
+    private void addGame(OAuth2Authentication auth, @RequestBody Game game) {
+        User user = usersRepository.findByEmail(auth.getName());
+        Collection<Game> myGames= user.getGames();
+        myGames.add(game);
+        user.setGames(myGames);
+        usersRepository.save(user);
     }
     @DeleteMapping("{id}")
     private void deleteGame(@PathVariable long id) {
