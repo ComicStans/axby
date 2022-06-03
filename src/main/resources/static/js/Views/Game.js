@@ -14,6 +14,7 @@ export default function Games(props) {
 export function gameListeners() {
     populateGames()
     addToPlayed()
+    addToWishList()
 }
 
 const populateGames = function() {
@@ -75,5 +76,25 @@ const addToPlayed = function() {
             headers: getHeaders()
         }
         fetch(`http://localhost:8081/api/games/add`, request);
+    })
+}
+
+const addToWishList = function() {
+    $("body").on("click", ".wishButton", function () {
+        console.log(this.id)
+        let id = this.id
+        let game = {
+            art: $("#cover-" + id).attr("src"),
+            companies: $("#companies-" + id).text(),
+            platforms: $("#platforms-" + id).text(),
+            summary: $("#summary-" + id).text(),
+            name: $("#title-" + id).text(),
+        }
+        let request ={
+            method: 'POST',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`http://localhost:8081/api/games/wish`, request);
     })
 }
