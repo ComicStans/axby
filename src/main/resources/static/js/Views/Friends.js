@@ -107,7 +107,7 @@ export function FindAllRequests(props) {
         }
         fetch("http://localhost:8081/api/users/friends/search/me", requests)
             .then(response => {
-                createView("/friends")
+                createView("/friendsRequest")
 
             })
             .catch(error => {
