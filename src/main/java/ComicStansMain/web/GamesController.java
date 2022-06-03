@@ -53,6 +53,7 @@ public class GamesController {
     private void addGame(OAuth2Authentication auth, @RequestBody Game game) {
         User user = usersRepository.findByEmail(auth.getName());
         Collection<Game> myGames= user.getGames();
+        game.setType(Game.Status.PLAYED);
         myGames.add(game);
         user.setGames(myGames);
         usersRepository.save(user);

@@ -26,8 +26,8 @@ const populateGames = function() {
                 console.log(res)
                 for (let game of res) {
                     console.log(game.id)
-                    let buttons = `<span class="btn btn-primary playButton" id="savePlayed-${game.id}">Played it</span>
-                                    <span  class="btn btn-primary wishButton" id="Wishlist-${game.id}">Wanna play it</span>`
+                    let buttons = `<span class="btn btn-primary playButton" id="${game.id}">Played it</span>
+                                    <span  class="btn btn-primary wishButton" id="${game.id}">Wanna play it</span>`
                     let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
                     game.involved_companies.forEach(company => {
                         html += `${company.company.name}, `
@@ -60,5 +60,11 @@ const populateGames = function() {
 const addToPlayed = function() {
     $("body").on("click", ".playButton", function () {
         console.log(this.id)
+        let id = this.id
+        let game = {
+            art: $("#cover-" + id).attr("src"),
+            companies: $("#companies-" + id).val(),
+            platforms: $("#platforms-" + id).val()
+        }
     })
 }
