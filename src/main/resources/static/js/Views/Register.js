@@ -28,26 +28,28 @@ export default function Register(props) {
 <!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT PASSWORD AND USERNAME ARE OK -->
 <!--TODO: NEED TO HAVE MORE REQUIRED INFO TO REGISTER (STARS NEXT TO REQUIRED FIELDS) -->
 
-                         <h1>Register</h1>
-                         <form id="register-form" style="margin-left: 1em; margin-right: 1em; width: 70%">
-                            <label for="newUsername">Username</label>
-                            <input id="newUsername" name="username" type="text"/>
-                            <label for="email">Email</label>
-                            <input id="email" name="email" type="email">
-                            <label for="userPassword">Password</label>
-                            <input id="userPassword" name="password" type="password"/>
-                            <label for="country">Country of Residence</label>
-                            <input id="country" name="country" type="text"/>
-                            <label for="region">State/Province/Region/County</label>
-                            <input id="region" name="region" type="text"/>
-                            <label for="language">Preferred Language</label>
-                            <input id="language" name="language" type="text"/>
-                            <label for="aboutme">A Bit About Me</label>
-                            <textarea id="aboutMe" name="aboutme" rows="4"></textarea>
-<!--                            <button id="register-btn" type="button">Register</button>-->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: maroon">Cancel</button>
-        <button type="button" class="btn btn-primary" id="Create">Create</button>
-                         </form>
+       <div class="container">
+           <div class="row">
+               <div class="col">
+                   <h1 style="text-align: center">Register</h1>
+                       <form id="register-form" style="margin-left: 1em; margin-right: 1em; width: 70%">
+                          <label for="newUsername">Username</label>
+                           <input id="newUsername" name="username" type="text"/>
+                          <label for="email">Email</label>
+                           <input id="email" name="email" type="email">
+                          <label for="userPassword">Password</label>
+                           <input id="userPassword" name="password" type="password"/>
+                <!--          <button id="register-btn" type="button">Register</button>-->
+                          <button type="button" class="btn btn-primary" id="Create">Create</button> <br>  
+                          <button type="button" class="btn btn-secondary" id="clearRegisterBtn" >Clear</button>
+                          
+                       </form>
+                </div>
+            </div>
+        </div>
+           
+           
+       
 <!--      </div>-->
 <!--      <div class="modal-footer">-->
 <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
@@ -88,10 +90,12 @@ export default function Register(props) {
 // }
 export function user(){
     CreateUser();
+    clearRegisterForm();
 }
 
 function CreateUser(){
     $("#Create").click(function (){
+        // localStorage.setItem("justRegistered", true)
         let newUser = {
             username: $("#newUsername").val(),
             email: $("#email").val(),
@@ -107,7 +111,19 @@ function CreateUser(){
         fetch("http://localhost:8081/api/users", request)
             .then(response => {
                 console.log(response.status);
-                createView("/");
+                localStorage.setItem("justRegistered", true)
+                createView("/login");
             })
     })
+}
+
+function clearRegisterForm() {
+
+    $("#clearRegisterBtn").click(function () {
+        $(':input', '#register-form')
+            .not(':button, :submit, :reset, :hidden')
+            .val('')
+            .prop('checked', false)
+            .prop('selected', false);
+    });
 }

@@ -32,7 +32,9 @@ export default function router(URI) {
     const routes = {
         '/': {
             returnView: Home,
-            state: {},
+            state: {
+                user: '/api/users/me'
+            },
             uri: '/',
             title: 'Home',
             eventProps: false,
