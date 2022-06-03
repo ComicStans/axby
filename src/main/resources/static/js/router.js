@@ -12,7 +12,7 @@ import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
 import MarketPlace from "./Views/MarketPlace.js";
 import Profile, {ProfileEvents} from "./Views/Profile.js";
-import Friends, {AcceptRequest, FriendsEvents} from "./Views/Friends.js";
+import Friends, {AcceptRequest, FindAllRequests, FriendsEvents} from "./Views/Friends.js";
 // import {CreateUser} from "./Views/Register.js";
 import {user} from "./Views/Register.js";
 import Account from "./Views/Account.js";
@@ -124,12 +124,12 @@ export default function router(URI) {
          '/friends': {
              returnView: Friends,
              state: {
-                 connection: '/api/users/friends/search/me'
+                 connections: '/api/users/friends/search/me'
              },
              uri: '/friends',
              title: "Friends",
-             eventProps: false,
-             viewEvent: FriendsEvents
+             eventProps: true,
+             viewEvent: FindAllRequests
          },
         '/boardView': {
             returnView: BoardView,

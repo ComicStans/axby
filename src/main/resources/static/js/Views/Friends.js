@@ -74,17 +74,18 @@ export default function Friends(props) {
 <button type="button" class="btn btn-primary" id="pendingRequests">
   Friends Requests
 </button>
-             ${props.connection.map(friend => {
 
-        return `
 <!--  I NEED THIS LINE TO GENERATE FOR EVERY FRIEND REQUEST    -->
 
+                 
+
+
       <div class="acceptOrDecline">
+      <p >SHOW ME FRIENDS!!</p>
         <button type="button" class="btn btn-primary" id="accept">Accept</button>
         <button type="button" class="btn btn-primary" id="decline">Decline</button>
       </div>
-                  `
-    }).join('')}
+                  
 
                </body>
         </html>
@@ -93,24 +94,22 @@ export default function Friends(props) {
 }
 
 export function FriendsEvents() {
-    FindAllRequests();
+    FindAllRequests(props);
     AcceptRequest();
     DeclineRequest();
 }
 
-export function FindAllRequests() {
+export function FindAllRequests(props) {
     $("#pendingRequests").click(function () {
         let requests = {
             method: "GET",
             headers: getHeaders()
-
         }
-        fetch("http://localhost:8081/api/users/friends/search/me" +`/${id}`, requests)
+        fetch("http://localhost:8081/api/users/friends/search/me", requests)
             .then(response => {
                 createView("/friends")
 
             })
-            // .catch(createView("/loading"));
             .catch(error => {
                 console.log("ERROR: " + error);
                 createView("/Error404")
