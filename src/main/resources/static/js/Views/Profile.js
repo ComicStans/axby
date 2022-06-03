@@ -83,7 +83,11 @@ export default function Profile(props) {
                            <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
 
                     <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-
+                            ${props.connection.map(connection => {
+                                return connection.dateAccepted != null ? (
+                                    `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+                                :("")}).join('')
+                            }
 
                         <h2>Wish List</h2>
                         <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
@@ -158,7 +162,7 @@ export function FriendRequest(props){
 
 //FINDING HOW TO FIX FRIENDS LIST
 // ${props.connection.map(connection => {
-//                                 return connection.dateAccepted != null && user.email === connection.recipient.email ? (
-//                                     `<p id="friend-${connection.id}"> <a href="/userProfile?username=${location.href.split('=')[1]}">${connection.requester.username}</a></p><br>`)
+//     return connection.dateAccepted != null && user.email === connection.recipient.email ? (
+//        `<p id="friend-${connection.id}"> <a href="/userProfile?username=${location.href.split('=')[1]}">${connection.requester.username}</a></p><br>`)
 //     : ("")}).join('')
 // }
