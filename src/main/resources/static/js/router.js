@@ -130,8 +130,7 @@ export default function router(URI) {
         '/boardView': {
             returnView: BoardView,
             state: {
-                boardView: '',
-                boards: '/api/boards'
+                boardView: ''
             },
             uri: '/posts',
             title: 'Game Boards',

@@ -2,11 +2,11 @@ import {getHeaders, getUser} from "../auth.js";
 import createView from "../createView.js";
 
 const URL = 'http://localhost:8081/api/posts/board/';
-const loggedInUser = getUser();
 
 export default function BoardView(props) {
     // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
     console.log(props)
+    const loggedInUser = getUser();
 
     return `
     <div class="container">
@@ -20,36 +20,8 @@ export default function BoardView(props) {
     <ul class="list-group list-group-flush">
         <div id="posts-container">
         
-        ${buildPostTopics(loggedInUser)}
+        ${buildPostTopics(props.boardView.posts,loggedInUser)}
     
-
-
-            <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
-            <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="examplePostModalLabel">Edit Post</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <input type="hidden" value="${post.id}" id="edit-post-id">
-                                <div class="form-group">
-                                    <label for="EditPostText" class="col-form-label">Post:</label>
-                                    <textarea class="form-control" id="EditPostText"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" id="saveChanges" data-dismiss="modal">Save Changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         <li class="list-group-item">
             <div id="b_news">
@@ -77,7 +49,6 @@ export default function BoardView(props) {
         </div>
     </div>
      `
-
 }
 
 function buildPostTopics(posts, loggedInUser) {
@@ -89,20 +60,46 @@ function buildPostTopics(posts, loggedInUser) {
 function buildPostRow(post, loggedInUser) {
         return `
             <li class="list-group-item"><h1><span class="post" id="post-${post.id}" data-link>${post.postText}</span></h1>
-            ${buildPostTopicEditButton(board, loggedInUser)}
-            ${buildPostTopicDeleteButton(board, loggedInUser)}
-            </li>`
+            ${buildPostTopicEditButton(post, loggedInUser)}
+            ${buildPostTopicDeleteButton(post, loggedInUser)}
+            </li>
+            <!-- EDIT POST TEXT MODAL                ------------------------------------------------------------------>
+            <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="examplePostModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="examplePostModalLabel">Edit Post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="hidden" value="${post.id}" id="edit-post-id">
+                                <div class="form-group">
+                                    <label for="EditPostText" class="col-form-label">Post:</label>
+                                    <textarea class="form-control" id="EditPostText"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="saveChanges" data-dismiss="modal">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
 }
 
-function buildPostTopicEditButton(board,loggedInUser) {
-    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== board.creator.email) {
+function buildPostTopicEditButton(post,loggedInUser) {
+    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== post.author.email) {
         return "";
     }
     return `<button type="button" class="btn edit-post-button" data-toggle="modal" data-target="#edit-post" id="edit-post-${post.id}" data-id="${post.id}"><i class="fas fa-edit"></i></button>`
 }
 
-function buildPostTopicDeleteButton(board,loggedInUser) {
-    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== board.creator.email) {
+function buildPostTopicDeleteButton(post,loggedInUser) {
+    if (loggedInUser.role !== 'ADMIN' && loggedInUser.userName !== post.author.email) {
         return "";
     }
     return `<button type="button" class="btn delete-post-button" id="delete-post-${post.id}" data-id="${post.id}"><i class="fas fa-trash-alt"></i></button></h1></li>`
