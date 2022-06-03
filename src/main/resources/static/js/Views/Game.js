@@ -72,6 +72,7 @@ const addToPlayed = function() {
         let request ={
             method: 'POST',
             body: JSON.stringify(game),
+            headers: getHeaders()
         }
         fetch(`http://localhost:8081/api/games/add`, request);
     })

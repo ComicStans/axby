@@ -53,10 +53,7 @@ public class GamesController {
     @PostMapping("add")
     private void addGame(OAuth2Authentication auth, @RequestBody Game game) {
         User user = usersRepository.findByEmail(auth.getName());
-        Collection<Game> myGames = new ArrayList<Game>();
-        if (user.getGames()!= null) {
-            myGames = user.getGames();
-        }
+        Collection<Game> myGames = new ArrayList<Game>(user.getGames());
         game.setType(Game.Status.PLAYED);
         myGames.add(game);
         user.setGames(myGames);
