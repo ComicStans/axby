@@ -29,21 +29,17 @@ const populateGames = function() {
                     let buttons = `<span class="btn btn-primary playButton" id="${game.id}">Played it</span>
                                     <span  class="btn btn-primary wishButton" id="${game.id}">Wanna play it</span>`
                     let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
-                    if(game.involved_companies !== null) {
                         game.involved_companies.forEach(company => {
                             html += `${company.company.name}, `
                         })
                         html = html.substr(0, html.length - 2);
                         html += `</p>`
-                    } else {
-                        html += "Information not available"
-                        html += `</p>`
-                    }
+
                     let htmlg = `<h5>platforms: </h5><p id="platforms-${game.id}">`
                     game.platforms.forEach(platform => {
                         htmlg += `${platform.name}, `
                     })
-                    htmlg = htmlg.substr(0, html.length-2);
+                    htmlg = htmlg.substr(0, htmlg.length-2);
                     htmlg += `</p>`
                     console.log(game.cover.url)
                     $("#gameResults").append(`<div class="card" style="width: 18rem;">
