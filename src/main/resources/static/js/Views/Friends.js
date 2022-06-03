@@ -139,6 +139,8 @@ export function DeclineRequest() {
         let decline = {
             method: "DELETE"
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(FindAllRequests)
+        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(function (){
+            createView("/friends")
+        })
     })
 }

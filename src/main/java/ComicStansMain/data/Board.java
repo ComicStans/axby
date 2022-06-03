@@ -63,6 +63,6 @@ public class Board {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties("admins")
+    @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated"})
     private Collection<User> admins;
 }
