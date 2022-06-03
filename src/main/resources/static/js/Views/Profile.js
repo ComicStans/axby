@@ -1,6 +1,6 @@
 import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
-// import {user} from "./Register";
+import {user} from "./Register";
 
 export default function Profile(props) {
     console.log(props)
@@ -84,7 +84,7 @@ export default function Profile(props) {
 
                     <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
                             ${props.connection.map(connection => {
-                                return connection.dateAccepted != null ? (
+                                return connection.dateAccepted != null && connection.recipient.email !== user.id ? (
                                     `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
                                 :("")}).join('')
                             }
