@@ -10,9 +10,10 @@ export default function Friends(props) {
                 <title>Register</title>
             </head>
 <body>
-<h1>Friends</h1>
+<h1 id="friendsTitle">Friends</h1>
 <hr>
 <!-- Button trigger modal -->
+<div class ="friendsButtons">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends">
   Edit Friends
 </button>
@@ -68,6 +69,8 @@ export default function Friends(props) {
 <button type="button" class="btn btn-primary" id="pendingRequests">
   Friends Requests
 </button>
+</div>
+<div id="acceptOrDecline"></div>
 </body>
         </html>
 `;
@@ -92,10 +95,9 @@ export function FindAllRequests() {
                     console.log(response)
                     $("#acceptOrDecline").html("");
                     response.forEach(connection => {
-                        $("#acceptOrDecline").append(`<p id="requester-${connection.id}">${connection.requester.username}</p>
-
-    <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
-    <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button>`)
+                        $("#acceptOrDecline").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
+                        <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
+                            <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button></div>`)
                     })
                 })
             })

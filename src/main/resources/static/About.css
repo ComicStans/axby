@@ -1,6 +1,6 @@
 p#about, .aboutUs{
     /*display: block;*/
-    margin: 1em;
+    margin: .5em 7em .5em 7em;
     text-align: center;
 }
 .ourTeam {
@@ -36,7 +36,6 @@ p#about, .aboutUs{
     color: #ffffff;
     font-family: 'Play', sans-serif; !important;
     text-shadow: 2px 2px #0e1b50;
-
 }
 
 .developedBy {

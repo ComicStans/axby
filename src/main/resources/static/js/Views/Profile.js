@@ -4,22 +4,22 @@ import {isLoggedIn} from "../auth.js";
 
 export default function Profile(props) {
     console.log(props)
-    return`
+    return `
 <head>    
     <title>Profile</title>
   </head>
        <body>
-           <div class="container">
+           <div class="container" style="margin-left: 1em;">
                 <div class="row">
                     <div class="col">
-                            <!--  TODO:    USERNAME AND PROFILENAME NOT ALIGNING!!!!              -->
                         <div id="profileNameandImage" class="username">
                             <!--     AUTO GENERATED USERNAME OF LOGGED IN PROFILE ---WORKING        -->
                             ${props.user.username}
                             <!-- TODO:     NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
-                            <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                             <br>
                         </div>
+                        <img class="img-circle " src="../../Images/NES.png" alt="NES controller">
+
                         <!-- ONLY DISPLAY IF YOU ARE ON SOMEONE ELSES PROFILE -->
                         <button type="button" id="confirmRequest" class="btn btn-primary" >
                          Friend Request
@@ -30,7 +30,7 @@ export default function Profile(props) {
                                     <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ -->
                               </div>
                             </div>
-                          </div>
+                          
                         <br>
                         <h2>About Me</h2>
                             <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
@@ -40,17 +40,16 @@ export default function Profile(props) {
                                 <p id="aboutMe">
                                     ${props.user.aboutUserText}
                                 </p>
-                        </div>
-                           <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
-
-                    <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-
-
-                        <h2>Wish List</h2>
-                        <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            
-                    </div>
-                   
+                            </div>
+                               <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
+  
+                        <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
+                        <div class="friendList"> </div>
+            
+                            <h2>Wish List</h2>
+                            <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
+                            <div class="wishList"> </div>
+           </div>
                     <div class="col" id="myCollection">
                          <h1>My Collection</h1>
                          <!-- TODO: THIS DROPDOWN BUTTON SHOULD ORGANIZE YOUR GAMES BASED ON OPTION YOU CHOOSE -->
@@ -64,10 +63,10 @@ export default function Profile(props) {
                                 <a class="dropdown-item" href="#">Reverse Alphabetical</a>
                               </div>
                             </div>  
-                         <!--      TODO:         THIS AREA NEEDS TO BE CREEATED TO DISPLAY YOUR GAMES                                       -->
+                         <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
                     </div>
-                </div>
-            </div>
+                    
+                   
                 </body>
     `;
 }

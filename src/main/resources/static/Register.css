@@ -16,6 +16,10 @@
     height: 50%;
     left: 25%;
 }
+.register-successful{
+    color: #ffffff;
+    font-family: 'VT323', monospace;
+}
 
 .popup-overlay.active {
     /*displays pop-up when "active" class is present*/
