@@ -1,7 +1,6 @@
 p#about, .aboutUs{
     /*display: block;*/
     margin: 1em;
-    color: white !important;
     text-align: center;
 }
 .ourTeam {
@@ -23,8 +22,30 @@ p#about, .aboutUs{
     justify-content: space-evenly;
 }
 
-.aboutUs, .ourTeam {
+.aboutUs {
+    font-family: 'Play', sans-serif; !important;
+    color: #ffffff;
+    text-shadow: 3px 3px #0e1b50;
+}
+.ourTeam{
+    font-family: 'Play', sans-serif; !important;
+    color: #62b243;
+    text-shadow: 2px 2px #0e1b50;
+}
+#about {
+    color: #ffffff;
+    font-family: 'Play', sans-serif; !important;
+    text-shadow: 2px 2px #0e1b50;
+
+}
+
+.developedBy {
+    font-size: xx-large;
     font-family: 'VT323', monospace !important;
+    color: #62b243;
+    text-shadow: 2px 2px #0e1b50;
+    text-align: center;
+
 }
 @media only screen and (max-width: 1182px) {
     .aboutPic{
