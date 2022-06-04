@@ -9,3 +9,45 @@ p#about, .aboutUs{
     color: navajowhite;
     margin: 1em;
 }
+.aboutPic{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:  10em;
+    height: 10em;
+    object-fit: cover;
+}
+#alignOurTeam{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.aboutUs, .ourTeam {
+    font-family: 'VT323', monospace !important;
+}
+@media only screen and (max-width: 1182px) {
+    .aboutPic{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width:  8em;
+        height: 8em;
+        object-fit: cover;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .aboutPic{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width:  8em;
+        height: 8em;
+        object-fit: cover;
+    }
+    #alignOurTeam{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
