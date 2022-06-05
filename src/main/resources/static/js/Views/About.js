@@ -10,15 +10,15 @@ export default function About(props) {
 
             <div id="alignOurTeam">
                 <h5 class="ourTeam">Wesley Bernard<br>
-                                <img class="aboutPic" src="../../Images/WesleyHeadshot.jpeg" onmouseover="this.src='https://www.ctvnews.ca/polopoly_fs/1.4037876!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg'" onmouseout="this.src='../../Images/Wesley'""alt"Wesley"></img>
+                                <img class="aboutPic" src="../../Images/WesleyHeadshot.jpeg" onmouseover="this.src='../../Images/Wesley.png'" onmouseout="this.src='../../Images/WesleyHeadshot.jpeg'" alt"Wesley"></img>
                 <h5 class="ourTeam">David Collins<br>
-                                <img class="aboutPic" src="../../Images/DavidHeadshot.jpeg" alt"David"></img>
+                                <img class="aboutPic" src="../../Images/DavidHeadshot.jpeg" onmouseover="this.src='../../Images/David.png'" onmouseout="this.src='../../Images/DavidHeadshot.jpeg'" alt"David"></img>
                 <h5 class="ourTeam">Jennifer Deleon<br>
-                                <img class="aboutPic" src="../../Images/JenniferHeadshot.jpg" alt"Jennifer"></img>
+                                <img class="aboutPic" src="../../Images/JenniferHeadshot.jpg" onmouseover="this.src='../../Images/Jenn.png'" onmouseout="this.src='../../Images/JenniferHeadshot.jpg'" alt"Jennifer"></img>
                 <h5 class="ourTeam">Rachel Verastique<br>
-                                <img class="aboutPic" src="../../Images/RachelHeadshot.jpeg" alt"Rachel"></img>
+                                <img class="aboutPic" src="../../Images/RachelHeadshot.jpeg" onmouseover="this.src='../../Images/Rachel.png'" onmouseout="this.src='../../Images/RachelHeadshot.jpeg'" alt"Rachel"></img>
                 <h5 class="ourTeam">Micah Wood<br>
-                               <img class="aboutPic" src="../../Images/MicahHeadshot.jpeg" alt"Micah"></img>
+                               <img class="aboutPic" src="../../Images/MicahHeadshot.jpeg" onmouseover="this.src='../../Images/Micah.png'" onmouseout="this.src='../../Images/MicahHeadshot.jpeg'" alt"Micah"></img>
             </div>
             <p id="specialThanks">Special Thanks to our Instructors:</p>
             <div id="Instructors">
