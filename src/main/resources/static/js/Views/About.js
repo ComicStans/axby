@@ -10,7 +10,7 @@ export default function About(props) {
 
             <div id="alignOurTeam">
                 <h5 class="ourTeam">Wesley Bernard<br>
-                                <img class="aboutPic" src="../../Images/Wesley.png" alt"Wesley"></img>
+                                <img class="aboutPic" src="../../Images/WesleyHeadshot.jpeg" onmouseover="this.src='https://www.ctvnews.ca/polopoly_fs/1.4037876!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg'" onmouseout="this.src='../../Images/Wesley'""alt"Wesley"></img>
                 <h5 class="ourTeam">David Collins<br>
                                 <img class="aboutPic" src="../../Images/DavidHeadshot.jpeg" alt"David"></img>
                 <h5 class="ourTeam">Jennifer Deleon<br>
@@ -19,7 +19,17 @@ export default function About(props) {
                                 <img class="aboutPic" src="../../Images/RachelHeadshot.jpeg" alt"Rachel"></img>
                 <h5 class="ourTeam">Micah Wood<br>
                                <img class="aboutPic" src="../../Images/MicahHeadshot.jpeg" alt"Micah"></img>
-
+            </div>
+            <p id="specialThanks">Special Thanks to our Instructors:</p>
+            <div id="Instructors">
+                <h5 class="codeupTeam">Doc Rob<br>
+                                <img class="aboutPic" src="../../Images/Doc.png" alt"Doc"></img>
+                <h5 class="codeupTeam">Ry<br>
+                                <img class="aboutPic" src="../../Images/Ry.png" alt"Ry"></img>
+                <h5 class="codeupTeam">Lola<br>
+                                <img class="aboutPic" src="../../Images/Lola.png" alt"Lola"></img>
+                <h5 class="codeupTeam">Casey<br>
+                                <img class="aboutPic" src="../../Images/Casey.png" alt"Casey"></img>
             </div>
         </main>
     `;
