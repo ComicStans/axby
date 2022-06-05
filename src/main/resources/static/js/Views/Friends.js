@@ -1,4 +1,4 @@
-import {getHeaders} from "../auth.js";
+import {getHeaders, getUser} from "../auth.js";
 import createView from "../createView.js";
 
 export default function Friends(props) {
@@ -45,7 +45,7 @@ export default function Friends(props) {
 
 <!-- Guild Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">
-  Creat Guild
+  Create Guild
 </button>
 
 <!-- Guild Modal -->
@@ -59,11 +59,14 @@ export default function Friends(props) {
         </button>
       </div>
       <div class="modal-body">
-        Here is where your guild will go
+          <label for="guildname">What's your guild's name?</label>
+          <input id="guildname" type="text" class="form-control">
+          <label for="gulidmotto">Optional: Give your guild a *concise* motto:</label>
+          <input id="guildmotto" type="text" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button id="close-guild-form" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="create-guild" type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
@@ -92,6 +95,7 @@ export function FriendsEvents() {
     FindAllRequests();
     AcceptRequest();
     DeclineRequest();
+    CreateGuildListener();
 }
 
 export function FindAllRequests() {
@@ -142,5 +146,32 @@ export function DeclineRequest() {
         fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(function (){
             createView("/friends")
         })
+    })
+}
+
+export function CreateGuildListener() {
+    $("#create-guild").click(function () {
+        const name = $("#guildname").val();
+        const motto = $("#guildmotto").val();
+        const creator = getUser();
+        console.log(name + "—" + motto);
+        const newGuild = {
+            name,
+            motto,
+            creator
+        }
+        const request = {
+            method: "POST",
+            headers: getHeaders(),
+            body: JSON.stringify(newGuild)
+        }
+        fetch(URL, request)
+            .then(response => {
+                console.log(response.status);
+                createView("/friends")
+            }).catch(error => {
+            console.log(error);
+            createView("/friends");
+        });
     })
 }
