@@ -46,7 +46,7 @@ function buildBoardPage(boards, loggedInUser) {
                       </div>
                     </div>
                     </div>
-                    <hr>
+                    <hr id="hr-board">
                      
                     
                     
