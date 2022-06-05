@@ -53,6 +53,7 @@ public class GamesController {
     @PostMapping("add")
     private void addGame(OAuth2Authentication auth, @RequestBody Game game) {
         User user = usersRepository.findByEmail(auth.getName());
+        game.setUser(user);
         Collection<Game> myGames = new ArrayList<Game>(user.getGames());
         game.setType(Game.Status.PLAYED);
         myGames.add(game);
@@ -63,6 +64,7 @@ public class GamesController {
     @PostMapping("wish")
     private void addWish(OAuth2Authentication auth, @RequestBody Game game) {
         User user = usersRepository.findByEmail(auth.getName());
+        game.setUser(user);
         Collection<Game> myGames = new ArrayList<Game>(user.getGames());
         game.setType(Game.Status.WANNAPLAY);
         myGames.add(game);
