@@ -10,11 +10,10 @@ export default function Friends(props) {
                 <title>Register</title>
             </head>
 <body>
-<h1>Friends</h1>
+<h1 id="friendsTitle">Friends</h1>
 <hr>
-
-               <body>
 <!-- Button trigger modal -->
+<div class ="friendsButtons">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends">
   Edit Friends
 </button>
@@ -39,9 +38,6 @@ export default function Friends(props) {
     </div>
   </div>
 </div>
-
-
-
 
 <!-- Guild Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">
@@ -70,19 +66,12 @@ export default function Friends(props) {
 </div>
 
 
-<!-- FRIENDS/CONNECTION Button trigger modal -->
 <button type="button" class="btn btn-primary" id="pendingRequests">
   Friends Requests
 </button>
-
-<!--  I NEED THESE LINES TO GENERATE FOR EVERY FRIEND REQUEST    -->
-      <div id="acceptOrDecline">
-        
-
-      </div>
-                  
-
-               </body>
+</div>
+<div id="acceptOrDecline"></div>
+</body>
         </html>
 `;
 
@@ -102,14 +91,15 @@ export function FindAllRequests() {
         }
         fetch("http://localhost:8081/api/users/friends/search/me", requests)
             .then(response => {
-            response.json().then(response=>{console.log(response)
-                $("#acceptOrDecline").html("");
-            response.forEach(connection =>{
-                $("#acceptOrDecline").append(`<p id="requester-${connection.id}">${connection.requester.username}</p>
-
-    <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
-    <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button>`)
-                })})
+                response.json().then(response => {
+                    console.log(response)
+                    $("#acceptOrDecline").html("");
+                    response.forEach(connection => {
+                        $("#acceptOrDecline").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
+                        <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
+                            <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button></div>`)
+                    })
+                })
             })
             .catch(error => {
                 console.log("ERROR: " + error);
@@ -139,7 +129,7 @@ export function DeclineRequest() {
         let decline = {
             method: "DELETE"
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(function (){
+        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(function () {
             createView("/friends")
         })
     })

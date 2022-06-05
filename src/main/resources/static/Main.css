@@ -7,20 +7,67 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
 
 
-h1, h2 {
+h1  {
     color: #b70c95;
     text-shadow: 1px 1px #0e1b50;
     font-family: 'Caveat Brush', cursive;
+}
+#friendsTitle{
+    color: #ffffff;
+    text-align: center;
+    font-family: 'VT323', monospace;
+}
+h2, h3{
+    color: #ffffff;
+    font-family: 'VT323', monospace;
+}
+.welcome{
+    text-align: center;
+}
+.friendsButtons {
+    margin-left: 1.7em;
+    margin-bottom: 1em;
+}
+#acceptOrDecline{
+margin-left: 1em;
+}
+
+.jumbotron {
+    margin-bottom: 0;
+    background-image: url(/Images/retro-game-synthwave.jpeg);
+    background-size: cover;
+    background-position: center center;
+}
+.jumboTitle{
+    font-size: 650%;
+    color: #4be8cb;
+    font-family: 'Smooch', cursive;
+    text-shadow: 2px 2px 10px #1d1db8, 2px 2px 10px #ccc;
+}
+
+.img-circle {
+    border-radius: 100%;
+    border: 4px solid ;
+    display: block;
+    width:  10em;
+    height: 10em;
+    object-fit: cover;
 }
 
 .nav-item {
     padding-right: 2em;
     text-align: center;
-    font-family: 'Caveat Brush', cursive;
+    font-family: 'VT323', monospace !important;
     color: white !important;
 
+}
+.nav-link {
+    display: block;
+    padding: .1em;
 }
 .navbar{
     background-color: black;
@@ -33,47 +80,26 @@ h1, h2 {
     justify-content: center;
 }
 
-.jumbotron {
-    margin-bottom: 0;
-    background-image: url(/Images/retro-game-synthwave.jpeg);
-    background-size: cover;
-    background-position: center center;
-}
-.jumboTitle{
-    font-size: 650%;
-    color: #cbf2a0;
-    font-family: 'Smooch', cursive;
-    text-shadow: 2px 2px 10px #6f11d1, 2px 2px 10px #ccc;
 
-}
 .glow {
-    font-family: "Comic Sans MS", serif;
-    font-size: 25px;
+    font-size: 35px;
     color: #6f11d1;
     text-align: center;
-    text-shadow:2px 2px 10px #6f11d1, 2px 2px 10px #ccc;
-
-    /*animation: glow 1s ease-in-out infinite alternate;*/
+    text-shadow: 2px 2px 10px #6f11d1, 3px 3px 10px #ccc;
 }
-/*@-webkit-keyframes glow {*/
-/*    from {*/
-/*        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #08ed17, 0 0 40px #08ed17, 0 0 50px #08ed17, 0 0 60px #08ed17, 0 0 70px #08ed17;*/
-/*    }*/
-/*    to {*/
-/*        text-shadow: 0 0 20px #fff, 0 0 30px #28dc0c, 0 0 40px #28dc0c, 0 0 50px #28dc0c, 0 0 60px #28dc0c, 0 0 70px #28dc0c, 0 0 80px #28dc0c;*/
-/*    }*/
-/*}*/
-
 .dropdown-menu {
     background-color: #000000;
 }
-body{
-    background-image: linear-gradient(to right, #840b9f , #0e1b50);
 
-}
 
 .navbar-light .navbar-toggler-icon {
     background-image: url(https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff) !important;
+}
+body{
+    background-image: linear-gradient(to right, #840b9f , #0e1b50);
+}
+.card {
+    margin-top: 1em !important;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -114,7 +140,7 @@ body{
     padding:50px 0;
     background-color:#000000;
     color:#4b4c4d;
-    margin-top: 5em;
+    margin-top: 1em;
 }
 
 .footer-clean h3 {
@@ -198,3 +224,24 @@ body{
 }
 
 /* Credit to https://epicbootstrap.com/snippets/footer-with-columns */
+
+@media only screen and (max-width: 1349px)  {
+
+    .glow {
+        font-size: 30px;
+        color: #6f11d1;
+        text-align: center;
+        text-shadow: 2px 2px 10px #6f11d1, 3px 3px 10px #ccc;
+    }
+
+}
+@media only screen and (max-width: 1165px) {
+
+    .glow {
+        font-size: 25px;
+        color: #6f11d1;
+        text-align: center;
+        text-shadow: 2px 2px 10px #6f11d1, 3px 3px 10px #ccc;
+    }
+
+}
