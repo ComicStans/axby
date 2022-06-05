@@ -164,6 +164,8 @@ export default function router(URI) {
             eventProps: true
         },
 
+        }
+
     }
 
     let piecesOfURI = URI.split("/");

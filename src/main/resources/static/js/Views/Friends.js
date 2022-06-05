@@ -149,6 +149,8 @@ export function DeclineRequest() {
     })
 }
 
+//This will need a /guild view added to router.js in order to work.
+//It would be nice if it could then switch to a fresh Guild page with its own member list & message board.
 export function CreateGuildListener() {
     $("#create-guild").click(function () {
         const name = $("#guildname").val();
@@ -165,7 +167,7 @@ export function CreateGuildListener() {
             headers: getHeaders(),
             body: JSON.stringify(newGuild)
         }
-        fetch(URL, request)
+        fetch("http://localhost:8081/api/guilds", request)
             .then(response => {
                 console.log(response.status);
                 createView("/friends")
