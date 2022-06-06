@@ -40,13 +40,13 @@ export default function Profile(props) {
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
                                 <p id="aboutMe">
-                                    ${props.user.aboutUserText}
+                                    ${props.user.aboutUserText ?? "New User to the website"}
                                 </p>
                             </div>
                                <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
   
                         <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-                        <div class="friendList"> </div>
+                        <div class="friendList">
                         ${props.connection.map(connection => {
                             return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
                                 `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
@@ -57,10 +57,18 @@ export default function Profile(props) {
                                 `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
                             :("")}).join('')
                         }
-            
+                        </div>
                             <h2>Wish List</h2>
                             <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            <div class="wishList"> </div>
+                            <div class="wishList">
+                             ${props.user.games.map(game => {
+                                 return game.type === "WANNAPLAY" ? (
+                                     `<img src="${game.art}">
+                                       <p id="name-${game.id}">${game.name}</p>
+                                       <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
+                             :("")}).join('')
+                            }
+                             </div>
            </div>
                     <div class="col" id="myCollection">
                          <h1>My Collection</h1>
