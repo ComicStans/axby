@@ -25,7 +25,6 @@ export default function Friends(props) {
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends" id="editFriends">
   Edit Friends
 </button>
-</div>
 <div id="friends-to-edit"></div>
 
 
@@ -117,11 +116,11 @@ export function EditFriends() {
                     $("#friends-to-edit").html("");
                     response.forEach(connection => {
                         if (connection.dateAccepted != null && connection.recipient.email === user.userName) {
-                            $("#friends-to-edit").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p id="friend-${connection.id}">${connection.requester.username}</p>
-                        <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Unfriend</button><br>`)
+                            $("#friends-to-edit").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="font-family: VT323, serif; font-size: xx-large" id="friend-${connection.id}">${connection.requester.username}</p>
+                        <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Unfriend</button></div><br>`)
                         } else if (connection.dateAccepted != null && connection.requester.email === user.userName) {
-                            $("#friends-to-edit").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p id="friend-${connection.id}">${connection.recipient.username}</p>
-                        <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Unfriend</button><br>`)
+                            $("#friends-to-edit").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="font-family: VT323, serif; font-size: xx-large" id="friend-${connection.id}">${connection.recipient.username}</p>
+                        <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Unfriend</button></div><br>`)
                         }
                     })
                 })
