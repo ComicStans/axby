@@ -1,6 +1,6 @@
 import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
-import {user} from "./Register";
+import {user} from "./Register.js";
 
 export default function Profile(props) {
     console.log(props)
