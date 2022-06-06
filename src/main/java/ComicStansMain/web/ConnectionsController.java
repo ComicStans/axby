@@ -42,12 +42,6 @@ public class ConnectionsController {
         return connectionsRepository.findAllByRequester(usersRepository.getById(id));
     }
 
-    @GetMapping("connections/{id}")
-    public Collection<Connection> findAllConnectionsByUser(@PathVariable Long id){
-        User user = usersRepository.getById(id);
-        return connectionsRepository.findAllByActiveRequesterOrRecipient(user);
-    }
-
     @PostMapping
     public void createConnection(@RequestBody Connection newConnection, OAuth2Authentication auth) {
         newConnection.setRequester(usersRepository.findByEmail(auth.getName()));
