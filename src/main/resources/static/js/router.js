@@ -7,6 +7,8 @@ import logout from "./Views/Logout.js";
 import {logoutEvents} from "./Views/Logout.js";
 import LoginEvent from "./auth.js";
 import Register from "./Views/Register.js"
+import Games from "./Views/Game.js";
+import {gameListeners} from "./Views/Game.js";
 // import {RegisterEvent} from "./Views/Register.js";
 import UserIndex from "./Views/Account.js"
 import {UserEvents} from "./Views/Account.js";
@@ -163,6 +165,14 @@ export default function router(URI) {
             viewEvent: AcceptRequest,
             eventProps: true
         },
+        '/games': {
+            returnView: Games,
+            state: {},
+            uri: '/games',
+            title: "games",
+            viewEvent: gameListeners,
+        },
+
 
     }
 

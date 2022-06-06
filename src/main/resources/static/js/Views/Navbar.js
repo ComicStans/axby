@@ -35,6 +35,10 @@ export default function Navbar(props) {
           <li>
                 <a class="nav-item" href="/friends" data-link>Friends</a>
           </li>
+          
+          <li>
+                <a class="nav-item" href="/games" data-link>games</a>
+          </li>
 
           <li>`;
     if (isLoggedIn()) {

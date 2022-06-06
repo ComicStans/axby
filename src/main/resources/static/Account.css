@@ -2,14 +2,13 @@
     display: block;
 }
 
-/*.img-circle {*/
-/*    border-radius: 100%;*/
-/*    border: 4px solid;*/
-/*    margin-left: 1em;*/
-/*}*/
+.accountImg{
+    margin-left: 3em;
+}
 label {
     position: inherit;
     margin-top: 1em;
+    margin-left: .6em;
     display: flex;
     color: #4fc5aa;
     text-shadow: #666666;
