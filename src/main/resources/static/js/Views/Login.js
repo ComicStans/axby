@@ -15,7 +15,7 @@ export default function Login(props) {
 <h1>Log In</h1>
 
 <div>
-    <h4>${registerMessage}</h4>
+    <h4 class="register-successful">${registerMessage}</h4>
 </div>
 <div class="container">
     <div class="row">
@@ -32,7 +32,6 @@ export default function Login(props) {
 </div>
 
 
-<!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT USER WAS LOGGED IN -->
 
 
 

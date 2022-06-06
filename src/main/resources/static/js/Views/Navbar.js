@@ -10,8 +10,9 @@ import {getUser} from "../auth.js";
 export default function Navbar(props) {
     // console.log(props);
     const loggedIn = isLoggedIn();
-getUser();
-// TRYING THIS OUT ============================------------------------*****************************************
+
+    getUser();
+
     let html = `
 <header>
     <div class="jumbotron jumbotron-fluid">
@@ -40,6 +41,9 @@ getUser();
           </li>
           <li>
             <a class="nav-item" href="/friends" data-link>Friends</a>
+          </li>
+          <li>
+            <a class="nav-item" href="/games" data-link>Games</a>
           </li>
           <li>
             <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
@@ -86,4 +90,6 @@ getUser();
     return html;
 
 
+
 }
+
