@@ -8,7 +8,7 @@ target/
 =======
 application.properties
 >>>>>>> 510cede33d39a546506b5ad0f0eacacb13801e0a
-
+config.js
 ### STS ###
 .apt_generated
 .classpath
