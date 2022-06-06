@@ -116,9 +116,11 @@ export default function router(URI) {
         '/profile': {
             returnView: Profile,
             state: {
+
                 userProfile: '/api/users/me',
                 connection: '/api/users/friends',
                 // game: 'api/users/game'
+
             },
             uri: '/profile',
             title: "Profile",

@@ -10,7 +10,10 @@ import {getUser} from "../auth.js";
 export default function Navbar(props) {
     // console.log(props);
     const loggedIn = isLoggedIn();
+
     getUser();
+
+
 // TRYING THIS OUT ============================------------------------*****************************************
     let html = `
 <header>
@@ -86,4 +89,6 @@ export default function Navbar(props) {
     return html;
 
 
+
 }
+
