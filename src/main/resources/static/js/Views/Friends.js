@@ -1,7 +1,9 @@
 import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
+import {getUser} from "../auth.js";
 
 export default function Friends(props) {
+    const user = getUser();
     return `<!DOCTYPE html>
 <html lang="en">
             <head>
@@ -37,7 +39,16 @@ export default function Friends(props) {
         </button>
       </div>
       <div class="modal-body">
-        Friends List goes here (How do I call the list?)
+        ${props.connection.map(connection => {
+            return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
+                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+            :("")}).join('')
+        }
+        ${props.connection.map(connection => {
+            return connection.dateAccepted != null && connection.requester.email === user.userName ? (
+                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
+            :("")}).join('')
+        }
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
