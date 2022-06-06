@@ -41,7 +41,7 @@ export default function Profile(props) {
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
                                 <p id="aboutMe">
 
-                                    ${props.user.aboutUserText ?? "New User to the website"}
+                                    ${props.userProfile.aboutUserText ?? "New User to the website"}
 
                                 </p>
                             </div>
@@ -63,7 +63,7 @@ export default function Profile(props) {
                             <h2>Wish List</h2>
                             <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
                             <div class="wishList">
-                             ${props.user.games.map(game => {
+                             ${props.userProfile.games.map(game => {
                                  return game.type === "WANNAPLAY" ? (
                                      `<img src="${game.art}">
                                        <p id="name-${game.id}">${game.name}</p>
@@ -86,7 +86,7 @@ export default function Profile(props) {
                               </div>
                             </div>  
                          <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
-                         ${props.user.games.map(game => {
+                         ${props.userProfile.games.map(game => {
                             return game.type === "PLAYED" ? (
                                 `<img src="${game.art}">
                                 <p id="name-${game.id}">${game.name}</p>

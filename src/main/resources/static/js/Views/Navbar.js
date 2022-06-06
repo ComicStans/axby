@@ -43,7 +43,7 @@ export default function Navbar(props) {
             <a class="nav-item" href="/friends" data-link>Friends</a>
           </li>
           <li>
-            <a class="nav-item" href="/games" data-link>games</a>
+            <a class="nav-item" href="/games" data-link>Games</a>
           </li>
           <li>
             <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
