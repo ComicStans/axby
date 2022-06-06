@@ -34,9 +34,8 @@ public class TwitchController {
         httpPost.addHeader("Client-ID", clientID);
         httpPost.addHeader("Authorization", twitchAuth);
 
-        StringEntity myEntity = new StringEntity("fields *, genres.name, themes.name;\n" +
+        StringEntity myEntity = new StringEntity("fields involved_companies.company.name, genres.name, themes.name, first_release_date, cover.url, name,platforms.name, rating, similar_games.name, summary, storyline;\n" +
                 "limit 5;\n" +
-                "exclude keywords, tags; \n" +
                 "search \"" + gameName +"\";", ContentType.create("text/plain", "UTF-8"));
         httpPost.setEntity(myEntity);
         try {
