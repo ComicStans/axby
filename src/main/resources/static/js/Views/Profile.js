@@ -16,7 +16,7 @@ export default function Profile(props) {
                     <div class="col">
                         <div id="profileNameandImage" class="username">
                             <!--     AUTO GENERATED USERNAME OF LOGGED IN PROFILE ---WORKING        -->
-                            ${props.user.username}
+                            ${props.userProfile.username}
                             <!-- TODO:     NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
                             <br>
                         </div>
@@ -40,7 +40,9 @@ export default function Profile(props) {
                             <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
                             <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
                                 <p id="aboutMe">
+
                                     ${props.user.aboutUserText ?? "New User to the website"}
+
                                 </p>
                             </div>
                                <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
@@ -117,7 +119,7 @@ export function FriendRequest(props) {
     $("#confirmRequest").click(function () {
         let connectionRequest = {
             recipient: {
-                username: props.user.username
+                username: props.userProfile.username
                 // ^^ uses (newConnection.getRecipient().getUsername()) from createConnection on ConnectionsController.java
             },
 

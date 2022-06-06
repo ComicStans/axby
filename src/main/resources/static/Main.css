@@ -69,12 +69,13 @@ margin-left: 1em;
     display: block;
     padding: .1em;
 }
+.form-control {
+    width: 90%;
+}
 .navbar{
-    background-color: black;
+    background-color: black !important;
 }
-.nav-link {
-    /*color: #b70c95 !important;*/
-}
+
 #navbarNavDropdown {
     flex-direction: row;
     justify-content: center;

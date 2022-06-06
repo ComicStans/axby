@@ -10,6 +10,14 @@ export default function Friends(props) {
                 <title>Register</title>
             </head>
 <body>
+    <div class="form-container">
+        <form class="form">
+            <nav class="navbar bg-light">
+                <input class="form-control mr-sm-2 searchUsersName" type="search" id="searchBar" placeholder="Search users name" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="submit" type="submit">Search</button>
+            </nav>
+        </form>
+    </div>
 <h1 id="friendsTitle">Friends</h1>
 <hr>
 <!-- Button trigger modal -->
@@ -41,7 +49,7 @@ export default function Friends(props) {
 
 <!-- Guild Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">
-  Creat Guild
+  Create Guild
 </button>
 
 <!-- Guild Modal -->
@@ -81,6 +89,7 @@ export function FriendsEvents() {
     FindAllRequests();
     AcceptRequest();
     DeclineRequest();
+    searchUsers();
 }
 
 export function FindAllRequests() {
@@ -95,9 +104,11 @@ export function FindAllRequests() {
                     console.log(response)
                     $("#acceptOrDecline").html("");
                     response.forEach(connection => {
-                        $("#acceptOrDecline").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
+                        if (connection.dateAccepted === null) {
+                            $("#acceptOrDecline").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
                         <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
-                            <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Decline</button></div>`)
+                            <button type="button"  class = "btn btn-primary decline " id="${connection.id}">Decline</button></div>`)
+                        }
                     })
                 })
             })
@@ -110,16 +121,17 @@ export function FindAllRequests() {
 }
 
 export function AcceptRequest(props) {
-    $("#accept").click(function () {
+    $("body").on("click", ".accept", function () {
+        let id = this.id
         let newConnection = {
             method: "PUT",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/FriendsRequest/props", newConnection)
-            .then(response => {
-                createView("/")
+        fetch(`http://localhost:8081/api/users/friends/${id}`, newConnection)
+            .then(function() {
+                createView("/friends")
             })
-            .catch(createView("/friendsRequest"));
+            .catch(createView("/"));
     })
 }
 
@@ -129,8 +141,20 @@ export function DeclineRequest() {
         let decline = {
             method: "DELETE"
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, decline).then(function () {
+        fetch(`http://localhost:8081/api/users/friends/${id}`, decline)
+            .then(function () {
             createView("/friends")
         })
     })
+}
+export function searchUsers() {
+    $("#submit").on("click", function () {
+
+        let id = this.id
+        console.log(id)
+
+        createView(`/userProfile/api/users/username?username=${$("#searchBar").val()}`)
+    })
+
+
 }
