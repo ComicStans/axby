@@ -116,7 +116,7 @@ export default function router(URI) {
         '/profile': {
             returnView: Profile,
             state: {
-                user: '/api/users/me',
+                userProfile: '/api/users/me',
                 connection: '/api/users/friends',
                 // game: 'api/users/game'
             },
@@ -148,7 +148,7 @@ export default function router(URI) {
         '/userProfile': {
             returnView: Profile,
             state: {
-                user: '/api/users/username?username=' + location.href.split('=')[1]
+                userProfile: ''
             },
             uri: '/userProfile',
             title: "Profile",
