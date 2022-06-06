@@ -81,26 +81,32 @@ export default function Profile(props) {
                         <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
                         <div class="friendList">
                         ${props.connection.map(connection => {
-                            return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-                                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
-                            :("")}).join('')
-                        }
+        return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
+                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+            : ("")
+    }).join('')
+    }
                         ${props.connection.map(connection => {
-                            return connection.dateAccepted != null && connection.requester.email === user.userName ? (
-                                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
-                            :("")}).join('')
-                        }
+        return connection.dateAccepted != null && connection.requester.email === user.userName ? (
+                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
+            : ("")
+    }).join('')
+    }
                         </div>
                             <h2>Wish List</h2>
                             <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            <div class="wishList">
+                            <div class="wishList">  
                              ${props.userProfile.games.map(game => {
                                  return game.type === "WANNAPLAY" ? (
-                                     `<img src="${game.art}">
-                                       <p id="name-${game.id}">${game.name}</p>
-                                       <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
+                                    `<div class="card" style="width: 18rem;">
+                                          <img src="${game.art}" id="art-${game.id}">
+                                                <div class="card-body">
+                                                    <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
+                                                    <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                </div>
+                                    </div>`)
                                  :("")}).join('')
-                             }
+                             } 
                              </div>
            </div>
                     <div class="col" id="myCollection">
@@ -119,9 +125,13 @@ export default function Profile(props) {
                          <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
                          ${props.userProfile.games.map(game => {
                             return game.type === "PLAYED" ? (
-                                `<img src="${game.art}">
-                                <p id="name-${game.id}">${game.name}</p>
-                                <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
+                                `<div class="card" style="width: 18rem;">
+                                       <img src="${game.art}" id="art-${game.id}">
+                                            <div class="card-body">
+                                                <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
+                                                <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                            </div>
+                                </div>`)
                             :("")}).join('')
                          }
                     </div>

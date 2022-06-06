@@ -29,10 +29,10 @@ export default function Friends(props) {
 
 
 <!-- Guild Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">
-  Create Guild
-</button>
-
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">-->
+<!--  Create Guild-->
+<!--</button>-->
+<br>
 <!-- Guild Modal -->
 <div class="modal fade" id="guild" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
