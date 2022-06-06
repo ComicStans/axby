@@ -10,13 +10,10 @@ export default function Account(props) {
 </head>
 <body class="account-body">
         <header>
-            <h1>Sample User Photo temp hard coded</h1>
+            <h1></h1>
         </header>
         <main>
-            <div class="profile">
-             <h3>Profile pic</h3>
-             <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user"> <!--     hard code, need to change later        -->
-            </div>
+             <img class="img-circle accountImg profile-img" src="../../Images/NES.png" alt="NES controller"> <!--     hard code, need to change later        -->
             <hr>
             <form id="register-form">
                 <label for="username">Username</label>

@@ -1,5 +1,6 @@
 import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
+import {isLoggedIn} from "../auth.js";
 
 export default function Profile(props) {
     console.log(props)
@@ -8,67 +9,28 @@ export default function Profile(props) {
     <title>Profile</title>
   </head>
        <body>
-           <div class="container">
+           <div class="container" style="margin-left: 1em;">
                 <div class="row">
                     <div class="col">
-                            <!--  TODO:    USERNAME AND PROFILENAME NOT ALIGNING!!!!              -->
                         <div id="profileNameandImage" class="username">
                             <!--     AUTO GENERATED USERNAME OF LOGGED IN PROFILE ---WORKING        -->
                             ${props.user.username}
                             <!-- TODO:     NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
-                            <img class="img-circle " src="https://randomuser.me/api/portraits/women/10.jpg" alt="Random user">
                             <br>
                         </div>
-                        <!-- Button trigger for add friend modal -->
+                        <img class="img-circle " src="../../Images/NES.png" alt="NES controller">
+
+                        <!-- ONLY DISPLAY IF YOU ARE ON SOMEONE ELSES PROFILE -->
                         <button type="button" id="confirmRequest" class="btn btn-primary" >
                          Friend Request
                         </button>
-                        <!-- Modal -->
-<!--                        <div class="modal fade" id="friendRequest" tabindex="-1" role="dialog" aria-labelledby="friendRequestCenterTitle" aria-hidden="true">-->
-<!--                          <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--                            <div class="modal-content">-->
-<!--                              <div class="modal-header">-->
-<!--                                <h5 class="modal-title" id="confirm">Confirm Friend Request</h5>-->
-<!--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                  <span aria-hidden="true">&times;</span>-->
-<!--                                </button>-->
-<!--                              </div>-->
-<!--                              <div class="modal-body">-->
-<!--                                Send friend request?-->
-<!--                              </div>-->
-<!--                              <div class="modal-footer">-->
-<!--                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
-<!--                                <button type="button" class="btn btn-primary confirm">Confirm</button>-->
-<!--                              </div>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blockUser">
+                        <button type="button" class="btn btn-primary" data-target="#blockUser">
                           Block
-                        </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="blockUserTitle" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Block User</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body"> 
-                                Are you sure you want to block ${props.user.username} ?  
-       <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ AND THE DISPLAY NAME BEING GENERTAED RIGHT NOW IS THE NAME OF THE CURRENT LOGGED-IN USER-->
-                                You will no longer see their profile, boards or receive messages from them.
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
+                        </button> 
+                                    <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ -->
                               </div>
                             </div>
-                          </div>
-                        </div>
+                          
                         <br>
                         <h2>About Me</h2>
                             <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
@@ -78,17 +40,16 @@ export default function Profile(props) {
                                 <p id="aboutMe">
                                     ${props.user.aboutUserText}
                                 </p>
-                        </div>
-                           <h2> <a href="/friends" data-link style="color: #b70c95">Friends List</a></h2>
-
-                    <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
-
-
-                        <h2>Wish List</h2>
-                        <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            
-                    </div>
-                   
+                            </div>
+                               <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
+  
+                        <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
+                        <div class="friendList"> </div>
+            
+                            <h2>Wish List</h2>
+                            <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
+                            <div class="wishList"> </div>
+           </div>
                     <div class="col" id="myCollection">
                          <h1>My Collection</h1>
                          <!-- TODO: THIS DROPDOWN BUTTON SHOULD ORGANIZE YOUR GAMES BASED ON OPTION YOU CHOOSE -->
@@ -96,16 +57,16 @@ export default function Profile(props) {
                               <button class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuLink" type="button" data-toggle="dropdown" aria-expanded="false">
                                 SORT
                               </button>
-                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <div class="dropdown-menu glow-dropdown" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Genre</a>
                                 <a class="dropdown-item" href="#">Alphabetical</a>
                                 <a class="dropdown-item" href="#">Reverse Alphabetical</a>
                               </div>
                             </div>  
-                         <!--      TODO:         THIS AREA NEEDS TO BE CREEATED TO DISPLAY YOUR GAMES                                       -->
+                         <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
                     </div>
-                </div>
-            </div>
+                    
+                   
                 </body>
     `;
 }
@@ -125,8 +86,8 @@ export function ProfileEvents() {
     })
 }
 
-export function FriendRequest(props){
-    $("#confirmRequest").click(function (){
+export function FriendRequest(props) {
+    $("#confirmRequest").click(function () {
         let connectionRequest = {
             recipient: {
                 username: props.user.username
@@ -140,11 +101,11 @@ export function FriendRequest(props){
             body: JSON.stringify(connectionRequest)
         }
 
-    fetch("http://localhost:8081/api/users/friends" , newRequest)
-        .then(response => {
-            createView("/")
-        })
-        .catch(createView("/profile"));
+        fetch("http://localhost:8081/api/users/friends", newRequest)
+            .then(response => {
+                createView("/")
+            })
+            .catch(createView("/profile"));
     })
 }
 

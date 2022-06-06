@@ -7,3 +7,32 @@
 #boardViewTitle {
 
 }
+#hr-board {
+    border: 0;
+    width: 100%;
+    height: 0;
+    border-top: 0.3rem dashed white;
+    position: relative;
+    overflow: visible;
+    margin: 2rem 0;
+}
+#hr-board:before {
+    animation: move 30s infinite linear;
+    position: absolute;
+    top: -14px;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='../../Images/bullet.png' height='571.11' width='541.6'%3E%3Cpath style='fill:%23ffcc00' d='M535.441,412.339A280.868,280.868 0 1,1 536.186,161.733L284.493,286.29Z'/%3E%3C/svg%3E");
+    background-size: 22px;
+    background-repeat: no-repeat;
+    background-position: calc(100% + 24px) 0;
+    content: ' ';
+    height: 24px;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+}
