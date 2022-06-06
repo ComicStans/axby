@@ -66,8 +66,8 @@ export default function Profile(props) {
                                      `<img src="${game.art}">
                                        <p id="name-${game.id}">${game.name}</p>
                                        <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
-                             :("")}).join('')
-                            }
+                                 :("")}).join('')
+                             }
                              </div>
            </div>
                     <div class="col" id="myCollection">
@@ -84,6 +84,13 @@ export default function Profile(props) {
                               </div>
                             </div>  
                          <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
+                         ${props.user.games.map(game => {
+                            return game.type === "PLAYED" ? (
+                                `<img src="${game.art}">
+                                <p id="name-${game.id}">${game.name}</p>
+                                <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
+                            :("")}).join('')
+                         }
                     </div>
                     
                    
