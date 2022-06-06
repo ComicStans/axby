@@ -116,11 +116,8 @@ export default function router(URI) {
         '/profile': {
             returnView: Profile,
             state: {
-
                 userProfile: '/api/users/me',
                 connection: '/api/users/friends',
-                // game: 'api/users/game'
-
             },
             uri: '/profile',
             title: "Profile",
@@ -130,6 +127,7 @@ export default function router(URI) {
          '/friends': {
              returnView: Friends,
              state: {
+                 connection: '/api/users/friends',
                  connections: '/api/users/friends/search/me'
              },
              uri: '/friends',
@@ -150,7 +148,8 @@ export default function router(URI) {
         '/userProfile': {
             returnView: Profile,
             state: {
-                userProfile: ''
+                userProfile: '',
+                connection: '/api/users/friends'
             },
             uri: '/userProfile',
             title: "Profile",

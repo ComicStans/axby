@@ -26,19 +26,7 @@ export default function Account(props) {
             </form>
            
             </body>
-            ${props.users.posts.map(post => {
-        return `
-<div class="card">
-  <div class="card-header">
-    ${post.title}
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>${post.content}</p>
-    </blockquote>
-  </div>
-</div>`
-    }).join('')}
+            
         </main>
     `;
 }
