@@ -13,8 +13,6 @@ export default function Navbar(props) {
 
     getUser();
 
-
-// TRYING THIS OUT ============================------------------------*****************************************
     let html = `
 <header>
     <div class="jumbotron jumbotron-fluid">
@@ -43,6 +41,9 @@ export default function Navbar(props) {
           </li>
           <li>
             <a class="nav-item" href="/friends" data-link>Friends</a>
+          </li>
+          <li>
+            <a class="nav-item" href="/games" data-link>games</a>
           </li>
           <li>
             <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
