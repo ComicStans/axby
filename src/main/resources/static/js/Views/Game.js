@@ -21,7 +21,7 @@ const populateGames = function() {
     $("#gameSearchButton").click(function () {
         $("#gameResults").html("")
         let game = $('#gameSearchBar').val()
-        fetch(`http://localhost:8081/api/search?gameName=${game}`)
+        fetch(`${BASE_URL}/api/search?gameName=${game}`)
             .then(res => res.json())
             .then(res => {
                 console.log(res)
@@ -75,7 +75,7 @@ const addToPlayed = function() {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/add`, request);
+        fetch(`${BASE_URL}/api/games/add`, request);
     })
 }
 
@@ -95,6 +95,6 @@ const addToWishList = function() {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/wish`, request);
+        fetch(`${BASE_URL}/api/games/wish`, request);
     })
 }

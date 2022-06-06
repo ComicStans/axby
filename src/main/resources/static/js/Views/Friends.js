@@ -98,7 +98,7 @@ export function FindAllRequests() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/friends/search/me", requests)
+        fetch(`${BASE_URL}}/api/users/friends/search/me`, requests)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
@@ -127,7 +127,7 @@ export function AcceptRequest(props) {
             method: "PUT",
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, newConnection)
+        fetch(`${BASE_URL}/api/users/friends/${id}`, newConnection)
             .then(function() {
                 createView("/friends")
             })
@@ -141,7 +141,7 @@ export function DeclineRequest() {
         let decline = {
             method: "DELETE"
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, decline)
+        fetch(`${BASE_URL}/api/users/friends/${id}`, decline)
             .then(function () {
             createView("/friends")
         })

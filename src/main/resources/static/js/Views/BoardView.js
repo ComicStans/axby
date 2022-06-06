@@ -1,7 +1,7 @@
 import {getHeaders, getUser} from "../auth.js";
 import createView from "../createView.js";
 
-const URL = 'http://localhost:8081/api/posts/board/';
+const URL = `${BASE_URL}}/api/posts/board/`;
 
 export default function BoardView(props) {
     // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
@@ -173,7 +173,7 @@ function createSavePostChangesListener() {
             body: JSON.stringify(savedChanges)
         }
 
-        fetch(`http://localhost:8081/api/posts/${id}`, request)
+        fetch(`${BASE_URL}/api/posts/${id}`, request)
             .then(res => {
                 console.log(res.status);
                 createView(`/boardView/api/boards/${boardId}`)
@@ -196,7 +196,7 @@ function createDeletePostListener() {
             headers: getHeaders(),
         }
 
-        fetch( `http://localhost:8081/api/posts/${id}`, request)
+        fetch( `${BASE_URL}/api/posts/${id}`, request)
             .then(res => {
                 console.log(res.status);
                 createView(`/boardView/api/boards/${boardId}`)
