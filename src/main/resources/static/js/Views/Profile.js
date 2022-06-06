@@ -1,8 +1,10 @@
 import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
 import {isLoggedIn} from "../auth.js";
+import {getUser} from "../auth.js";
 
 export default function Profile(props) {
+    const user = getUser();
     console.log(props)
     return `
 <head>    
@@ -45,6 +47,16 @@ export default function Profile(props) {
   
                         <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
                         <div class="friendList"> </div>
+                        ${props.connection.map(connection => {
+                            return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
+                                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+                            :("")}).join('')
+                        }
+                        ${props.connection.map(connection => {
+                            return connection.dateAccepted != null && connection.requester.email === user.userName ? (
+                                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
+                            :("")}).join('')
+                        }
             
                             <h2>Wish List</h2>
                             <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
