@@ -92,6 +92,18 @@ export function getUser() {
     const payload = parts[1];
     const decodedPayload = atob(payload);
     const payloadObject = JSON.parse(decodedPayload);
+    console.log(payloadObject)
+    fetch('http://localhost:8081/api/users/email?email=' + payloadObject.user_name)
+        .then(res => {
+            return res.json()
+
+        })
+        .then(res => {
+            console.log(res)
+            localStorage.removeItem("username")
+            localStorage.setItem("username", res.username)
+            console.log(localStorage.getItem("username"));
+        })
     const user = {
         userName: payloadObject.user_name,
         role: payloadObject.authorities[0]
