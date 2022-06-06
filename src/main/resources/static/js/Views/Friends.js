@@ -3,7 +3,6 @@ import createView from "../createView.js";
 import {getUser} from "../auth.js";
 
 export default function Friends(props) {
-    const user = getUser();
     return `<!DOCTYPE html>
 <html lang="en">
             <head>
@@ -23,40 +22,12 @@ export default function Friends(props) {
 <h1 id="friendsTitle">Friends</h1>
 <hr>
 <!-- Button trigger modal -->
-<div class ="friendsButtons">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends" id="editFriends">
   Edit Friends
 </button>
-
-<!-- Modal -->
-<div class="modal fade" id="friends" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Friends</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ${props.connection.map(connection => {
-            return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
-            :("")}).join('')
-        }
-        ${props.connection.map(connection => {
-            return connection.dateAccepted != null && connection.requester.email === user.userName ? (
-                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
-            :("")}).join('')
-        }
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
+<div id="friends-to-edit"></div>
+
 
 <!-- Guild Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">
@@ -101,6 +72,7 @@ export function FriendsEvents() {
     AcceptRequest();
     DeclineRequest();
     searchUsers();
+    EditFriends();
 }
 
 export function FindAllRequests() {
@@ -119,6 +91,37 @@ export function FindAllRequests() {
                             $("#acceptOrDecline").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
                         <button type = "button" class= "btn btn-primary accept" id = "${connection.id}"> Accept </button>
                             <button type="button"  class = "btn btn-primary decline " id="${connection.id}">Decline</button></div>`)
+                        }
+                    })
+                })
+            })
+            .catch(error => {
+                console.log("ERROR: " + error);
+                createView("/Error404")
+            });
+    })
+
+}
+
+export function EditFriends() {
+    $("#editFriends").click(function () {
+        const user = getUser();
+        let friends = {
+            method: "GET",
+            headers: getHeaders()
+        }
+        fetch("http://localhost:8081/api/users/friends", friends)
+            .then(response => {
+                response.json().then(response => {
+                    console.log(response)
+                    $("#friends-to-edit").html("");
+                    response.forEach(connection => {
+                        if (connection.dateAccepted != null && connection.recipient.email === user.userName) {
+                            $("#friends-to-edit").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p id="friend-${connection.id}">${connection.requester.username}</p>
+                        <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Unfriend</button><br>`)
+                        } else if (connection.dateAccepted != null && connection.requester.email === user.userName) {
+                            $("#friends-to-edit").append(`<div style=" margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p id="friend-${connection.id}">${connection.recipient.username}</p>
+                        <button type="button"  class = "btn btn-primary decline" id="${connection.id}">Unfriend</button><br>`)
                         }
                     })
                 })
