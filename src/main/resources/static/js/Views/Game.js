@@ -78,6 +78,7 @@ const populateGames = function () {
 
 const addToPlayed = function () {
     $("body").on("click", ".playButton", function () {
+        $(this).off("click")
         console.log(this.id)
         let id = this.id
         let game = {
@@ -99,6 +100,7 @@ const addToPlayed = function () {
 
 const addToWishList = function () {
     $("body").on("click", ".wishButton", function () {
+        $(this).off("click")
         console.log(this.id)
         let id = this.id
         let game = {
