@@ -10,13 +10,15 @@ export default function Games(props) {
                 <input class="mr-sm-2 searchUsersName" type="text" id="gameSearchBar" placeholder="Search video games">
                 <button class="btn btn-outline-success my-2 my-sm-0" id="gameSearchButton" type="button">Search</button>
             </nav>
-
+            
+                               <p class="titlePage">Games</p>
+                                      <hr class="hr-title">
+<div>
     <div id="gameResults">
     
 </div>
 
-                   <p class="titlePage">Games</p>
-                                      <hr class="hr-title">
+
 
 
     `
@@ -36,6 +38,10 @@ const populateGames = function () {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                if (res.length === 0) {
+                    $("#gameResults").append('no results found')
+                    return
+                }
                 for (let game of res) {
                     console.log(game.id)
                     let buttons = `<span class="btn btn-primary playButton" id="${game.id}">Played it</span>
@@ -56,7 +62,7 @@ const populateGames = function () {
                     console.log(game.cover.url)
                     $("#gameResults").append(`<div class="card" style="width: 18rem;">
   <img class="card-img-top" id="cover-${game.id}" src="${game.cover.url}" alt="${game.name}" width="20">
-  <div class="card-body">
+  <div class="card-body" id="daCardBody">
     <h5 class="card-title" id="title-${game.id}">${game.name}</h5>
     <p class="card-text" id="summary-${game.id}">Summary: ${game.summary}</p>
     <p class="card-text" id="storyline-${game.id}">Storyline: ${game.storyline ?? "No storyline listed"}</p>
