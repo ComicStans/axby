@@ -78,7 +78,7 @@ function CreateUser(){
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newUser)
         }
-        fetch("http://localhost:8081/api/users", request)
+        fetch(`${BASE_URL}/api/users`, request)
             .then(response => {
                 console.log(response.status);
                 localStorage.setItem("justRegistered", true)
