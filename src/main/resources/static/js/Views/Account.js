@@ -46,7 +46,7 @@ export function UserEvents() {
             method: "PUT",
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/users/password?newPassword=${newPassword}`, request)
+        fetch(`${BASE_URL}/api/users/password?newPassword=${newPassword}`, request)
             .then(res => {
                 console.log(`${request.method} SUCCESS: ${res.status}`);
             }).catch(error => {
