@@ -1,7 +1,7 @@
 import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 import {getUser} from "../auth.js";
-const URL = `${BASE_URL}}/api/boards`;
+const URL = `${BASE_URL}/api/boards`;
 export default function MessageBoards(props) {
     console.log(props);
     const loggedInUser = getUser();

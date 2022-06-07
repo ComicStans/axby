@@ -174,7 +174,7 @@ export function FriendRequest(props) {
             body: JSON.stringify(connectionRequest)
         }
 
-        fetch(`${BASE_URL}}/api/users/friends`, newRequest)
+        fetch(`${BASE_URL}/api/users/friends`, newRequest)
             .then(response => {
                 createView("/")
             })

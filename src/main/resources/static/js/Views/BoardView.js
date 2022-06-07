@@ -1,7 +1,7 @@
 import {getHeaders, getUser} from "../auth.js";
 import createView from "../createView.js";
 
-const URL = `${BASE_URL}}/api/posts/board/`;
+const URL = `${BASE_URL}/api/posts/board/`;
 
 export default function BoardView(props) {
     // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
