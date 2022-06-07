@@ -76,13 +76,13 @@ export default function Profile(props) {
                         <div class="friendList">
                         ${props.connection.map(connection => {
         return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+                `<p id="friend-${connection.id}" style="font-family: VT323, serif">${connection.requester.username}</p><br>`)
             : ("")
     }).join('')
     }
                         ${props.connection.map(connection => {
         return connection.dateAccepted != null && connection.requester.email === user.userName ? (
-                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
+                `<p id="friend-${connection.id}" style="font-family: VT323, serif">${connection.recipient.username}</p><br>`)
             : ("")
     }).join('')
     }
@@ -98,7 +98,10 @@ export default function Profile(props) {
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                     <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
-                                                    <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+
+                                                    <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button>
+
+
                                                     <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
@@ -127,8 +130,12 @@ export default function Profile(props) {
                                             <div class="card-body">
                                                 <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                 <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
-                                                <button class="wannaplay-btn btn-primary" id="wannaplay-${game.id}" data-id="${game.id}">Wanna Play</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+
+                                                <button class="wannaplay-btn btn-primary" id="wannaplay-${game.id}" data-id="${game.id}">Wanna Play</button>
                                                 <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
+                                                <input id="text-${game.id}" data-id="${game.id}" class="reviewText form-control" type="text" placeholder="Enter Review Here.">
+                                                <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+
                                             </div>
                                 </div>`)
             :("")}).join('')
@@ -145,6 +152,8 @@ export function ProfileEvents() {
     addToPlayed();
     addToWannaPlay();
     deleteGame();
+    addReviews();
+
 
 
     $(document).ready(function () {
@@ -226,6 +235,8 @@ function showOrHideButtons(props,user) {
     }
 }
 
+
+
 export function addToPlayed() {
     $(".played-btn").click(function () {
         console.log(this.id)
@@ -238,7 +249,7 @@ export function addToPlayed() {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/${id}`, request)
+        fetch(`${BASE_URL}/api/games/${id}`, request)
             .then(function() {
                 createView("/profile")
             });
@@ -257,7 +268,7 @@ export function addToWannaPlay() {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/${id}`, request)
+        fetch(`${BASE_URL}/api/games/${id}`, request)
             .then(function() {
                 createView("/profile")
             });
@@ -271,9 +282,33 @@ export function deleteGame() {
         let remove = {
             method: 'DELETE'
         }
-        fetch(`http://localhost:8081/api/games/${id}`, remove)
+
+        fetch(`${BASE_URL}/api/games/${id}`, remove)
+
             .then(function () {
                 createView("/profile")
             })
     })
 }
+
+
+export function addReviews() {
+    $(".review-btn").click(function (){
+        console.log(this.id)
+        const id = $(this).data("id")
+        let userReview = $("#text-" + id).val()
+        let game = {
+            review: userReview
+        }
+        let request = {
+            method: 'PUT',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`${BASE_URL}/api/games/${id}`, request)
+            .then(function (){
+                createView("/profile")
+            })
+    })
+}
+
