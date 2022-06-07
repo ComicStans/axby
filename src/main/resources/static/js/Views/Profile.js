@@ -5,6 +5,11 @@ const URL = 'http://localhost:8081/api/users/aboutme';
 // import {user} from "./Register";
 export default function Profile(props) {
     const user = getUser();
+    const dynamicFriends = friends(props, props.userProfile);
+    const dynamicFriendsAgain = friendsAgain(props, props.userProfile)
+    console.log("UwU")
+    console.log(props)
+    console.log("UwU")
     const showButtonText = showOrHideButtons(props, user);
     return `
 <head>    
@@ -29,7 +34,7 @@ export default function Profile(props) {
                 </div>
                           
                         <br>
-<!--               edit modal ---------------------------------------------------------------------------------------------->
+<!--               edit about me modal ---------------------------------------------------------------------------------------------->
                         <h2>About Me</h2>
                             <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
                         <div id="userAbout">                              
@@ -74,18 +79,10 @@ export default function Profile(props) {
   
                         <!--  GENERATES FRIENDS LIST          -->
                         <div class="friendList">
-                        ${props.connection.map(connection => {
-        return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-                `<p id="friend-${connection.id}" style="font-family: VT323, serif">${connection.requester.username}</p><br>`)
-            : ("")
-    }).join('')
-    }
-                        ${props.connection.map(connection => {
-        return connection.dateAccepted != null && connection.requester.email === user.userName ? (
-                `<p id="friend-${connection.id}" style="font-family: VT323, serif">${connection.recipient.username}</p><br>`)
-            : ("")
-    }).join('')
-    }
+
+                        ${dynamicFriends}
+                        ${dynamicFriendsAgain}
+
                         </div>
                             <h2>Wish List</h2>
                             <!--   GENERATES WISH LIST          -->
@@ -167,6 +164,8 @@ export function ProfileEvents() {
         })
     })
 }
+
+
 export function FriendRequest(props) {
     $("#confirmRequest").click(function () {
         let connectionRequest = {
@@ -292,6 +291,36 @@ export function deleteGame() {
 }
 
 
+const friends = function (props, user) {
+    let html = ''
+    props.connection.map(connection => {
+        if (connection.dateAccepted != null && connection.recipient.email === user.email) {
+            html += `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`
+        }
+    })
+    //     html = connection.dateAccepted != null && connection.recipient.email === user.userName ? (
+    //             `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+    //         : ("")
+    // }).join('')
+    return html
+}
+
+const friendsAgain = function (props, user) {
+    let html = ''
+    props.connection.map(connection => {
+        console.log(props)
+        if (connection.dateAccepted != null && connection.requester.email === user.email) {
+            html += `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`
+        }
+    })
+    //     html = connection.dateAccepted != null && connection.requester.email === user.userName ? (
+    //             `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
+    //         : ("")
+    // }).join('')
+    return html
+}
+
+
 export function addReviews() {
     $(".review-btn").click(function (){
         console.log(this.id)
@@ -311,4 +340,5 @@ export function addReviews() {
             })
     })
 }
+
 
