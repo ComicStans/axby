@@ -20,7 +20,8 @@ export default function Friends(props) {
         </form>
     </div>
 <h1 id="friendsTitle">Friends</h1>
-<hr>
+<hr class="hr-title">
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends" id="editFriends">
   Edit Friends

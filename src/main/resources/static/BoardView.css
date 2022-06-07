@@ -10,16 +10,7 @@
     font-family: 'VT323', monospace;
     background-color: black;
 }
-#hr-board {
-    border: 0;
-    width: 100%;
-    height: 0;
-    border-top: 0.3rem dashed white;
-    position: relative;
-    overflow: visible;
-    margin: 2rem 0;
 
-}
 .topic{
     color: black ;
     font-size: xx-large;

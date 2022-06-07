@@ -12,7 +12,8 @@ export default function Login(props) {
     <title>Log In</title>
 </head>
 <body>
-<h1>Log In</h1>
+<p class="titlePage">Log In</p>
+<hr class="hr-title">
 
 <!-- Button trigger modal -->
 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">-->
@@ -33,7 +34,7 @@ export default function Login(props) {
 <div>
     <h4 class="register-successful">${registerMessage}</h4>
 </div>
-<div class="container">
+<div class="container loginBoxes">
     <div class="row">
         <div class="col">
             <form id="login-form">
