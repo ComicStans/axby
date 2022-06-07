@@ -12,7 +12,7 @@
 
 
 h1  {
-    color: #b70c95;
+    color: #ffffff;
     text-shadow: 1px 1px #0e1b50;
     font-family: 'Caveat Brush', cursive;
 }
@@ -35,7 +35,19 @@ h2, h3{
 #acceptOrDecline{
 margin-left: 1em;
 }
+.hr-title {
+    width: 80%;
+    border: 0;
+    height: 0;
+    box-shadow: 0 0 10px 1px #00ecfe;
+}
+.hr-title:after {
+    content: "\00a0";
 
+}
+.loginBoxes{
+    align-items: center;
+}
 .jumbotron {
     margin-bottom: 0;
     background-image: url(/Images/retro-game-synthwave.jpeg);
@@ -56,6 +68,16 @@ margin-left: 1em;
     width:  10em;
     height: 10em;
     object-fit: cover;
+}
+.titlePage{
+    font-size: xxx-large;
+    color: white;
+    font-family: 'Play', sans-serif;
+    text-align: center;
+}
+
+#gameSearchBar {
+    width: 90%;
 }
 
 .nav-item {

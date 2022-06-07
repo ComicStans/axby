@@ -8,9 +8,6 @@ export default function Home(props) {
 
     }
 
-    fetch("http://localhost:8081/api/search?gameName=tetris")
-        .then(res=>res.json())
-        // .then(res=>console.log(res))    //this is just to test the API call
     return`<head>
         <title></title>
     </head>
