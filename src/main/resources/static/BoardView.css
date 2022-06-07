@@ -13,6 +13,7 @@
 
 .topic{
     color: black ;
+    text-shadow: 1px 1px #6f11d1;
     font-size: xx-large;
     font-family: 'VT323', monospace;
 }
