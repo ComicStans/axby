@@ -104,6 +104,8 @@ export default function Profile(props) {
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                     <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                    <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+                                                    <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
                                  :("")}).join('')
@@ -131,6 +133,8 @@ export default function Profile(props) {
                                             <div class="card-body">
                                                 <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                 <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                <button class="wannaplay-btn btn-primary" id="wannaplay-${game.id}" data-id="${game.id}">Wanna Play</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+                                                <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                             </div>
                                 </div>`)
                             :("")}).join('')
@@ -145,6 +149,9 @@ export default function Profile(props) {
 export function ProfileEvents() {
     createEditAboutMeListener();
     createSaveEditChangesListener();
+    addToPlayed();
+    addToWannaPlay();
+    deleteGame();
 
     $(document).ready(function () {
 
@@ -222,9 +229,54 @@ function createSaveEditChangesListener() {
         })
     }
 
-/* WORKING ON GAMES WISHLIST
- ${props.game.map(game => {
-    return game.status === WANNAPLAY ? (
-        `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
- :("")}).join('')
- } */
+export function addToPlayed() {
+    $(".played-btn").click(function () {
+        console.log(this.id)
+        const id = $(this).data("id")
+        const game = {
+            type: 'PLAYED'
+        };
+        let request = {
+            method: 'PUT',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, request)
+            .then(function() {
+                createView("/profile")
+            });
+    })
+}
+
+export function addToWannaPlay() {
+    $(".wannaplay-btn").click(function () {
+        console.log(this.id)
+        const id = $(this).data("id")
+        const game = {
+            type: 'WANNAPLAY'
+        };
+        let request = {
+            method: 'PUT',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, request)
+            .then(function() {
+                createView("/profile")
+            });
+    })
+}
+
+export function deleteGame() {
+    $(".delete-btn").click(function (){
+        console.log(this.id)
+        const id = $(this).data("id")
+        let remove = {
+            method: 'DELETE'
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, remove)
+            .then(function () {
+                createView("/profile")
+            })
+    })
+}
