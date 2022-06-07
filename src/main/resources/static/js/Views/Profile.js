@@ -1,7 +1,7 @@
 import {getHeaders, getUser, isLoggedIn} from "../auth.js";
 import createView from "../createView.js";
 
-const URL = 'http://localhost:8081/api/users/aboutme';
+const URL = `${BASE_URL}}/api/users/aboutme`;
 // import {user} from "./Register";
 export default function Profile(props) {
     const user = getUser();
