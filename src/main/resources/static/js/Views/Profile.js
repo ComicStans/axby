@@ -10,6 +10,13 @@ const URL = 'http://localhost:8081/api/users/aboutme';
 
 export default function Profile(props) {
     const user = getUser();
+    const showButtonText = `
+            <button type="button" id="confirmRequest" class="btn btn-primary">
+                Friend Request
+            </button>
+            <button type="button" id="blockUser" class="btn btn-primary" data-target="#blockUser">
+                Block
+            </button>`
     console.log(props)
     return `
 <head>    
@@ -26,8 +33,8 @@ export default function Profile(props) {
                             <br>
                         </div>
                         <img class="img-circle " src="../../Images/NES.png" alt="NES controller">
-                        <div id="request-and-block">
-                        ${showOrHideButtons(props,user)}
+                        <div id="request-and-block">`
+                            ${showButtonText}
                         </div>
                                     <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ -->
                     </div>
@@ -221,17 +228,19 @@ function createSaveEditChangesListener() {
 
 
 export function showOrHideButtons(props,user) {
+    console.log(props);
     let profileEmail = props.userProfile.email;
     let loginEmail = user.userName;
     if (profileEmail === loginEmail) {
         return "";
     } else {
         return
-        `<div style="margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
+        `<div style="margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;">
+            <p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${props.connection[0].requester.id}">${props.connection[0].requester.username}</p>
             <button type="button" id="confirmRequest" class="btn btn-primary">
                 Friend Request
             </button>
-            <button type="button" className="btn btn-primary" data-target="#blockUser">
+            <button type="button" id="blockUser" class="btn btn-primary" data-target="#blockUser">
                 Block
             </button>   
         </div>`;
