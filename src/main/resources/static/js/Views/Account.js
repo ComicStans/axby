@@ -1,4 +1,6 @@
 import createView from "../createView.js";
+import {getUser} from "../auth.js";
+
 
 const URL = 'http://localhost:8081/api/account';
 
@@ -21,7 +23,7 @@ export default function Account(props) {
                 <label for="email">Email</label>
                 <input class="account-page" disabled id="email" name="email" type="email" value="${props.users.email}"><br>
                 <label for="new-password">New Password</label>
-                <input class="account-page" id="new-password" name="new-password" type="text" value=""/><br>
+                <input class="account-page" id="new-password" name="new-password" type="password" value=""/><br>
                 <button id="change-password-button" type="button">Change Password</button>
             </form>
            
@@ -33,7 +35,7 @@ export default function Account(props) {
 
 export function UserEvents() {
     $("#change-password-button").click(function() {
-        const id = 1;
+        const id = `${props.userProfile.username}`;
         let uriExtra = '/1/updatePassword';
         const newPassword = $("#new-password").val()
 
