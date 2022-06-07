@@ -1,12 +1,11 @@
-import {getHeaders} from "../auth.js";
+import {getHeaders, getUser, isLoggedIn} from "../auth.js";
 import createView from "../createView.js";
-import {isLoggedIn} from "../auth.js";
-import {getUser} from "../auth.js";
-URL = 'http://localhost:8081/api/users/aboutme';
 
+const URL = 'http://localhost:8081/api/users/aboutme';
+// import {user} from "./Register";
 export default function Profile(props) {
     const user = getUser();
-    console.log(props)
+    const showButtonText = showOrHideButtons(props, user);
     return `
 <head>    
     <title>Profile</title>
@@ -21,18 +20,13 @@ export default function Profile(props) {
                             <!-- TODO:     NEED TO FIGURE OUT HOW TO HAVE USERS CUSTOM PROFILE PIC AUTO GENERATE          -->
                             <br>
                         </div>
-                        <img class="img-circle " src="../../Images/NES.png" alt="NES controller">
-
-                        <!-- ONLY DISPLAY IF YOU ARE ON SOMEONE ELSES PROFILE -->
-                        <button type="button" id="confirmRequest" class="btn btn-primary" >
-                         Friend Request
-                        </button>
-                        <button type="button" class="btn btn-primary" data-target="#blockUser">
-                          Block
-                        </button> 
+                        <img class="img-circle" src="../../Images/NES.png" alt="NES controller">
+                        <div id="request-and-block">
+                            ${showButtonText}
+                        </div>
                                     <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ -->
-                              </div>
-                            </div>
+                    </div>
+                </div>
                           
                         <br>
 <!--               edit modal ---------------------------------------------------------------------------------------------->
@@ -98,8 +92,8 @@ export default function Profile(props) {
                             <div class="wishList">
 
                              ${props.userProfile.games.map(game => {
-                                 return game.type === "WANNAPLAY" ? (
-                                    `<div class="card" style="width: 18rem;">
+        return game.type === "WANNAPLAY" ? (
+                `<div class="card" style="width: 18rem;">
                                           <img src="${game.art}" id="art-${game.id}">
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
@@ -108,8 +102,8 @@ export default function Profile(props) {
                                                     <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
-                                 :("")}).join('')
-                             } 
+            :("")}).join('')
+    } 
                              </div>
            </div>
                     <div class="col" id="myCollection">
@@ -127,8 +121,8 @@ export default function Profile(props) {
                             </div>  
                          <!--      TODO:      DISPLAY YOUR GAMES                          -->
                          ${props.userProfile.games.map(game => {
-                            return game.type === "PLAYED" ? (
-                                `<div class="card" style="width: 18rem;">
+        return game.type === "PLAYED" ? (
+                `<div class="card" style="width: 18rem;">
                                        <img src="${game.art}" id="art-${game.id}">
                                             <div class="card-body">
                                                 <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
@@ -137,15 +131,14 @@ export default function Profile(props) {
                                                 <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                             </div>
                                 </div>`)
-                            :("")}).join('')
-                         }
+            :("")}).join('')
+    }
                     </div>
                     
                    
                 </body>
     `;
 }
-
 export function ProfileEvents() {
     createEditAboutMeListener();
     createSaveEditChangesListener();
@@ -153,20 +146,18 @@ export function ProfileEvents() {
     addToWannaPlay();
     deleteGame();
 
-    $(document).ready(function () {
 
+    $(document).ready(function () {
         $('#edit-button').click(function () {
             console.log(true)
             $('#aboutMe').attr('contenteditable', 'true')
         });
-
         $('#end-editing').click(function () {
             console.log(false)
             $('#aboutMe').attr('contenteditable', 'false')
         })
     })
 }
-
 export function FriendRequest(props) {
     $("#confirmRequest").click(function () {
         let connectionRequest = {
@@ -174,14 +165,12 @@ export function FriendRequest(props) {
                 username: props.userProfile.username
                 // ^^ uses (newConnection.getRecipient().getUsername()) from createConnection on ConnectionsController.java
             },
-
         }
         let newRequest = {
             method: "POST",
             headers: getHeaders(),
             body: JSON.stringify(connectionRequest)
         }
-
         fetch(`${BASE_URL}/api/users/friends`, newRequest)
             .then(response => {
                 createView("/")
@@ -189,45 +178,53 @@ export function FriendRequest(props) {
             .catch(createView("/profile"));
     })
 }
-
-
 function createEditAboutMeListener() {
-
     $("#edit-aboutMe-button").click(function () {
         const id = $(this).data("id");
         console.log(id)
         $("#edit-aboutMe-id").val(id)
         const oldAboutMeText = $(`#aboutMe`).text();
         $("#edit-aboutMe-text").val(oldAboutMeText);
-
     });
-
 }
-
 function createSaveEditChangesListener() {
-        $("#save-edit-btn").click(function () {
-            const aboutMeText = $('#edit-aboutMe-text').val();
-            // const id = $('#edit-aboutMe-id').val();
-            const savedAboutMeChanges = {
-                aboutUserText:
-                    aboutMeText
-
-            }
-            const request = {
-                method: "PUT",
-                headers: getHeaders(),
-                body: JSON.stringify(savedAboutMeChanges)
-            }
-            fetch(URL , request)
-                .then(res => {
-                    console.log(res.status);
-                    createView("/profile")
-                }).catch(error => {
-                console.log(error);
-                createView("/profile");
-            });
-        })
+    $("#save-edit-btn").click(function () {
+        const aboutMeText = $('#edit-aboutMe-text').val();
+        // const id = $('#edit-aboutMe-id').val();
+        const savedAboutMeChanges = {
+            aboutUserText:
+            aboutMeText
+        }
+        const request = {
+            method: "PUT",
+            headers: getHeaders(),
+            body: JSON.stringify(savedAboutMeChanges)
+        }
+        fetch(URL , request)
+            .then(res => {
+                console.log(res.status);
+                createView("/profile")
+            }).catch(error => {
+            console.log(error);
+            createView("/profile");
+        });
+    })
+}
+function showOrHideButtons(props,user) {
+    let profileEmail = props.userProfile.email;
+    let loginEmail = user.userName;
+    if(profileEmail === loginEmail) {
+        return "";
+    } else {
+        return `<button type="button" id="confirmRequest" class="btn btn-primary">
+                Friend Request
+            </button>
+            <button type="button" id="blockUser" class="btn btn-primary" data-target="#blockUser">
+                Block
+            </button>
+        `;
     }
+}
 
 export function addToPlayed() {
     $(".played-btn").click(function () {
