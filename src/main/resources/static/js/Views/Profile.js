@@ -47,7 +47,7 @@ export default function Profile(props) {
                             </div>
                                <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
   
-                        <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
+                        <!--  GENERATES FRIENDS LIST          -->
                         <div class="friendList">
                         ${props.connection.map(connection => {
                             return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
@@ -61,7 +61,7 @@ export default function Profile(props) {
                         }
                         </div>
                             <h2>Wish List</h2>
-                            <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
+                            <!--   GENERATES WISH LIST          -->
                             <div class="wishList">
                              ${props.userProfile.games.map(game => {
                                  return game.type === "WANNAPLAY" ? (
@@ -85,7 +85,7 @@ export default function Profile(props) {
                                 <a class="dropdown-item" href="#">Reverse Alphabetical</a>
                               </div>
                             </div>  
-                         <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
+                         <!--      TODO:      DISPLAY YOUR GAMES                          -->
                          ${props.userProfile.games.map(game => {
                             return game.type === "PLAYED" ? (
                                 `<img src="${game.art}">

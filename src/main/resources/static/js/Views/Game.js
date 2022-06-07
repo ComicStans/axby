@@ -3,8 +3,14 @@ import {getHeaders} from "../auth.js";
 
 export default function Games(props) {
     return `
-    <input type="text" id="gameSearchBar"> 
-    <button type="button" id="gameSearchButton">Search</button>
+<!--    <input type="text" id="gameSearchBar"> -->
+<!--    <button type="button" id="gameSearchButton">Search</button>-->
+        
+            <nav class="navbar bg-light">
+                <input class="mr-sm-2 searchUsersName" type="text" id="gameSearchBar" placeholder="Search video games">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="gameSearchButton" type="button">Search</button>
+            </nav>
+
     <div id="gameResults">
     
 </div>

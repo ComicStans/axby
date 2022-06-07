@@ -4,8 +4,11 @@
 
 }
 
-#boardViewTitle {
-
+#boardTitle {
+    color: #ffffff;
+    font-size: xx-large;
+    font-family: 'VT323', monospace;
+    background-color: black;
 }
 #hr-board {
     border: 0;
@@ -16,4 +19,19 @@
     overflow: visible;
     margin: 2rem 0;
 
+}
+.topic{
+    color: black ;
+    font-size: xx-large;
+    font-family: 'VT323', monospace;
+}
+
+.card-header:first-child {
+    background-color: black;
+}
+.description{
+    font-family: 'Caveat Brush', cursive;
+}
+p.topic{
+    color: #ffffff;
 }
