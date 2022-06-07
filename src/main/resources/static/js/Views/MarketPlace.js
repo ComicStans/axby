@@ -64,6 +64,7 @@ export default function MarketPlace(props) {
                         <p class="card-text">Good condition, no scratches, original case no damage. Shipping only!</p>
                         <a href="#" class="btn btn-primary">Contact Seller</a>
                       </div>
+
                 </div>
             </a> 
         </div>

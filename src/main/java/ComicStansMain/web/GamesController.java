@@ -47,7 +47,16 @@ public class GamesController {
     @PutMapping("{id}")
     private void editGame(@PathVariable long id, @RequestBody Game game) {
         Game editedGame = gamesRepository.getById(id);
-        editedGame.setArt(game.getArt());
+        if (game.getArt() != null){
+            editedGame.setArt(game.getArt());
+        }
+        if (game.getType() != null){
+            editedGame.setType(game.getType());
+        }
+        if (game.getReview() == null || game.getReview() != null){
+            editedGame.setReview(game.getReview());
+        }
+
         gamesRepository.save(editedGame);
     }
     @PostMapping("add")

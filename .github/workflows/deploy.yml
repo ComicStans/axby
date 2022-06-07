@@ -2,6 +2,9 @@
 
 name: deploy-project
 
+env:
+    TITLE: ${{ secrets.CONFIG_JS }}
+    
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the deploy branch
@@ -13,7 +16,7 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -34,8 +37,10 @@ jobs:
             cd ${{ secrets.DEPLOY_DIR }}
             git checkout deploy
             git pull origin deploy
-            cat ${{ secrets.APPLICATION_PROPERTIES }} > src/main/resources/application.properties
-            cat ${{ secrets.CONFIG_JS }} > src/main/resources/static/js/config.js
+            echo '${{ secrets.APPLICATION_PROPERTIES }}' > src/main/resources/application.properties
+            echo '${{ secrets.KEYS_JS }}' > src/main/resources/static/js/keys.js
+            echo '${{ secrets.CONFIG_JS }}' > src/main/resources/static/js/config.js
+            echo '${{ secrets.HTTPS_CERT }}' | base64 -d > fulgentcorp.p12
             pm2 reload all
           
 # end of deployment script
