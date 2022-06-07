@@ -241,7 +241,7 @@ export function addToPlayed() {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/${id}`, request)
+        fetch(`${BASE_URL}/api/games/${id}`, request)
             .then(function() {
                 createView("/profile")
             });
@@ -260,7 +260,7 @@ export function addToWannaPlay() {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/${id}`, request)
+        fetch(`${BASE_URL}/api/games/${id}`, request)
             .then(function() {
                 createView("/profile")
             });
@@ -274,7 +274,7 @@ export function deleteGame() {
         let remove = {
             method: 'DELETE'
         }
-        fetch(`http://localhost:8081/api/games/${id}`, remove)
+        fetch(`${BASE_URL}/api/games/${id}`, remove)
             .then(function () {
                 createView("/profile")
             })
