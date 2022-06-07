@@ -103,8 +103,8 @@ export default function Profile(props) {
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                     <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
-                                                    <button class="btn-primary" id="played-${game.id}">Played</button> <button class="btn-secondary" id="review-${game.id}">Review</button>
-                                                    <button class="btn-secondary" id="delete-${game.id}">Delete</button>
+                                                    <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+                                                    <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
                                  :("")}).join('')
@@ -146,6 +146,8 @@ export default function Profile(props) {
 export function ProfileEvents() {
     createEditAboutMeListener();
     createSaveEditChangesListener();
+    addToPlayed();
+    // deleteGame();
 
     $(document).ready(function () {
 
@@ -223,22 +225,35 @@ function createSaveEditChangesListener() {
         })
     }
 
-export   function addToPlayed() {
-    $("body").on("click", ".playButton", function () {
+export function addToPlayed() {
+    $(".played-btn").click(function () {
         console.log(this.id)
-        let id = this.id
-        let game = {
-            art: $("#cover-" + id).attr("src"),
-            companies: $("#companies-" + id).text(),
-            platforms: $("#platforms-" + id).text(),
-            summary: $("#summary-" + id).text(),
-            name: $("#title-" + id).text(),
-        }
-        let request ={
-            method: 'POST',
+        const id = $(this).data("id")
+        const game = {
+            type: 'PLAYED'
+        };
+        let request = {
+            method: 'PUT',
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/games/add`, request);
+        fetch(`http://localhost:8081/api/games/${id}`, request)
+            .then(function() {
+                createView("/profile")
+            });
+    })
+}
+
+export function deleteGame() {
+    $(".delete-btn").click(function (){
+        console.log(this.id)
+        const id = $(this).data("id")
+        let remove = {
+            method: 'DELETE'
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, remove)
+            .then(function () {
+                createView("/profile")
+            })
     })
 }
