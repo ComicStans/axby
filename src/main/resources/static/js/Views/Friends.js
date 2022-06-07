@@ -30,10 +30,10 @@ export default function Friends(props) {
 
 
 <!-- Guild Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">
-  Create Guild
-</button>
-
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guild">-->
+<!--  Create Guild-->
+<!--</button>-->
+<br>
 <!-- Guild Modal -->
 <div class="modal fade" id="guild" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -81,7 +81,7 @@ export function FindAllRequests() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/friends/search/me", requests)
+        fetch(`${BASE_URL}/api/users/friends/search/me`, requests)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
@@ -110,7 +110,7 @@ export function EditFriends() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/friends", friends)
+        fetch(`${BASE_URL}/api/users/friends`, friends)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
@@ -141,7 +141,7 @@ export function AcceptRequest(props) {
             method: "PUT",
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, newConnection)
+        fetch(`${BASE_URL}/api/users/friends/${id}`, newConnection)
             .then(function() {
                 createView("/friends")
             })
@@ -155,7 +155,7 @@ export function DeclineRequest() {
         let decline = {
             method: "DELETE"
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, decline)
+        fetch(`${BASE_URL}/api/users/friends/${id}`, decline)
             .then(function () {
             createView("/friends")
         })

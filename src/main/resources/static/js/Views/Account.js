@@ -2,7 +2,7 @@ import createView from "../createView.js";
 import {getUser} from "../auth.js";
 
 
-const URL = 'http://localhost:8081/api/account';
+const URL = `${BASE_URL}/api/account`;
 
 export default function Account(props) {
     console.log(props)

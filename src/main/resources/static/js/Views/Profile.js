@@ -2,6 +2,7 @@ import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
 import {isLoggedIn} from "../auth.js";
 import {getUser} from "../auth.js";
+URL = 'http://localhost:8081/api/users/aboutme';
 
 export default function Profile(props) {
     const user = getUser();
@@ -34,42 +35,79 @@ export default function Profile(props) {
                             </div>
                           
                         <br>
+<!--               edit modal ---------------------------------------------------------------------------------------------->
                         <h2>About Me</h2>
                             <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
-                        <div id="userAbout">
-                            <button type="button" class="btn " id="edit-button"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn " id="end-editing"><i class="far fa-save"></i></button>                               
+                        <div id="userAbout">                              
+                            <button type="button" class="btn" data-toggle="modal" id="edit-aboutMe-button" data-target="#exampleModal" data-whatever="@mdo" data-id="${props.userProfile.id}"><i class="fas fa-edit"></i>Edit About Me</button>                          
                                 <p id="aboutMe">
-
                                     ${props.userProfile.aboutUserText ?? "New User to the website"}
-
                                 </p>
                             </div>
+                            
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit About Me</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form>
+                                       <input type="hidden" value="${props.userProfile.id}" id="edit-aboutMe-id">
+                                      <div class="form-group">
+                                        <label for="edit-aboutMe-text" class="col-form-label">About Me</label>
+                                        <textarea class="form-control" id="edit-aboutMe-text"></textarea>
+                                      </div>
+                                    </form>
+                                  </div>
+                                  
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="cancel-edit-btn" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="save-edit-btn" data-dismiss="modal">Save Changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            
+                            
+                            
+<!--                --------------------------------------------------------------------------------------------            -->
                                <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
   
                         <!--  GENERATES FRIENDS LIST          -->
                         <div class="friendList">
                         ${props.connection.map(connection => {
-                            return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-                                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
-                            :("")}).join('')
-                        }
+        return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
+                `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
+            : ("")
+    }).join('')
+    }
                         ${props.connection.map(connection => {
-                            return connection.dateAccepted != null && connection.requester.email === user.userName ? (
-                                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
-                            :("")}).join('')
-                        }
+        return connection.dateAccepted != null && connection.requester.email === user.userName ? (
+                `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
+            : ("")
+    }).join('')
+    }
                         </div>
                             <h2>Wish List</h2>
                             <!--   GENERATES WISH LIST          -->
                             <div class="wishList">
+
                              ${props.userProfile.games.map(game => {
                                  return game.type === "WANNAPLAY" ? (
-                                     `<img src="${game.art}">
-                                       <p id="name-${game.id}">${game.name}</p>
-                                       <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
+                                    `<div class="card" style="width: 18rem;">
+                                          <img src="${game.art}" id="art-${game.id}">
+                                                <div class="card-body">
+                                                    <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
+                                                    <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                </div>
+                                    </div>`)
                                  :("")}).join('')
-                             }
+                             } 
                              </div>
            </div>
                     <div class="col" id="myCollection">
@@ -88,9 +126,13 @@ export default function Profile(props) {
                          <!--      TODO:      DISPLAY YOUR GAMES                          -->
                          ${props.userProfile.games.map(game => {
                             return game.type === "PLAYED" ? (
-                                `<img src="${game.art}">
-                                <p id="name-${game.id}">${game.name}</p>
-                                <p id="review-${game.id}">${game.review ?? "No game reviews"}</p>`)
+                                `<div class="card" style="width: 18rem;">
+                                       <img src="${game.art}" id="art-${game.id}">
+                                            <div class="card-body">
+                                                <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
+                                                <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                            </div>
+                                </div>`)
                             :("")}).join('')
                          }
                     </div>
@@ -101,6 +143,9 @@ export default function Profile(props) {
 }
 
 export function ProfileEvents() {
+    createEditAboutMeListener();
+    createSaveEditChangesListener();
+
     $(document).ready(function () {
 
         $('#edit-button').click(function () {
@@ -130,13 +175,52 @@ export function FriendRequest(props) {
             body: JSON.stringify(connectionRequest)
         }
 
-        fetch("http://localhost:8081/api/users/friends", newRequest)
+        fetch(`${BASE_URL}/api/users/friends`, newRequest)
             .then(response => {
                 createView("/")
             })
             .catch(createView("/profile"));
     })
 }
+
+
+function createEditAboutMeListener() {
+
+    $("#edit-aboutMe-button").click(function () {
+        const id = $(this).data("id");
+        console.log(id)
+        $("#edit-aboutMe-id").val(id)
+        const oldAboutMeText = $(`#aboutMe`).text();
+        $("#edit-aboutMe-text").val(oldAboutMeText);
+
+    });
+
+}
+
+function createSaveEditChangesListener() {
+        $("#save-edit-btn").click(function () {
+            const aboutMeText = $('#edit-aboutMe-text').val();
+            // const id = $('#edit-aboutMe-id').val();
+            const savedAboutMeChanges = {
+                aboutUserText:
+                    aboutMeText
+
+            }
+            const request = {
+                method: "PUT",
+                headers: getHeaders(),
+                body: JSON.stringify(savedAboutMeChanges)
+            }
+            fetch(URL , request)
+                .then(res => {
+                    console.log(res.status);
+                    createView("/profile")
+                }).catch(error => {
+                console.log(error);
+                createView("/profile");
+            });
+        })
+    }
 
 /* WORKING ON GAMES WISHLIST
  ${props.game.map(game => {
