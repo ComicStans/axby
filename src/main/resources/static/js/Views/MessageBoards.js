@@ -12,8 +12,8 @@ function buildBoardPage(boards, loggedInUser) {
         <div class="container">
             <div class="row">
                 <div class="col">
-                <div id="boardViewTitle"><h1>BOARDS</h1></div>
-<!--  CREATE A BOARD MODAL             ----------------------------------------------------------------->
+                <div class="titlePage">BOARDS</div>
+                    <hr class="hr-title">
                     <div id="createTopicModal">
                     <button type="button" class="btn btn-primary" id="add-topic-button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create A Board</button>
                     
@@ -46,13 +46,12 @@ function buildBoardPage(boards, loggedInUser) {
                       </div>
                     </div>
                     </div>
-                    <hr id="hr-board">
                      
                     
                     
       <div class="card" style="width: 69em;">
            <div class="card-header">
-             <h1>TOPIC</h1>
+             <h1>TOPICS</h1>
            </div>
            <ul class="list-group list-group-flush">
             <div id="topic-container">

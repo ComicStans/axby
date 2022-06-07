@@ -3,11 +3,22 @@ import {getHeaders} from "../auth.js";
 
 export default function Games(props) {
     return `
-    <input type="text" id="gameSearchBar"> 
-    <button type="button" id="gameSearchButton">Search</button>
+<!--    <input type="text" id="gameSearchBar"> -->
+<!--    <button type="button" id="gameSearchButton">Search</button>-->
+        
+            <nav class="navbar bg-light">
+                <input class="mr-sm-2 searchUsersName" type="text" id="gameSearchBar" placeholder="Search video games">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="gameSearchButton" type="button">Search</button>
+            </nav>
+
     <div id="gameResults">
     
 </div>
+
+                   <p class="titlePage">Games</p>
+                                      <hr class="hr-title">
+
+
     `
 }
 
@@ -17,7 +28,7 @@ export function gameListeners() {
     addToWishList()
 }
 
-const populateGames = function() {
+const populateGames = function () {
     $("#gameSearchButton").click(function () {
         $("#gameResults").html("")
         let game = $('#gameSearchBar').val()
@@ -30,17 +41,17 @@ const populateGames = function() {
                     let buttons = `<span class="btn btn-primary playButton" id="${game.id}">Played it</span>
                                     <span  class="btn btn-primary wishButton" id="${game.id}">Wanna play it</span>`
                     let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
-                        game.involved_companies.forEach(company => {
-                            html += `${company.company.name}, `
-                        })
-                        html = html.substr(0, html.length - 2);
-                        html += `</p>`
+                    game.involved_companies.forEach(company => {
+                        html += `${company.company.name}, `
+                    })
+                    html = html.substr(0, html.length - 2);
+                    html += `</p>`
 
                     let htmlg = `<h5>platforms: </h5><p id="platforms-${game.id}">`
                     game.platforms.forEach(platform => {
                         htmlg += `${platform.name}, `
                     })
-                    htmlg = htmlg.substr(0, htmlg.length-2);
+                    htmlg = htmlg.substr(0, htmlg.length - 2);
                     htmlg += `</p>`
                     console.log(game.cover.url)
                     $("#gameResults").append(`<div class="card" style="width: 18rem;">
@@ -59,7 +70,7 @@ const populateGames = function() {
     })
 }
 
-const addToPlayed = function() {
+const addToPlayed = function () {
     $("body").on("click", ".playButton", function () {
         console.log(this.id)
         let id = this.id
@@ -70,7 +81,7 @@ const addToPlayed = function() {
             summary: $("#summary-" + id).text(),
             name: $("#title-" + id).text(),
         }
-        let request ={
+        let request = {
             method: 'POST',
             body: JSON.stringify(game),
             headers: getHeaders()
@@ -79,7 +90,7 @@ const addToPlayed = function() {
     })
 }
 
-const addToWishList = function() {
+const addToWishList = function () {
     $("body").on("click", ".wishButton", function () {
         console.log(this.id)
         let id = this.id
@@ -90,7 +101,7 @@ const addToWishList = function() {
             summary: $("#summary-" + id).text(),
             name: $("#title-" + id).text(),
         }
-        let request ={
+        let request = {
             method: 'POST',
             body: JSON.stringify(game),
             headers: getHeaders()

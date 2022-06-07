@@ -12,12 +12,13 @@ export default function Login(props) {
     <title>Log In</title>
 </head>
 <body>
-<h1>Log In</h1>
+<p class="titlePage">Log In</p>
+<hr class="hr-title">
 
 <div>
     <h4 class="register-successful">${registerMessage}</h4>
 </div>
-<div class="container">
+<div class="container loginBoxes">
     <div class="row">
         <div class="col">
             <form id="login-form">
