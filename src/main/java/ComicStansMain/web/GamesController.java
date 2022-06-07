@@ -53,6 +53,9 @@ public class GamesController {
         if (game.getType() != null){
             editedGame.setType(game.getType());
         }
+        if (game.getReview() == null || game.getReview() != null){
+            editedGame.setReview(game.getReview());
+        }
         gamesRepository.save(editedGame);
     }
     @PostMapping("add")
