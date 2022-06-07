@@ -16,7 +16,7 @@ export default function Login(props) {
 <hr class="hr-title">
 
 <div>
-    <h4 class="register-successful">${registerMessage}</h4>
+    <p class="register-successful">${registerMessage}</p>
 </div>
 <div class="container loginBoxes">
     <div class="row">

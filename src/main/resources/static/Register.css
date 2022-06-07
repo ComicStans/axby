@@ -57,14 +57,9 @@
     color: #ffffff;
 }
 
-/*.btn-primary {*/
-/*    background-color: #202124 !important;*/
-/*}*/
-/*#account-form {*/
-/*     display: grid;*/
-/*     font-family: "Helvetica Neue", sans-serif;*/
-/*     width: 30%;*/
-/*     color: #666666;*/
-/*     text-align: center;*/
-/*     margin-left: 1em;*/
-/* }*/
+.register-successful {
+    font-size: xx-large;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'VT323', monospace;
+}

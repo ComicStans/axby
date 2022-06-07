@@ -84,6 +84,7 @@ p#about, .aboutUs{
     color: #ffffff;
     font-family: 'Play', sans-serif; !important;
     text-shadow: 2px 2px #0e1b50;
+    margin: 3em 8em 3em 8em !important
 }
 
 .developedBy, #specialThanks {
