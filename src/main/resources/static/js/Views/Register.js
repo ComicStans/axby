@@ -21,7 +21,9 @@ export default function Register(props) {
        <div class="container">
            <div class="row">
                <div class="col">
-                   <h1 style="text-align: center">Register</h1>
+                   <p class="titlePage">Register</p>
+                   <hr class="hr-title">
+
                        <form id="register-form" style="margin-left: 1em; margin-right: 1em; width: 70%">
                           <label for="newUsername">Username</label>
                            <input id="newUsername" name="username" type="text"/>
@@ -76,7 +78,7 @@ function CreateUser(){
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newUser)
         }
-        fetch("http://localhost:8081/api/users", request)
+        fetch(`${BASE_URL}/api/users`, request)
             .then(response => {
                 console.log(response.status);
                 localStorage.setItem("justRegistered", true)

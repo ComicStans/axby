@@ -20,7 +20,8 @@ export default function Friends(props) {
         </form>
     </div>
 <h1 id="friendsTitle">Friends</h1>
-<hr>
+<hr class="hr-title">
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#friends" id="editFriends">
   Edit Friends
@@ -80,7 +81,7 @@ export function FindAllRequests() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/friends/search/me", requests)
+        fetch(`${BASE_URL}/api/users/friends/search/me`, requests)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
@@ -111,7 +112,7 @@ export function EditFriends() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/friends", friends)
+        fetch(`${BASE_URL}/api/users/friends`, friends)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
@@ -142,7 +143,7 @@ export function AcceptRequest(props) {
             method: "PUT",
             headers: getHeaders()
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, newConnection)
+        fetch(`${BASE_URL}/api/users/friends/${id}`, newConnection)
             .then(function() {
                 createView("/friends")
             })
@@ -156,7 +157,7 @@ export function DeclineRequest() {
         let decline = {
             method: "DELETE"
         }
-        fetch(`http://localhost:8081/api/users/friends/${id}`, decline)
+        fetch(`${BASE_URL}/api/users/friends/${id}`, decline)
             .then(function () {
             createView("/friends")
         })

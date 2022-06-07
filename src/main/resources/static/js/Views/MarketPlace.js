@@ -6,7 +6,8 @@ export default function MarketPlace(props) {
         
     </head>
       <body>
-        <h1 style="text-align: center">Market Place</h1>
+        <p class="titlePage">Market Place</p>
+                           <hr class="hr-title">
     <div class="container">
         <div class="row">
             <div class="col-sm-2">

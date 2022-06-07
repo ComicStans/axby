@@ -40,12 +40,14 @@ public class Board {
 //Each Board has a single user that creates it, represented in the database as Creator.
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
-    @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated"})
+    @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated", "BoardsAdministered"})
+    @ToString.Exclude
     private User creator;
 
 //Each Board can contain many Posts.
     @OneToMany(mappedBy = "boardId")
     @JsonIgnoreProperties({"boardId"})
+    @ToString.Exclude
     private Collection<Post> posts;
 
 //One Board can have many admin Users; each User can administer many Boards.
@@ -63,6 +65,7 @@ public class Board {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
 
-    @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated"})
+    @JsonIgnoreProperties({"boards","posts", "guilds", "guildsCreated", "BoardsAdministered"})
+    @ToString.Exclude
     private Collection<User> admins;
 }

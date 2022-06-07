@@ -72,7 +72,7 @@ export default function Profile(props) {
 <!--                --------------------------------------------------------------------------------------------            -->
                                <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
   
-                        <!--   TODO:        THIS NEEDS TO AUTO GENERATE FRIENDS LIST          -->
+                        <!--  GENERATES FRIENDS LIST          -->
                         <div class="friendList">
                         ${props.connection.map(connection => {
         return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
@@ -88,8 +88,9 @@ export default function Profile(props) {
     }
                         </div>
                             <h2>Wish List</h2>
-                            <!--    TODO:       THIS NEEDS TO AUTO GENERATE WISH LIST          -->
-                            <div class="wishList">  
+                            <!--   GENERATES WISH LIST          -->
+                            <div class="wishList">
+
                              ${props.userProfile.games.map(game => {
         return game.type === "WANNAPLAY" ? (
                 `<div class="card" style="width: 18rem;">
@@ -97,6 +98,8 @@ export default function Profile(props) {
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                     <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                    <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+                                                    <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
             :("")}).join('')
@@ -116,7 +119,7 @@ export default function Profile(props) {
                                 <a class="dropdown-item" href="#">Reverse Alphabetical</a>
                               </div>
                             </div>  
-                         <!--      TODO:         THIS AREA NEEDS TO BE CREATED TO DISPLAY YOUR GAMES                                       -->
+                         <!--      TODO:      DISPLAY YOUR GAMES                          -->
                          ${props.userProfile.games.map(game => {
         return game.type === "PLAYED" ? (
                 `<div class="card" style="width: 18rem;">
@@ -124,6 +127,8 @@ export default function Profile(props) {
                                             <div class="card-body">
                                                 <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                 <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                <button class="wannaplay-btn btn-primary" id="wannaplay-${game.id}" data-id="${game.id}">Wanna Play</button> <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
+                                                <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                             </div>
                                 </div>`)
             :("")}).join('')
@@ -137,6 +142,11 @@ export default function Profile(props) {
 export function ProfileEvents() {
     createEditAboutMeListener();
     createSaveEditChangesListener();
+    addToPlayed();
+    addToWannaPlay();
+    deleteGame();
+
+
     $(document).ready(function () {
         $('#edit-button').click(function () {
             console.log(true)
@@ -161,7 +171,7 @@ export function FriendRequest(props) {
             headers: getHeaders(),
             body: JSON.stringify(connectionRequest)
         }
-        fetch("http://localhost:8081/api/users/friends", newRequest)
+        fetch(`${BASE_URL}/api/users/friends`, newRequest)
             .then(response => {
                 createView("/")
             })
@@ -215,9 +225,55 @@ function showOrHideButtons(props,user) {
         `;
     }
 }
-/* WORKING ON GAMES WISHLIST
- ${props.game.map(game => {
-    return game.status === WANNAPLAY ? (
-        `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
- :("")}).join('')
- } */
+
+export function addToPlayed() {
+    $(".played-btn").click(function () {
+        console.log(this.id)
+        const id = $(this).data("id")
+        const game = {
+            type: 'PLAYED'
+        };
+        let request = {
+            method: 'PUT',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, request)
+            .then(function() {
+                createView("/profile")
+            });
+    })
+}
+
+export function addToWannaPlay() {
+    $(".wannaplay-btn").click(function () {
+        console.log(this.id)
+        const id = $(this).data("id")
+        const game = {
+            type: 'WANNAPLAY'
+        };
+        let request = {
+            method: 'PUT',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, request)
+            .then(function() {
+                createView("/profile")
+            });
+    })
+}
+
+export function deleteGame() {
+    $(".delete-btn").click(function (){
+        console.log(this.id)
+        const id = $(this).data("id")
+        let remove = {
+            method: 'DELETE'
+        }
+        fetch(`http://localhost:8081/api/games/${id}`, remove)
+            .then(function () {
+                createView("/profile")
+            })
+    })
+}
