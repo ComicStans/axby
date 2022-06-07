@@ -103,6 +103,8 @@ export default function Profile(props) {
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                     <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
+                                                    <button class="btn-primary" id="played-${game.id}">Played</button> <button class="btn-secondary" id="review-${game.id}">Review</button>
+                                                    <button class="btn-secondary" id="delete-${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
                                  :("")}).join('')
@@ -221,9 +223,22 @@ function createSaveEditChangesListener() {
         })
     }
 
-/* WORKING ON GAMES WISHLIST
- ${props.game.map(game => {
-    return game.status === WANNAPLAY ? (
-        `<p id="games-${game.id}"><a href="#">${game.name}</a></p><br>`)
- :("")}).join('')
- } */
+export   function addToPlayed() {
+    $("body").on("click", ".playButton", function () {
+        console.log(this.id)
+        let id = this.id
+        let game = {
+            art: $("#cover-" + id).attr("src"),
+            companies: $("#companies-" + id).text(),
+            platforms: $("#platforms-" + id).text(),
+            summary: $("#summary-" + id).text(),
+            name: $("#title-" + id).text(),
+        }
+        let request ={
+            method: 'POST',
+            body: JSON.stringify(game),
+            headers: getHeaders()
+        }
+        fetch(`http://localhost:8081/api/games/add`, request);
+    })
+}
