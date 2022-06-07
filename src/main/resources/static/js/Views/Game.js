@@ -62,7 +62,7 @@ const populateGames = function () {
                     console.log(game.cover.url)
                     $("#gameResults").append(`<div class="card" style="width: 18rem;">
   <img class="card-img-top" id="cover-${game.id}" src="${game.cover.url}" alt="${game.name}" width="20">
-  <div class="card-body">
+  <div class="card-body" id="daCardBody">
     <h5 class="card-title" id="title-${game.id}">${game.name}</h5>
     <p class="card-text" id="summary-${game.id}">Summary: ${game.summary}</p>
     <p class="card-text" id="storyline-${game.id}">Storyline: ${game.storyline ?? "No storyline listed"}</p>

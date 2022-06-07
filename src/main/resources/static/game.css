@@ -3,3 +3,8 @@
     flex-direction: row;
     justify-content: center;
 }
+
+#daCardBody{
+    background-color: #840b9f;
+    color: #40E0D0;
+}
