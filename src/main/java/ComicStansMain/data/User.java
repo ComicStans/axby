@@ -88,6 +88,7 @@ public class User {
     )
 
     @JsonIgnoreProperties({"members","creator"})
+    @ToString.Exclude
     private Collection<Guild> guilds;
 
 //Each User can have many types of SensitiveContent that can be filtered out of view.
@@ -107,6 +108,7 @@ public class User {
     )
 
     @JsonIgnoreProperties("users")
+    @ToString.Exclude
     private Collection<SensitiveContent> sensitiveContent;
 
 //Each User administer many Boards, each of which can have many admin Users.
@@ -125,6 +127,7 @@ public class User {
     )
 
     @JsonIgnoreProperties("guildBoardsAdministered")
+    @ToString.Exclude
     private Collection<Board> BoardsAdministered;
 
 //Each User administer many GuildBoards, each of which can have many admin Users.
@@ -143,6 +146,7 @@ public class User {
     )
 
     @JsonIgnoreProperties("guildBoardsAdministered")
+    @ToString.Exclude
     private Collection<GuildBoard> guildBoardsAdministered;
 
 //User one-to-many Collections: boards, games, posts, reports, preferences, and guildsCreated.
@@ -150,25 +154,31 @@ public class User {
 //and the user reported.
     @OneToMany(mappedBy = "userId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("userId")
+    @ToString.Exclude
     private Collection<Preference> preferences;
 
     @OneToMany(mappedBy = "userReporting", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("userReporting")
+    @ToString.Exclude
     private Collection<Report> reports;
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("creator")
+    @ToString.Exclude
     private Collection<Board> boards;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("author")
+    @ToString.Exclude
     private Collection<Post> posts;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
+    @ToString.Exclude
     private Collection<Game> games;
 
     @OneToMany(mappedBy = "creator")
     @JsonIgnoreProperties("creator")
+    @ToString.Exclude
     private Collection<Guild> guildsCreated;
 }
