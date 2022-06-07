@@ -80,20 +80,29 @@ public class UsersController {
     }
 
     @PutMapping("password")
-    private void updatePassword(@Valid @Size(min = 3) @RequestParam String newPassword, OAuth2Authentication auth) {
+    public void updatePassword(@Valid @Size(min = 3) @RequestParam String newPassword, OAuth2Authentication auth) {
+        System.out.println(auth);
+        System.out.println(auth.getName());
+        System.out.println(ur);
+
         User u = ur.findByEmail(auth.getName());
-        String oldPassword = u.getPassword();
-        if (!newPassword.equals(oldPassword) && newPassword.length() > 2) {
-            u.setPassword(pe.encode(newPassword));
-            ur.save(u);
-        }
-        if (newPassword.equals(oldPassword)) {
-            System.out.println("Sorry, you may not repeat your previous password");
-        } else if (newPassword.length() <= 2) {
-            System.out.println("Please make sure that your password is at least 3 characters in length.");
-        } else {
-            System.out.println("Password for user " + auth.getName() + " has been updated.");
-        }
+        System.out.println(u);
+//        String oldPassword = u.getPassword();
+//        if (!newPassword.equals(oldPassword) && newPassword.length() > 2) {
+//            u.setPassword(pe.encode(newPassword));
+//            ur.save(u);
+//        }
+//        if (newPassword.equals(oldPassword)) {
+//            System.out.println("Sorry, you may not repeat your previous password");
+//        } else if (newPassword.length() <= 2) {
+//            System.out.println("Please make sure that your password is at least 3 characters in length.");
+//        } else {
+//            System.out.println("Password for user " + auth.getName() + " has been updated.");
+//        }
+        String encryptedPassword = newPassword;
+        encryptedPassword = pe.encode(encryptedPassword);
+        u.setPassword(encryptedPassword);
+        ur.save(u);
     }
 
     @DeleteMapping("{id}")
