@@ -80,7 +80,7 @@ export function FindAllRequests() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch(`${BASE_URL}}/api/users/friends/search/me`, requests)
+        fetch(`${BASE_URL}/api/users/friends/search/me`, requests)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
@@ -109,7 +109,7 @@ export function EditFriends() {
             method: "GET",
             headers: getHeaders()
         }
-        fetch("http://localhost:8081/api/users/friends", friends)
+        fetch(`${BASE_URL}/api/users/friends`, friends)
             .then(response => {
                 response.json().then(response => {
                     console.log(response)
