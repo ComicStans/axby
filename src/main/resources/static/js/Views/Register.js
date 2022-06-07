@@ -13,17 +13,7 @@ export default function Register(props) {
                <body>
 
 
-<!-- Modal -->
-<!--<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog" role="document">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Register</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
+
 <!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT USER WAS REGISTERED -->
 <!--TODO: NEED TO HAVE SOME SORT OF CONFIRMATION THAT PASSWORD AND USERNAME ARE OK -->
 <!--TODO: NEED TO HAVE MORE REQUIRED INFO TO REGISTER (STARS NEXT TO REQUIRED FIELDS) -->
@@ -35,10 +25,16 @@ export default function Register(props) {
                        <form id="register-form" style="margin-left: 1em; margin-right: 1em; width: 70%">
                           <label for="newUsername">Username</label>
                            <input id="newUsername" name="username" type="text"/>
+                             <div id="add-post-title-error" class="invalid-feedback">
+                            Username must be non-blank.
+                        </div>
                           <label for="email">Email</label>
                            <input id="email" name="email" type="email">
                           <label for="userPassword">Password</label>
                            <input id="userPassword" name="password" type="password"/>
+                           <div id="add-post-content-error" class="invalid-feedback">
+                            Password must be non-blank.
+                        </div>
                 <!--          <button id="register-btn" type="button">Register</button>-->
                           <button type="button" class="btn btn-primary" id="Create">Create</button> <br>  
                           <button type="button" class="btn btn-secondary" id="clearRegisterBtn" >Clear</button>
@@ -48,56 +44,28 @@ export default function Register(props) {
             </div>
         </div>
            
-           
-       
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
-<!--        <button type="button" class="btn btn-primary" id="Create">Create</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+          
                </body>
         </html>
 `;
 }
 
-// export function RegisterEvent() {
-//     $("#register-btn").click(function () {
 
-        // let newUser = {
-        //     username: $("#username").val(),
-        //     email: $("#email").val(),
-        //     password: $("#password").val()
-        // }
-
-        // console.log(newUser);
-        //
-        // let request = {
-        //     method: "POST",
-        //     headers: {"Content-Type": "application/json"},
-        //     body: JSON.stringify(newUser)
-        // }
-
-//         fetch("http://localhost:8081/api/users", request)
-//             .then(response => {
-//                 console.log(response.status);
-//                 createView("/");
-//             })
-//
-//     })
-// }
 export function user(){
     CreateUser();
     clearRegisterForm();
+    createAddFormListeners();
+    validatePost();
 }
 
 function CreateUser(){
     $("#Create").click(function (){
-        // localStorage.setItem("justRegistered", true)
+        if(!validatePost()) {
+            return;
+        }
         let newUser = {
             username: $("#newUsername").val(),
+
             email: $("#email").val(),
             password: $("#userPassword").val()
         }
@@ -127,3 +95,44 @@ function clearRegisterForm() {
             .prop('selected', false);
     });
 }
+
+function createAddFormListeners() {
+    $("#newUsername").keyup((event) => {
+        validatePost();
+    });
+    $("#userPassword").keyup((event) => {
+        validatePost();
+    });
+}
+
+function validatePost() {
+    // return true if post is valid else false
+    const title = $("#newUsername").val();
+    const content = $("#userPassword").val();
+    let isFormOk = true;
+    // valid title is non blank
+    if(title.trim().length === 0) {
+        // console.log("Title must be non-blank");
+        $("#add-post-title").addClass("border border-danger");
+        $("#add-post-title-error").show();
+        isFormOk = false;
+    } else {
+        $("#add-post-title").removeClass("border border-danger");
+        $("#add-post-title-error").hide();
+    }
+    // valid content is non-blank
+    if(content.trim().length === 0) {
+        $("#add-post-content").addClass("border border-danger");
+        $("#add-post-content-error").show();
+        isFormOk = false;
+    } else {
+        $("#add-post-content").removeClass("border border-danger");
+        $("#add-post-content-error").hide();
+    }
+    return isFormOk;
+}
+
+
+// function validatePassword() {
+//
+// }

@@ -48,6 +48,9 @@ export default function Navbar(props) {
           <li>
             <a class="nav-item active" href="/marketPlace" data-link>Market Place</a>
           </li>
+          <li>
+            <a class="nav-item" href="/about" data-link>About</a>
+         </li>
          
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,7 +72,7 @@ export default function Navbar(props) {
             <a class="nav-item active" href="/" data-link>Home</a>
          </li>
          <li>
-            <a class="dropdown-item nav-item" href="/about" data-link>About</a>
+            <a class="nav-item" href="/about" data-link>About</a>
          </li>
          <li>
             <a class="nav-item" id="register-link"  data-target="#register" data-link href="/register">Register</a>
