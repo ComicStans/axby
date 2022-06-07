@@ -92,7 +92,8 @@ const addToPlayed = function () {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`${BASE_URL}/api/games/add`, request);
+        fetch(`${BASE_URL}/api/games/add`, request)
+            .then(res => alert("Added to played list"));
     })
 }
 
@@ -112,6 +113,7 @@ const addToWishList = function () {
             body: JSON.stringify(game),
             headers: getHeaders()
         }
-        fetch(`${BASE_URL}/api/games/wish`, request);
+        fetch(`${BASE_URL}/api/games/wish`, request)
+            .then(res => alert("Added to wishlist"));
     })
 }
