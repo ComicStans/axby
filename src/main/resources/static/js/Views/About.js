@@ -24,13 +24,13 @@ export default function About(props) {
             <p id="specialThanks">Special Thanks to our Instructors:</p>
             <div id="Instructors">
                 <h5 class="codeupTeam">Doc Rob<br>
-                                <img class="aboutPic" src="../../Images/Doc.png" alt"Doc"></img>
+                                <img class="aboutPic" src="../../Images/Doc.png" onmouseover="this.src='../../Images/DocReal.jpeg'" onmouseout="this.src='../../Images/Doc.png'" alt"Doc"></img>
                 <h5 class="codeupTeam">Ry<br>
-                                <img class="aboutPic" src="../../Images/Ry.png" alt"Ry"></img>
+                                <img class="aboutPic" src="../../Images/Ry.png" onmouseover="this.src='../../Images/RyReal.jpeg'" onmouseout="this.src='../../Images/Ry.png'" alt"Ry"></img>
                 <h5 class="codeupTeam">Lola<br>
-                                <img class="aboutPic" src="../../Images/Lola.png" alt"Lola"></img>
+                                <img class="aboutPic" src="../../Images/Lola.png" onmouseover="this.src='../../Images/LolaRealjpeg.jpeg'" onmouseout="this.src='./../Images/Lola.png'" alt"Lola"></img>
                 <h5 class="codeupTeam">Casey<br>
-                                <img class="aboutPic" src="../../Images/Casey.png" alt"Casey"></img>
+                                <img class="aboutPic" src="../../Images/Casey.png" onmouseover="this.src='../../Images/CaseyReal.jpeg'" onmouseout="this.src='../../Images/Casey.png'" alt"Casey"></img>
             </div>
         </main>
     `;
