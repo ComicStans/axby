@@ -2,7 +2,11 @@ import {getHeaders} from "../auth.js";
 import createView from "../createView.js";
 import {isLoggedIn} from "../auth.js";
 import {getUser} from "../auth.js";
-URL = 'http://localhost:8081/api/users/aboutme';
+
+const URL = 'http://localhost:8081/api/users/aboutme';
+
+// import {user} from "./Register";
+
 
 export default function Profile(props) {
     const user = getUser();
@@ -22,17 +26,12 @@ export default function Profile(props) {
                             <br>
                         </div>
                         <img class="img-circle " src="../../Images/NES.png" alt="NES controller">
-
-                        <!-- ONLY DISPLAY IF YOU ARE ON SOMEONE ELSES PROFILE -->
-                        <button type="button" id="confirmRequest" class="btn btn-primary" >
-                         Friend Request
-                        </button>
-                        <button type="button" class="btn btn-primary" data-target="#blockUser">
-                          Block
-                        </button> 
+                        <div id="request-and-block">
+                        ${showOrHideButtons(props,user)}
+                        </div>
                                     <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ -->
-                              </div>
-                            </div>
+                    </div>
+                </div>
                           
                         <br>
 <!--               edit modal ---------------------------------------------------------------------------------------------->
@@ -182,7 +181,6 @@ export function FriendRequest(props) {
     })
 }
 
-
 function createEditAboutMeListener() {
 
     $("#edit-aboutMe-button").click(function () {
@@ -220,6 +218,25 @@ function createSaveEditChangesListener() {
             });
         })
     }
+
+
+export function showOrHideButtons(props,user) {
+    let profileEmail = props.userProfile.email;
+    let loginEmail = user.userName;
+    if (profileEmail === loginEmail) {
+        return "";
+    } else {
+        return
+        `<div style="margin-top: .5em; background-color: #431473; padding: 1em; color: #fff; border: thick double #6f11d1; max-width: 25em;"><p style="margin-top: .5em; color: #ebef00; font-family: 'VT323', monospace;font-size: xx-large;" id="requester-${connection.id}">${connection.requester.username}</p>
+            <button type="button" id="confirmRequest" class="btn btn-primary">
+                Friend Request
+            </button>
+            <button type="button" className="btn btn-primary" data-target="#blockUser">
+                Block
+            </button>   
+        </div>`;
+    }
+}
 
 /* WORKING ON GAMES WISHLIST
  ${props.game.map(game => {
