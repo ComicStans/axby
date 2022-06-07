@@ -11,14 +11,6 @@ const URL = 'http://localhost:8081/api/users/aboutme';
 export default function Profile(props) {
     const user = getUser();
     const showButtonText = showOrHideButtons(props,user)
-        // `
-        //     <button type="button" id="confirmRequest" class="btn btn-primary">
-        //         Friend Request
-        //     </button>
-        //     <button type="button" id="blockUser" class="btn btn-primary" data-target="#blockUser">
-        //         Block
-        //     </button>`
-    console.log(props)
     return `
 <head>    
     <title>Profile</title>
@@ -228,10 +220,8 @@ function createSaveEditChangesListener() {
     }
 
 function showOrHideButtons(props,user) {
-    console.log(props);
     let profileEmail = props.userProfile.email;
     let loginEmail = user.userName;
-    console.log(profileEmail + " " + loginEmail)
     if (profileEmail === loginEmail) {
         return "";
     } else {
