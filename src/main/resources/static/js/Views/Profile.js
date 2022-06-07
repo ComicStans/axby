@@ -35,7 +35,7 @@ export default function Profile(props) {
                             </div>
                           
                         <br>
-<!--               edit modal ---------------------------------------------------------------------------------------------->
+<!--               edit about me modal ---------------------------------------------------------------------------------------------->
                         <h2>About Me</h2>
                             <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
                         <div id="userAbout">                              
