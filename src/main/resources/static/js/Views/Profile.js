@@ -83,13 +83,6 @@ export default function Profile(props) {
                         ${dynamicFriends}
                         ${dynamicFriendsAgain}
 
-                        ${props.connection.map(connection => {
-        return connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-                `<p id="friend-${connection.id}" style="font-family: VT323, serif">${connection.requester.username}</p><br>`)
-            : ("")
-    }).join('')
-    }
-
                         </div>
                             <h2>Wish List</h2>
                             <!--   GENERATES WISH LIST          -->
