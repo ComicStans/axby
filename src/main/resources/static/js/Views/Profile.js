@@ -158,9 +158,8 @@ export function FriendRequest(props) {
         }
         fetch(`${BASE_URL}/api/users/friends`, newRequest)
             .then(response => {
-                createView("/")
+                alert("Request sent")
             })
-            .catch(createView("/profile"));
     })
 }
 function createEditAboutMeListener() {
