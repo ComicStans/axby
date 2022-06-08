@@ -29,8 +29,6 @@ import {FriendRequest} from "./Views/Profile.js";
  * @returns {*}
  */
 export default function router(URI) {
-
-    console.log(URI)
     const routes = {
         '/': {
             returnView: Home,

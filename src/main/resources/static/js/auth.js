@@ -93,7 +93,6 @@ export function getUser() {
     const payload = parts[1];
     const decodedPayload = atob(payload);
     const payloadObject = JSON.parse(decodedPayload);
-    console.log(payloadObject)
     fetch(`${BASE_URL}/api/users/email?email=` + payloadObject.user_name)
         .then(res => {
             return res.json()
