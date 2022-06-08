@@ -101,7 +101,6 @@ export function getUser() {
         .then(res => {
             localStorage.removeItem("username")
             localStorage.setItem("username", res.username)
-            console.log(localStorage.getItem("username"));
         })
     const user = {
         userName: payloadObject.user_name,
