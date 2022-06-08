@@ -15,7 +15,7 @@ export default function BoardView(props) {
             
              <div class="card" style="width: 69em;">
     <div class="card-header">
-       <h1>${props.boardView.name} - ${props.boardView.description}</h1>
+       <p class="topic">${props.boardView.name} - ${props.boardView.description}</p>
     </div>
     <ul class="list-group list-group-flush">
         <div id="posts-container">
@@ -37,8 +37,8 @@ export default function BoardView(props) {
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:20px;">
-                                    <input type="submit" class="saveComment" id="${props.boardView.id}" value="Save Post">
-                                    <input type="submit" value="Cancel" class="create-post-cancel">
+                                    <button  type="button" class="btn btn-primary saveComment" id="${props.boardView.id}" value="Save Post">Save Post</button>
+                                    <button  type="button" value="Cancel" class="btn btn-primary create-post-cancel"> Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -58,10 +58,9 @@ function buildPostTopics(posts, loggedInUser) {
     }).join('');
 }
 
-
 function buildPostRow(post, loggedInUser) {
         return `
-            <li class="list-group-item"><h1><span class="post" id="post-${post.id}" data-link>${post.postText}</span></h1>
+            <li class="list-group-item"><p class="topic" style="color: black !important;"><span id="post-${post.id}" data-link>${post.postText}</span></p>
             ${buildPostTopicEditButton(post, loggedInUser)}
             ${buildPostTopicDeleteButton(post, loggedInUser)}
             </li>
@@ -161,12 +160,9 @@ function createSavePostChangesListener() {
         var boardId = $(".saveComment").attr("id");
         const postText = $('#EditPostText').val();
         const id = $('#edit-post-id').val();
-
-
         const savedChanges = {
             postText
         }
-
         const request = {
             method: "PUT",
             headers: getHeaders(),
@@ -184,7 +180,6 @@ function createSavePostChangesListener() {
     })
 
 }
-
 
 function createDeletePostListener() {
     $(".delete-post-button").click(function () {
