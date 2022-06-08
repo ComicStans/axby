@@ -99,7 +99,6 @@ export function getUser() {
 
         })
         .then(res => {
-            console.log(res)
             localStorage.removeItem("username")
             localStorage.setItem("username", res.username)
             console.log(localStorage.getItem("username"));
