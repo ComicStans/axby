@@ -2,24 +2,14 @@ import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 
 export default function Games(props) {
-    return `
-<!--    <input type="text" id="gameSearchBar"> -->
-<!--    <button type="button" id="gameSearchButton">Search</button>-->
-        
+    return `        
             <nav class="navbar bg-light">
                 <input class="mr-sm-2 searchUsersName" type="text" id="gameSearchBar" placeholder="Search video games">
                 <button class="btn btn-outline-success my-2 my-sm-0" id="gameSearchButton" type="button">Search</button>
             </nav>
-            
-                               <p class="titlePage">Games</p>
-                                      <hr class="hr-title">
-<div>
-    <div id="gameResults">
-    
-</div>
-
-
-
+                    <p class="titlePage">Games</p>
+                       <hr class="hr-title">
+                           <div id="gameResults"> </div>
 
     `
 }

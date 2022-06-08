@@ -16,6 +16,7 @@ export default function Profile(props) {
     <title>Profile</title>
   </head>
        <body>
+
            <div class="container" style="margin-left: 1em;">
                 <div class="row">
                     <div class="col">
@@ -30,15 +31,11 @@ export default function Profile(props) {
                             ${showButtonText}
                         </div>
                                     <!--  TODO: GET BLOCK BUTTON FUNCTIONAL ^^^^ -->
-                    </div>
-                </div>
                           
                         <br>
-<!--               edit about me modal ---------------------------------------------------------------------------------------------->
                         <h2>About Me</h2>
-                            <!--    TODO:     EDIT AND SAVE BUTTONS NOT WORKING   NEED TO GET WORKING            -->
                         <div id="userAbout">                              
-                            <button type="button" class="btn" data-toggle="modal" id="edit-aboutMe-button" data-target="#exampleModal" data-whatever="@mdo" data-id="${props.userProfile.id}"><i class="fas fa-edit"></i>Edit About Me</button>                          
+                            <button type="button" style="color: #4be8cb; padding-left: 1em;" class="btn" data-toggle="modal" id="edit-aboutMe-button" data-target="#exampleModal" data-whatever="@mdo" data-id="${props.userProfile.id}"><i style="color: #4be8cb;" class="fas fa-edit"></i>Edit</button>                          
                                 <p id="aboutMe">
                                     ${props.userProfile.aboutUserText ?? "New User to the website"}
                                 </p>
@@ -69,43 +66,32 @@ export default function Profile(props) {
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </div>                          
                             
-                            
-                            
-                            
-<!--                --------------------------------------------------------------------------------------------            -->
                                <h2> <a href="/friends" data-link style="color: #ffffff">Friends List</a></h2>
-  
                         <!--  GENERATES FRIENDS LIST          -->
                         <div class="friendList">
-
                         ${dynamicFriends}
                         ${dynamicFriendsAgain}
-
                         </div>
                             <h2>Wish List</h2>
                             <!--   GENERATES WISH LIST          -->
                             <div class="wishList">
-
                              ${props.userProfile.games.map(game => {
-        return game.type === "WANNAPLAY" ? (
-                `<div class="card" style="width: 18rem;">
+                            return game.type === "WANNAPLAY" ? (
+                            `<div class="card" style="width: 18rem;">
                                           <img src="${game.art}" id="art-${game.id}">
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                     <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
-
                                                     <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button>
-
-
                                                     <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
                                     </div>`)
-            :("")}).join('')
-    } 
+                                :("")}).join('')
+                                } 
                              </div>
-           </div>
+                        </div>
                     <div class="col" id="myCollection">
                          <h1>My Collection</h1>
                          <!-- TODO: THIS DROPDOWN BUTTON SHOULD ORGANIZE YOUR GAMES BASED ON OPTION YOU CHOOSE -->
@@ -119,28 +105,26 @@ export default function Profile(props) {
                                 <a class="dropdown-item" href="#">Reverse Alphabetical</a>
                               </div>
                             </div>  
-                         <!--      TODO:      DISPLAY YOUR GAMES                          -->
+                         <!--       DISPLAY YOUR GAMES                          -->
                          ${props.userProfile.games.map(game => {
-        return game.type === "PLAYED" ? (
-                `<div class="card" style="width: 18rem;">
+                        return game.type === "PLAYED" ? (
+                        `<div class="card" style="width: 18rem;">
                                        <img src="${game.art}" id="art-${game.id}">
                                             <div class="card-body">
                                                 <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
                                                 <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
-
                                                 <button class="wannaplay-btn btn-primary" id="wannaplay-${game.id}" data-id="${game.id}">Wanna Play</button>
                                                 <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 <input id="text-${game.id}" data-id="${game.id}" class="reviewText form-control" type="text" placeholder="Enter Review Here.">
                                                 <button class="review-btn btn-secondary" id="review-${game.id}" data-id="${game.id}">Review</button>
-
                                             </div>
-                                </div>`)
-            :("")}).join('')
-    }
-                    </div>
-                    
-                   
-                </body>
+                                </div>`) 
+                            :("")}).join('')
+                            }
+                  </div>
+            </div>
+         </div>               
+    </body>
     `;
 }
 export function ProfileEvents() {
@@ -150,8 +134,6 @@ export function ProfileEvents() {
     addToWannaPlay();
     deleteGame();
     addReviews();
-
-
 
     $(document).ready(function () {
         $('#edit-button').click(function () {
@@ -164,7 +146,6 @@ export function ProfileEvents() {
         })
     })
 }
-
 
 export function FriendRequest(props) {
     $("#confirmRequest").click(function () {
@@ -234,8 +215,6 @@ function showOrHideButtons(props,user) {
     }
 }
 
-
-
 export function addToPlayed() {
     $(".played-btn").click(function () {
         console.log(this.id)
@@ -290,7 +269,6 @@ export function deleteGame() {
     })
 }
 
-
 const friends = function (props, user) {
     let html = ''
     props.connection.map(connection => {
@@ -298,10 +276,6 @@ const friends = function (props, user) {
             html += `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`
         }
     })
-    //     html = connection.dateAccepted != null && connection.recipient.email === user.userName ? (
-    //             `<p id="friend-${connection.id}"> <a href="#">${connection.requester.username}</a></p><br>`)
-    //         : ("")
-    // }).join('')
     return html
 }
 
@@ -313,10 +287,6 @@ const friendsAgain = function (props, user) {
             html += `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`
         }
     })
-    //     html = connection.dateAccepted != null && connection.requester.email === user.userName ? (
-    //             `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`)
-    //         : ("")
-    // }).join('')
     return html
 }
 
@@ -340,5 +310,3 @@ export function addReviews() {
             })
     })
 }
-
-

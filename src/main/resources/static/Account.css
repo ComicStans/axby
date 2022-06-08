@@ -4,6 +4,7 @@
 
 .accountImg{
     margin-left: 3em;
+    margin-top: 5em;
 }
 label {
     position: inherit;
@@ -40,8 +41,8 @@ p.profile-info {
 }
 
 #register-form, .account-page, #change-password-button{
-    width: 50%;
-    margin-left: .5em;
+    width: 80%;
+    /*margin-left: .5em;*/
 }
 /*h3 {*/
 /*    margin-left: 0.5em;*/
@@ -49,3 +50,18 @@ p.profile-info {
 #change-password-button {
     margin-bottom: 10em;
 }
+#snes{
+    max-width: 100%;
+    max-height: 80%;
+    float: right;
+    position: relative;
+    margin-top: 5em;
+}
+.accountInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+

@@ -2,8 +2,8 @@ export default function MarketPlace(props) {
     return `
     <head>
         <meta charset="utf-8">
-        <title>MarketPlace</title>
-        
+<div class="titlePage">Market Place</div>
+<hr class="hr-title">
     </head>
       <body>
         <h1 style="text-align: center; font-size: 4em" id="marketPlace">Market Place</h1>
