@@ -46,31 +46,24 @@ function buildBoardPage(boards, loggedInUser) {
                       </div>
                     </div>
                     </div>
-                     
-                    
-                    
+                               
       <div class="card" style="width: 69em;">
            <div class="card-header">
              <h1>TOPICS</h1>
            </div>
            <ul class="list-group list-group-flush">
             <div id="topic-container">
-            
 
             ${buildBoardTopics(boards, loggedInUser)}
 
-             
              </div>
-             
-             
+     
            </ul>
          </div>
     
      <br>                                                       
      <hr>
-           
-                    
-                    
+        
                 </div>
             </div>
         </div>

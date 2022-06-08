@@ -19,7 +19,7 @@ export default function Friends(props) {
             </nav>
         </form>
     </div>
-<h1 id="friendsTitle">Friends</h1>
+<h1 class="titlePage">Friends</h1>
 <hr class="hr-title">
 
 <!-- Button trigger modal -->
