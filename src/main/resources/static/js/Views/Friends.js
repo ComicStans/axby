@@ -87,13 +87,13 @@ export function FindAllRequests() {
                 response.json().then(response => {
                     $("#acceptOrDecline").html("");
                     console.log(response)
-                    response.forEach(connection => function () {
-                        if (connection,dateAccepted !== null) {
-                            boolean = false;
+                    response.forEach(connection => {
+                        if (connection.dateAccepted === null) {
+                            boolean = false
                         }
                     })
                     if (boolean === true) {
-                        alert("No friend requests.")
+                        alert("No friend requests...")
                         return
                     }
                     response.forEach(connection => {
