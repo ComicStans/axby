@@ -83,7 +83,6 @@ export default function Profile(props) {
                                           <img src="${game.art}" id="art-${game.id}">
                                                 <div class="card-body">
                                                     <h5 id="name-${game.id}" style="color: black">${game.name}</h5>
-                                                    <p id="review-${game.id}" style="color: black">${game.review ?? "No game reviews"}</p>
                                                     <button class="played-btn btn-primary" id="played-${game.id}" data-id="${game.id}">Played</button>
                                                     <button class=" delete-btn btn-secondary" id="delete-${game.id}" data-id="${game.id}">Delete</button>
                                                 </div>
