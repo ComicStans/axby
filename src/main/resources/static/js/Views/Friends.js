@@ -85,8 +85,10 @@ export function FindAllRequests() {
             .then(response => {
                 response.json().then(response => {
                     $("#acceptOrDecline").html("");
+                    console.log(response)
                     if (response.length === 0) {
                         window.alert("You have no open Friend Requests.")
+                        return
                     }
                     response.forEach(connection => {
                         if (connection.dateAccepted === null) {
