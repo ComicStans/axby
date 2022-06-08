@@ -88,12 +88,12 @@ export function FindAllRequests() {
                     $("#acceptOrDecline").html("");
                     console.log(response)
                     response.forEach(connection => function () {
-                        if (connection,dateAccepted !== null) {
+                        if (connection,dateAccepted === null) {
                             boolean = false;
                         }
                     })
-                    if (boolean === false) {
-                        window.alert("No friend requests.")
+                    if (boolean === true) {
+                        alert("No friend requests.")
                         return
                     }
                     response.forEach(connection => {
