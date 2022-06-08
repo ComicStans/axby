@@ -81,13 +81,19 @@ export function FindAllRequests() {
             method: "GET",
             headers: getHeaders()
         }
+        let boolean = true
         fetch(`${BASE_URL}/api/users/friends/search/me`, requests)
             .then(response => {
                 response.json().then(response => {
                     $("#acceptOrDecline").html("");
                     console.log(response)
-                    if (response.length === 0) {
-                        window.alert("You have no open Friend Requests.")
+                    response.forEach(connection => function () {
+                        if (connection,dateAccepted !== null) {
+                            boolean = false;
+                        }
+                    })
+                    if (boolean === false) {
+                        window.alert("No friend requests.")
                         return
                     }
                     response.forEach(connection => {
