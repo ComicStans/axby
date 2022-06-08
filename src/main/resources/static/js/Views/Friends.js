@@ -88,7 +88,7 @@ export function FindAllRequests() {
                     $("#acceptOrDecline").html("");
                     console.log(response)
                     response.forEach(connection => function () {
-                        if (connection,dateAccepted === null) {
+                        if (connection,dateAccepted !== null) {
                             boolean = false;
                         }
                     })
