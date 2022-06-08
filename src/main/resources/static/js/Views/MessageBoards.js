@@ -3,7 +3,6 @@ import {getHeaders} from "../auth.js";
 import {getUser} from "../auth.js";
 const URL = `${BASE_URL}/api/boards`;
 export default function MessageBoards(props) {
-    console.log(props);
     const loggedInUser = getUser();
     return buildBoardPage(props.boards, loggedInUser);
 }
@@ -139,8 +138,6 @@ function createAddTopicListener() {
     $("#create-topic").click(function () {
         const description = $("#description").val();
         const name = $("#topicName").val();
-        console.log(description);
-        console.log(name);
         const newBoardTopic = {
             name,
             description
@@ -166,7 +163,6 @@ function createEditTopicListener() {
         const id = $(this).data("id");
         const oldName = $(`#topic-${id}`).text();
         $("#edit-id").val(id)
-        console.log(oldName);
         const oldDescription = $(`#post-description-${id}`).text();
         // $("#add-topic-id").val(id);
         $("#EditTopicName").val(oldName);
@@ -218,9 +214,7 @@ function createDeleteTopicListeners() {
 function viewBoardPost() {
     $('.topic').click(function () {
         var boardId = this.id
-        console.log(boardId)
         boardId = boardId.replace("topic-", "")
-        console.log(boardId)
         createView(`/boardView/api/boards/${boardId}`)
     })
 }

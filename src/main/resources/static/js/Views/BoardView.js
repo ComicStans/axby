@@ -5,7 +5,6 @@ const URL = `${BASE_URL}/api/posts/board/`;
 
 export default function BoardView(props) {
     // var boardId = (typeof props.boardView[0].boardId.id === "undefined") ? 2: props.boardView[0].boardId.id
-    console.log(props)
     const loggedInUser = getUser();
 
     return `
@@ -144,7 +143,6 @@ function createEditPostListener() {
 
     $(".edit-post-button").click(function () {
         const id = $(this).data("id");
-        console.log(id)
         $("#edit-post-id").val(id)
         const oldPostText = $(`#post-${id}`).text();
         $("#EditPostText").val(oldPostText);
@@ -184,7 +182,6 @@ function createSavePostChangesListener() {
 function createDeletePostListener() {
     $(".delete-post-button").click(function () {
       var boardId = $(".saveComment").attr("id");
-        console.log(boardId);
         const id = $(this).data("id");
         const request = {
             method: "DELETE",

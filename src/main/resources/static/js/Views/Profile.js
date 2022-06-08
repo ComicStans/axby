@@ -7,9 +7,6 @@ export default function Profile(props) {
     const user = getUser();
     const dynamicFriends = friends(props, props.userProfile);
     const dynamicFriendsAgain = friendsAgain(props, props.userProfile)
-    console.log("UwU")
-    console.log(props)
-    console.log("UwU")
     const showButtonText = showOrHideButtons(props, user);
     return `
 <head>    
@@ -169,7 +166,6 @@ export function FriendRequest(props) {
 function createEditAboutMeListener() {
     $("#edit-aboutMe-button").click(function () {
         const id = $(this).data("id");
-        console.log(id)
         $("#edit-aboutMe-id").val(id)
         const oldAboutMeText = $(`#aboutMe`).text();
         $("#edit-aboutMe-text").val(oldAboutMeText);
@@ -216,7 +212,6 @@ function showOrHideButtons(props,user) {
 
 export function addToPlayed() {
     $(".played-btn").click(function () {
-        console.log(this.id)
         const id = $(this).data("id")
         const game = {
             type: 'PLAYED'
@@ -281,7 +276,6 @@ const friends = function (props, user) {
 const friendsAgain = function (props, user) {
     let html = ''
     props.connection.map(connection => {
-        console.log(props)
         if (connection.dateAccepted != null && connection.requester.email === user.email) {
             html += `<p id="friend-${connection.id}"> <a href="#">${connection.recipient.username}</a></p><br>`
         }
@@ -292,7 +286,6 @@ const friendsAgain = function (props, user) {
 
 export function addReviews() {
     $(".review-btn").click(function (){
-        console.log(this.id)
         const id = $(this).data("id")
         let userReview = $("#text-" + id).val()
         let game = {

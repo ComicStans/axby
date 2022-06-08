@@ -33,7 +33,6 @@ const populateGames = function () {
                     return
                 }
                 for (let game of res) {
-                    console.log(game.id)
                     let buttons = `<span class="btn btn-primary playButton" id="${game.id}">Played it</span>
                                     <span  class="btn btn-primary wishButton" id="${game.id}">Wanna play it</span>`
                     let html = `<h5>companies involved: </h5><p id="companies-${game.id}">`
@@ -69,7 +68,6 @@ const populateGames = function () {
 const addToPlayed = function () {
     $("body").on("click", ".playButton", function () {
         $(this).off("click")
-        console.log(this.id)
         let id = this.id
         let game = {
             art: $("#cover-" + id).attr("src"),
@@ -91,7 +89,6 @@ const addToPlayed = function () {
 const addToWishList = function () {
     $("body").on("click", ".wishButton", function () {
         $(this).off("click")
-        console.log(this.id)
         let id = this.id
         let game = {
             art: $("#cover-" + id).attr("src"),

@@ -71,7 +71,6 @@ function CreateUser(){
             email: $("#email").val(),
             password: $("#userPassword").val()
         }
-        console.log(newUser);
 
         let request = {
             method: "POST",

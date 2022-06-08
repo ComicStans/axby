@@ -8,7 +8,6 @@ import {getUser} from "../auth.js";
 // TODO: WE NEED TO HAVE NAVBAR DISPLAY DIFFERENTLY BASED ON IF OUT ARE SIGNED IN OR NOT
 // TODO: SIGN OUT OPTION
 export default function Navbar(props) {
-    // console.log(props);
     const loggedIn = isLoggedIn();
 
     getUser();

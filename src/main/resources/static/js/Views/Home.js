@@ -1,7 +1,6 @@
 import {isLoggedIn} from "../auth.js";
 
 export default function Home(props) {
-    console.log(props)
     var welcomeMessage = "";
     if (isLoggedIn()  ) {
         welcomeMessage = `Welcome, ${props.user.username ?? "gamer!"}`

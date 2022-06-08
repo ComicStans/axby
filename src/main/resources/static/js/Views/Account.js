@@ -3,7 +3,6 @@ import {getHeaders, getUser} from "../auth.js";
 
 
 export default function Account(props) {
-    console.log(props)
     return `
 <head>
 <title>Account</title>    

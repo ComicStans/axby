@@ -84,7 +84,6 @@ export function FindAllRequests() {
         fetch(`${BASE_URL}/api/users/friends/search/me`, requests)
             .then(response => {
                 response.json().then(response => {
-                    console.log(response)
                     $("#acceptOrDecline").html("");
                     if (response.length === 0) {
                         window.alert("You have no open Friend Requests.")
@@ -116,7 +115,6 @@ export function EditFriends() {
         fetch(`${BASE_URL}/api/users/friends`, friends)
             .then(response => {
                 response.json().then(response => {
-                    console.log(response)
                     $("#friends-to-edit").html("");
                     response.forEach(connection => {
                         if (connection.dateAccepted != null && connection.recipient.email === user.userName) {
@@ -168,7 +166,6 @@ export function searchUsers() {
     $("#submit").on("click", function () {
 
         let id = this.id
-        console.log(id)
 
         createView(`/userProfile/api/users/username?username=${$("#searchBar").val()}`)
     })
